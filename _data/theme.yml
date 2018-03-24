@@ -5,12 +5,11 @@ highlight_color: '#3498db'
 
 # Profile links on the left sidebar, leave blank to ignore
 social:
-  github: swanson
+  github: razertory
   #bitbucket: philipj
-  hacker_news: swanson
   #stackexchange: 348619
   #stackoverflow: 348619
-  twitter: _swanson
+  twitter: razertory
   #facebook: zuck
   #tumblr: animalygifs
   #linkedin: philipjagielski
@@ -19,8 +18,8 @@ social:
   #flickr: johndoe
 
 # "Hi, I'm _______"
-name: Matt Swanson
-email: test@example.com
+name: Razertory
+email: spring.razer@gmail.com
 tagline: "weak opinions, strongly held"
 
 # Google Analytics key, leave blank to ignore

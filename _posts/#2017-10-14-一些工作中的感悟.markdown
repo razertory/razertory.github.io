@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "做工程要避免的思维上的误区"
+date:   2017-10-15 01:21:50 +0800
+categories: jekyll update
+---
+
+## 可怕的不是无知，而是不知道自己无知
+> The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge                    -- Stephen Hawking
+
+## 停止你毫无依据的侃侃而谈，用测试用例来证实
+> Talk is cheap, show me the test
