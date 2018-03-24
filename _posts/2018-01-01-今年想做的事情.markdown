@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "2018年想做的事情"
+date:   2018-01-01 0:21:00 +0800
+categories: jekyll update
+---
+18年，毕业半年了。今年，我想：
+### 做一些翻译的事情
+文章，书籍都好，领域也不限制，只要是是觉得有意义，内容优质。
+### ACM
+各种ACM(包括但不限于lintcode, hackerrank, topcoder, geeksforgeeks)上面完成一些中级以上的挑战，最好也能参加一些竞赛。其实有点可惜没有能够在大学期间坚持ACM。现在生活逐渐开始被自己调整得很规律，索性就开始吧。
+### Open Source
+给[graphql-batch](https://github.com/Shopify/graphql-batch)增加一些new features，感觉在这个领域国内需要有人做一些事情的。能够和一些一线的Ruby厂的大神切磋代码也是极好的。
+### 再学一门编程语言
+目前考虑的是Rust。
+### 区块链技术
+好吧已经开始了。
