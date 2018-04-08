@@ -10,8 +10,8 @@ categories: jekyll update
 
 文章中涉及的内容有：
 * 编程语言 Java, Go, Python, Ruby, Lua, Rust, Erlang
-* 框架/库 Netty, Nginx, Jetty, Tomcat, Rails
-* 操作系统 select, poll, epoll, dequne, 进程，线程，协程,IO多路复用
+* 框架/库 Netty, Nginx, Jetty, Tomcat, Rails, OTP
+* 操作系统 select, poll, epoll, kqueue, 进程，线程，协程,IO多路复用
 * 概念 同步，异步，阻塞，非阻塞，事件驱动，NIO, BIO, 全局解释锁GIL
 
 笔者才疏学浅，若有含糊不清或者有误之处，望指正。
@@ -29,5 +29,10 @@ categories: jekyll update
 
 首先，这两个调用func的地方都希望能够立即获得期望的反馈，所谓的期望的，就是指比如这个func的功能就是计算两个传入的int参数的sum，那么期望的反馈，就一定是这两个数的sum，它不能有误，更不能返回一些奇奇怪怪的东西。当然，也不能慢，也就是说同时的两个调用花的时间要和一个调用是一样的。
 
+这里回到上面引用的句子，我们把函数理解为’逻辑流‘，那么此时的并发可以理解为`在时间上重叠的函数，我们就认为是并发的`。
+
 ## 进程(PROCCESS)
+## IO多路复用(MULTIPLEXING) || 事件驱动(EVEN DRIVEN)
+## 线程(THREAD)
+## 协程(COROUTINE)
 
