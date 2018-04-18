@@ -10,7 +10,7 @@ categories: jekyll update
 
 Ruby在编程表达能力上，几乎是我见过的所有服务端语言中最强的。元编程 + Rails + 各种库，几乎算得上是互联网创业公司的神兵利器。当然，语言这种东西，好坏得看上下文的，不同的话在不同的语境中效果还是不一样的。至少对于我司的业务和人员编制，加上对于往后一年的预估，在大量的论证下，大家都对技术选型达成了一致。我们需要技术团队有强大的业务推进能力，并且能做出高效稳定的服务。
 
-现在看来，这样的选择没有错。我已经将rc环境的graphql api 开放。http://rc.kid17.com:10000
+现在看来，这样的选择没有错。我已经将rc环境的graphql api 开放: [http://rc.kid17.com:10000](http://rc.kid17.com:10000)
 
 随着产品的重构和业务的迁移，我们的流量开始逐步转向graphql服务，各个规范也建立起来。随着业务模块的复杂度增高，用户数量的增加和数据量的增大，新一轮的挑战即将开始。首先就是要把这个巨大复杂的Rails + GraphQL项目拆掉，第二个就是确定新的架构，第三点就是拥抱变化，让这个服务本身变得可以维护，扩展和改进。
 
@@ -50,3 +50,10 @@ INFO -- : (0.105159s) SELECT * FROM `activities` WHERE (`subject_id` IN (26, 32,
 > The greatest enemy of knowledge is not ignorance, it is the ilussion of knowledge --史蒂芬·霍金
 
 我都会把这个gem包玩转 :)
+
+#### 初识
+首先，这个玩意儿是学习了Facebook官方的dataloader做的。所以不出意外地，它用了promise.rb。可以在源码里面看到这样的调用，并且作者的sample里面也很清晰地说明了这个玩意儿的输出开始就是个Promise对象。所以对于graphql ruby的
+```ruby
+resolve -> (obj, arg, ctx) {}
+```
+这样的do block块就应该和普通的http api框架不一样。可以理解的是，一次graph请求的，所需要的每个field对于服务端来说，是并发获取的。这里并发获取，肯定用了他自己的一套策略。可以猜测的是，就是用的异步I/O的方式。所以从这一点来说，这个库本质上和graphql ruby是完全契合的。
