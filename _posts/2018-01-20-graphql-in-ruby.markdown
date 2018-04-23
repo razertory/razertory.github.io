@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "GraphQL in Ruby"
+title:  "向GraphQL迁移"
 date:   2018-1-20 0:21:00 +0800
 categories: jekyll update
 ---
