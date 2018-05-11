@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "关于TCP，NIO，以及Netty的进一步理解"
+title:  "关于TCP，NIO，以及Netty"
 date:   2017-11-20 0:21:00 +0800
 categories: jekyll update
 ---
@@ -8,7 +8,17 @@ categories: jekyll update
 ### 问题
 在给我司旧系统解决性能问题的时候，有一个让我印象深刻的事件。我们有个历史项目，是用Netty做的Http服务器，这个项目在运行一段时间之后，几乎所有的接口都会变得很慢。通过一系列的观察，可以发现的是，每次重启服务器，接口就会变得很快，然后只要过了一周，即使在并发量及低的情况下，接口依然很慢。我最终定位到了瓶颈出现在了一个点上：通过`lsof -i`这个命令，可以看到项目所绑定的8080端口上，有着大量的CLOSE_WAIT的tcp socket fd。具体的表征就是
 
+#本地复现
 ```shell
+66387 springchan  435u  IPv6 0x978a4f8b9aa9a147      0t0  TCP localhost:http-alt->localhost:56126 (CLOSE_WAIT)
+java    66387 springchan  436u  IPv6 0x978a4f8b9aa9b847      0t0  TCP localhost:http-alt->localhost:56127 (CLOSE_WAIT)
+java    66387 springchan  437u  IPv6 0x978a4f8bacc17987      0t0  TCP localhost:http-alt->localhost:56319 (CLOSE_WAIT)
+java    66387 springchan  438u  IPv6 0x978a4f8b9a8d4287      0t0  TCP localhost:http-alt->localhost:56129 (CLOSE_WAIT)
+java    66387 springchan  439u  IPv6 0x978a4f8b9a8d53c7      0t0  TCP localhost:http-alt->localhost:56130 (CLOSE_WAIT)
+java    66387 springchan  440u  IPv6 0x978a4f8b9a8d3707      0t0  TCP localhost:http-alt->localhost:56131 (CLOSE_WAIT)
+java    66387 springchan  441u  IPv6 0x978a4f8b9a8d3147      0t0  TCP localhost:http-alt->localhost:56132 (CLOSE_WAIT)
+java    66387 springchan  442u  IPv6 0x978a4f8bae270707      0t0  TCP localhost:http-alt->localhost:56350 (CLOSE_WAIT)
+java    66387 springchan  443u  IPv6 0x978a4f8b9a8d4e07      0t0  TCP localhost:http-alt->localhost:56134 (CLOSE_WAIT)
 ```
 
 也就是说，有着大量的tcp socket资源在并发量很低的情况下依旧处于CLOSE_WAIT的状态。可以肯定的是，这种现象一定是不健康的。CLOSE_WAIT处于TCP四次分手过程中，客户端首先给服务端发送了fin报，服务端接受之后就会回应一个ack报给对方，同时状态切换为CLOSE_WAIT。接下来呢，服务端真正需要考虑的事情是察看是否还有数据发送给对方 ，如果没有的话，那么就可以close这个SOCKET，发送FIN报文给对方，也即关闭连接。所以你在CLOSE_WAIT状态下，需要完成的事情是等待你去关闭连接。这个时候，这两个过程是可以控制的，第一种，服务端不再发送报文给客户端，直接close。第二种，服务端发送fin报给客户端，同时自己处于LAST_ACK状态。所以我比较确定的是，服务端在管理TCP连接的阶段出了问题。
@@ -18,3 +28,58 @@ categories: jekyll update
 
 ### 分析&解决
 这个老项目本身就是个单体应用，所以可以很确认问题是出在了项目代码这一块。可以猜测的是，是使用Netty的方式不对。所以我第一步，去研究了Netty的基本原理。
+
+直接发现问题出现在了`channelRead()`这个方法里面。按照官方的说明，使用者的服务里面不应该有阻塞调用。这会严重耗费系统资源。如果有阻塞调用，希望放在线程池里。所以我将项目中的阻塞调用层，统一用了线程池来管理。
+
+```java
+ public class HttpServerInboundHandler  extends ChannelInboundHandlerAdapter{
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg){
+        new Route(ctx, msg).init();
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+    	ctx.flush();
+        ctx.channel().close();
+        ctx.close();
+    }    
+}  
+```
+
+修改之后
+
+```java
+public class HttpServerInboundHandler  extends ChannelInboundHandlerAdapter{
+
+    ExecutorService executor =Executors.newCachedThreadPool();
+
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg){
+        executor.execute(new Route(ctx, msg));
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+    	ctx.flush();
+        ctx.channel().close();
+        ctx.close();
+    }    
+}
+```
+这里让线程池来处理阻塞调用层的业务。经过ab测试发现不会再有类似的问题出现。
+
+Netty本质上是一个纯异步的框架，用来做一些并发高，实时性强的系统，比如通信，游戏等。但对于普通的互联网服务，比如由tomcat，jetty构建的一些服务而言，netty可能并不适合。Netty设计之初意在高性能通信，用有限的资源产出最大的并发量级。所以使用者不得不很清楚socket编程，select，poll模型等。这对于单纯的非实时高并发应用开发者来说，增加了不少复杂度。如果是Java生态的，并且需要自己实现一些服务治理功能的，基于Netty开发是个明智的选择。
+
