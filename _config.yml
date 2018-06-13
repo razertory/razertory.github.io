@@ -1,5 +1,5 @@
 # General Jekyll Config
 highlighter: rouge
-url: https://razertory.me
+url: //razertory.github.io
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
