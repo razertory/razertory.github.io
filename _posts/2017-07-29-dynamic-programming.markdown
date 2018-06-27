@@ -82,4 +82,92 @@ public int fib(int i) {
 ```
 好了，测试一发。嗯，结果正确。看看性能：不到5ms。
 
+## 子数组问题
+给一个非负整数集合set，一个目标值元素sum，求判断该集合中，是否包含一个子集合，使得子集合的元素和等于目标值sum？
+
+easy
+
+子集合如果大小确定为2，那么直接就可以用k-v映射来判断。（嵌套for循环解决的的就过掉～）
+```java
+public boolean isSubsetSum(int[]set, int sum) {
+    HashMap map = new HashMap();
+    for (int i : set) {
+        map.put(sum - i, i);
+    }
+    for (int i: set) {
+        if (map.containsKey(i)) {
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+hard
+
+`状态转移方程`
+
+子集合的大小0 < size <= set.length。这种情况下，需要进一步把大问题拆分成小问题，推导出状态转移方程。
+```java
+isSubsetSum(set, n, sum) = isSubsetSum(set, n-1, sum) || 
+                           isSubsetSum(set, n-1, sum-set[n-1])
+Base Cases:
+isSubsetSum(set, n, sum) = false, if sum > 0 and n == 0
+isSubsetSum(set, n, sum) = true, if sum == 0 
+```
+紧接着，coding
+```java
+boolean isSubsetSum(int set[], int n, int sum){
+    // 基本条件
+    if (sum == 0)
+        return true;
+    if (n == 0 && sum != 0)
+        return false;
+        
+    // 如果最后一个元素大于sum，忽略掉
+    if (set[n-1] > sum)
+        return isSubsetSum(set, n-1, sum);
+        
+    /* 否则，检查sum是否能够被组合。分为下面两种情况
+        (a) 包含最后一个元素 
+        (b) 不包含最后一个元素 */
+    return isSubsetSum(set, n-1, sum) || 
+        isSubsetSum(set, n-1, sum-set[n-1]);
+}
+```
+这个做法的复杂度为指数级别
+
+`动态规划矩阵`
+其实，在《算法导论》一书中，其实有一点可以很明确“应用于子问题重叠的情况”。分析上述的算法，可以发现有很多重叠的子问题。所以，有必要回到文章最开始的一点`加缓存`。这里考虑用一个矩阵来缓存结果集。
+```java
+boolean isSubsetSum(int set[], int n, int sum) {
+    boolean subset[][] = new boolean[sum+1][n+1];
+    
+    // sum 为 0 的情况，结果始终为 true 
+    for (int i = 0; i <= n; i++)
+        subset[0][i] = true;
+    
+    // sum 不为 0，但集合为空，始终为 false
+   for (int i = 1; i <= sum; i++)
+        subset[i][0] = false;
+    
+    // 自底向上填充矩阵
+    for (int i = 1; i <= sum; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            subset[i][j] = subset[i][j-1];
+            if (i >= set[j-1])
+            subset[i][j] = subset[i][j] || 
+                    subset[i - set[j-1]][j-1];
+        }
+    }
+    
+    return subset[sum][n];
+}
+```
+可以分析出，只需要矩阵级别的复杂度就可以解决这个问题。
+
+笔者用了大量的案例来说明解决某些问题，用动态规划的方式。后续将加上一些最短路径算法和经典背包问题的解法。
+
 理解了动态规划的哲学，很大程度上，在做一些高性能的系统的时候一定会有更多的思路。
