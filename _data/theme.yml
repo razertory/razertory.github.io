@@ -6,10 +6,11 @@ highlight_color: '#3498db'
 # Profile links on the left sidebar, leave blank to ignore
 social:
   github: razertory
+  zhihu: razertory
+  twitter: razertory
   #bitbucket: philipj
   #stackexchange: 348619
   #stackoverflow: 348619
-  twitter: razertory
   #facebook: zuck
   #tumblr: animalygifs
   #linkedin: philipjagielski
