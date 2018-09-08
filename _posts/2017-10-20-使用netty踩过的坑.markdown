@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "关于TCP，NIO，以及Netty"
+title:  "用Netty的一次bug跟踪"
 date:   2017-11-20 0:21:00 +0800
 categories: jekyll update
 ---

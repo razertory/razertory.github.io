@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "我所理解的动态规划"
+title:  "动态规划"
 date:   2017-07-29 +0800
 categories: jekyll update
 ---
