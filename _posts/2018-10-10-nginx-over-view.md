@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "[译] 开源项目之 nginx"
+title:  "开源项目之 nginx"
 date:   2018-06-14 +0800
-categories: jekyll update
+categories: nginx
 ---
+
+原文链接：http://aosabook.org/en/nginx.html
 
 # 开源项目之 Nginx
 
