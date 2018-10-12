@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "开始我的代码大全项目"
-date:   2018-06-01 +0800
-categories: jekyll update
+title:  "Datastructure in Java"
+date:   2018-06-01 13:23:53 +0800
+categories: [datastructure]
 ---
 当我开始打算做这个项目([地址](https://github.com/razertory/Datastructure-in-Java))的时候，我的想法是很简单纯粹的。在这个时代，我们获取知识的途径很多，各种文章论坛公众号满天飞。我也越来越发现，对于我这种想更精进的人而言，自始至终地专注、安静地去实现一个数据结构成了一件很吸引我的事情。所以，在 https://github.com/buptdavid/datastructure 这个项目的指引下，我打算基于它做一些更全面，更细致的东西。
 

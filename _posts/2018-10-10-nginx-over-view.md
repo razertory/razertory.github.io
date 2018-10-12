@@ -1,12 +1,10 @@
 ---
 layout: post                          # (require) default post layout
-title: "Path to Nginx"                   # (require) a string title
+title: "Nginx Project Overview"                   # (require) a string title
 date: 2018-04-20 19:51:02 +0700       # (require) a post date
-categories: [python, django]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
+categories: [nginx]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 原文链接：http://aosabook.org/en/nginx.html
-
-# 开源项目之 Nginx
 
 nginx (读作 "engine x") 是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自2004年发布以来, nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：复杂均衡，缓存，流量控制以及高效集成在Web服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器。
 
