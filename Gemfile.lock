@@ -13,6 +13,7 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
+    colorize (0.8.1)
     commonmarker (0.17.13)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.0.5)
@@ -244,7 +245,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize
   github-pages
 
 BUNDLED WITH
-   1.16.5
+   1.16.6
