@@ -1,5 +1,5 @@
 GEM
-  remote: https://gems.ruby-china.com/
+  remote: https://rubygems.org/
   specs:
     activesupport (4.2.10)
       i18n (~> 0.7)
@@ -245,7 +245,6 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
-  jekyll-feed
 
 BUNDLED WITH
-   1.16.6
+   1.16.5

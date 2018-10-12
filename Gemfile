@@ -1,3 +1,2 @@
-source 'https://gems.ruby-china.com'
-gem 'jekyll-feed'
+source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
