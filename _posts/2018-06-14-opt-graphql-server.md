@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "记一次 GraphQL 优化分享"
+title:  "GraphQL 优化分享"
 date:   2018-06-14 +0800
 categories: graphql
 ---

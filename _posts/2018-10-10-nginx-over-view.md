@@ -2,7 +2,7 @@
 layout: post                          # (require) default post layout
 title: "Nginx Project Overview"                   # (require) a string title
 date: 2018-10-09 19:51:02 +0700       # (require) a post date
-categories: [nginx]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
+categories: [nginx]
 ---
 
 

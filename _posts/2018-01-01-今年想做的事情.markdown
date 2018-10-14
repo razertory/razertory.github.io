@@ -2,7 +2,7 @@
 layout: post
 title:  "2018年想做的事情"
 date:   2018-01-01 0:21:00 +0800
-categories: jekyll update
+categories: life
 ---
 > 算是今年的🚩吧
 
