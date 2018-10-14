@@ -11,7 +11,7 @@ end
 
 content =
 "---
-layout: post_by_category
+layout: posts_by_category
 categories: #{file}
 title: #{file.to_s.capitalize}
 permalink: /category/#{file}

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "control-cpu-just-by-java-code"
+title: "Java 控制CPU 占用"
 date: 2018-10-13 00:40:18 +0800
-categories: os
+categories: os beauty-of-programming
 ---
 
 这次写一篇有趣的博文，选自《编程之美》。在日常工作中，我们时不时会去看服务器的性能，比较关键的一个就是 CPU 占有率。那么 CPU 占有率到底是什么呢？在本书中就可以找到答案。这里用 Java 可以实现一个简单的版本用于更深入理解计算机系统。
