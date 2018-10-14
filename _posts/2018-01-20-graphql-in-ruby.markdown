@@ -2,7 +2,7 @@
 layout: post
 title:  "向GraphQL迁移"
 date:   2018-1-20 0:21:00 +0800
-categories: jekyll update
+categories: graphql
 ---
 时间大概是17年九月，我司的新App开工。在技术选型上，我们很激进地选择了`graphql` instead of restful。当时想到的理由是很简单，但是也无可厚非的：我们的App和后期将要做的新Web在业务上有很大的相通性，并且功能模块有不少类似的地方，所以用graphql这样的技术来做API层复用性会很高。后期在做一些管理后台的时候，效率也会高不少。
 

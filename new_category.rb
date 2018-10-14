@@ -11,19 +11,19 @@ end
 
 content =
 "---
-layout: posts_by_category
+layout: post_by_category
 categories: #{file}
-title: #{file.capitalize}
+title: #{file.to_s.capitalize}
 permalink: /category/#{file}
 ---"
 
 path = Pathname.new(File.dirname(__FILE__)).realpath
-file_name = "#{path}/_posts/#{Date.today}-#{ARGV[0]}.md"
+file_name = "#{path}/category/#{file}.md"
 
 begin
   file = File.new(file_name, "w")
   file.write(content)
-  puts "Your post `#{file_name}` has been created".green
+  puts "Your category `#{file_name}` has been created".green
 rescue
    File.delete(file_name)
 ensure
