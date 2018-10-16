@@ -4,6 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I am freelance developer. Currently doing more in backend, focused in Python and Django.
+Backend developer, open source programmer, doing mostly in Java, Ruby and Golang. Path to distributed database developer.
 
-email: agus[at]python.web.id
+email: spring.razer[at]gmail.com
