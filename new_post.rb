@@ -11,10 +11,10 @@ end
 
 content =
 "---
-layout: posts_by_category
-categories: #{file}
+layout: post
+categories:
+date: #{Time.now}
 title: #{file.capitalize}
-permalink: /category/#{file}
 ---"
 
 path = Pathname.new(File.dirname(__FILE__)).realpath
