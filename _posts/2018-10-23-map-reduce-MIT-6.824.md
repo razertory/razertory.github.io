@@ -59,4 +59,20 @@ completed, the master wakes up the user program.
 At this point, the MapReduce call in the user program
 returns back to the user code.
 
-在这个 lab 中，我们要做的第一个就是实现上述步骤 3 中的 Map function 以及 步骤 6 中的 Reduce function。
+**在 lab 中，map 就是将输入的内容转化成中间文件暂存在磁盘中**
+
+1. 按照题目规则创建好 N(reduce worker 个数）个中间文件
+2. 解析输入的内容转化成 key-value 组成的数组 kvs
+3. 遍历 kvs，对每个 key 进行 hash + 取模 N 的得到文件索引找到对应的中间文件，并把遍历中的 key-value json 化之后写到对应的中间文件
+
+这里的 Hash + 取模过程与许多负载均衡算法类似，都是为了平衡资源，让每个中间文件的大小一致。生成的每个中间文件的文件名都会包含 map worker 的编号和 reduce worker 的编号。
+
+**reduce 的工作就是解析 map 过程产生的中间文件，写到输出文件中**
+1. 根据调度器传入的当前 reduce worker 的编号和正在进行工作的 map worker 个数来找到并读取对应的中间文件
+2. 遍历这些中间文件，把里面的内容反序列化之后存到一个 kvs 中
+3. 给 kvs 按照 key 排序
+4. 把 kvs json 序列化之后写到输出文件中(序列化之前可能会按照用户的意图进一步处理)
+
+reduce 的过程，实际上就是在合并然后处理这些中间文件
+
+**reduce 和 map 过程一定是可以同时运行的。**
