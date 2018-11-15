@@ -31,8 +31,8 @@ urls:
     #  url: /projects/
     - text: Collections
       url: /collections
-    - text: XML Feed
-      url: /feed.xml
+    # - text: XML Feed
+    #   url: /feed.xml
 
 url: "http://razertory.me"
 baseurl: ""
