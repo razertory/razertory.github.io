@@ -29,6 +29,8 @@ urls:
       url: /about/
     #- text: My Projects
     #  url: /projects/
+    - text: Collections
+      url: /collections
     - text: XML Feed
       url: /feed.xml
 
