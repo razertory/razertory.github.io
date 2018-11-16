@@ -9,6 +9,7 @@ permalink: /collections/
 * Paxos made simple <https://lamport.azurewebsites.net/pubs/paxos-simple.pdf>
 * Traditional vs. Modern Database Systems <https://sfu-db.github.io/dbsystems/>
 * CAP理论和最终一致性（Eventually Consistent）<https://zhuanlan.zhihu.com/p/47215123>
+* Perspectives on the CAP Theorem <https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf>
 
 # PACTICES
 * <https://15721.courses.cs.cmu.edu/spring2017/schedule.html>
