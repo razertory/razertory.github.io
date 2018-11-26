@@ -10,7 +10,7 @@ categories: [nginx]
 
 # 参考文档
 * [春哥的 nginx 教程](https://openresty.org/download/agentzh-nginx-tutorials-zhcn.html)
-* [淘宝 Tengine 团队](https://openresty.org/download/agentzh-nginx-tutorials-zhcn.html)
+* [淘宝 Tengine 团队](http://tengine.taobao.org/book/)
 
 # 正文
 > * 原文作者：[Andrew Alexeev](http://aosabook.org/en/intro2.html#alexeev-andrew)
