@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2018-10-23 10:09:07 +0800
-title: Map-reduce-mit-6.824
+title: MIT6.824 Map Reduce 
 categories: [mit-6824]
 ---
 
@@ -205,7 +205,7 @@ func schedule(
 	phase jobPhase,
 	registerChan chan string,
 ) {
-	var waitGroup sync.WaitGroup //等待一次Map/Reduce完成
+	var waitGroup sync.WaitGroup // 等待一次 Map/Reduce 完成
 	var ntasks, nOther int
 
 	if phase == mapPhase {
@@ -217,11 +217,11 @@ func schedule(
     // 缓存大小和任务个数一致
     readyChan := make(chan string, ntasks)
 
-    //重试计数器
+    // 重试计数器
 	retryChan := make(chan *DoTaskArgs, ntasks) /
-	failureCounts := WorkerFailureCount{workers: make(map[string]int)} 
+	failureCounts := WorkerFailureCount{workers: make(map[string]int)}
 
-	// call 方法将准备好的参数交给RPC组件，并执行任务
+	// call 方法将准备好的参数交给 RPC 组件，并执行任务
 	startTask := func(worker string, args *DoTaskArgs) {
 		defer waitGroup.Done()
 		success := call(worker, "Worker.DoTask", args, nil)
@@ -265,12 +265,10 @@ func schedule(
 			}
 		}
 	}
-
-	// Wait for all in-flight tasks to finish
 	waitGroup.Wait()
-	fmt.Printf("Schedule: %v phase done\n", phase)
 }
 
 ```
 
 ### 商业生产版（土豪版）
+[Hadoop](https://github.com/apache/hadoop)
