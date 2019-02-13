@@ -25,11 +25,11 @@ share:
   twitter_username: razertory
 
 urls:
-    - text: About Me
+    - text: 关于我
       url: /about/
     #- text: My Projects
     #  url: /projects/
-    - text: Collections
+    - text: 收集
       url: /collections
     # - text: XML Feed
     #   url: /feed.xml
