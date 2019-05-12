@@ -15,6 +15,7 @@ layout: post
 categories:
 date: #{Time.now}
 title: #{file.capitalize}
+publish: false
 ---"
 
 path = Pathname.new(File.dirname(__FILE__)).realpath
