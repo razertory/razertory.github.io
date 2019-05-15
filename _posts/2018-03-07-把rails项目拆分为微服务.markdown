@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "将 Rails 项目拆分成微服务架构"
+title:  "「译」将 Rails 项目拆分成微服务架构"
 date:   2018-03-07 15:21:50 +0800
 categories: microservice
 ---

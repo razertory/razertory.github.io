@@ -3,11 +3,25 @@ layout: post
 categories: [mit-6824]
 date: 2019-05-12 13:43:13 +0800
 title: MIT6.824 Raft 2A
-published: false
+published: true
 ---
 
 ### 初识 Raft
-CAP
+现有的分布式系统往往会在 CAP 之前权衡
+
+![CAP Sample](/static/img/cap-samples.jpg)
+
+Raft 在 CAP 理论中, 着重强调 C 和 P。
+
+
+通常，完备的分布式存储系统应该做到对外提供看起来只有一个节点的服务，暴露简单的 API。简单的实现数据库的主从可以通过一个 master 多个 slave 来实现。比如现有的 RDS 提供商都提供了这样的功能。
+不过如果master 到 slave 之前的通信断了，那么很有可能我们从 master 和 slave 读到的数据就会不一致了。网络，存储，硬件这些东西在集群数量庞大的时候，就会看起来不再那么可靠。这个时候就需要设计出一个协议来让多个节点总是保持一致，并且如果某个节点挂了或者节点之前的通信故障了，在修复了之后这个系统能够自愈。-- Paxos 和 Raft 就随之而来了。其实在个人看来这两个算法本质都是通过
+
+ 1. 基于某个由协议产生的 master 来同步数据
+ 2. 用多数派的方式来决定数据的走向
+
+由于 Raft 更加容易理解和实现，MIT 6.824 Lab 2A 也是基于了 Raft。
+
 
 ### 代码阅读
 作为一套标准的 TDD 作业，从测试代码开始阅读是很好的选择
@@ -30,8 +44,10 @@ CAP
 
 3. candidate 收集到超过半数的确认投票的结果时，就会将自己转换成 leader。
 
-要注意的是。第 1 点中，follower 变成了 canditate 的时候，要term++；第 2 点里面一定要赋值给自己的 term 不然有很多 leaders。
+要注意的是。第 1 点中，follower 变成了 canditate 的时候，要 term++；第 2 点里面一定要赋值给自己的 term 不然有很多 leaders。
 
+## TODO
 *TestReElection2A*
+
 
 

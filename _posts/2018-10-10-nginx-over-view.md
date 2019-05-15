@@ -1,16 +1,9 @@
 ---
 layout: post                          # (require) default post layout
-title: "Nginx 之路"                   # (require) a string title
+title: "「译」开源项目之 Nginx"                   # (require) a string title
 date: 2018-10-09 19:51:02 +0700       # (require) a post date
 categories: [nginx]
 ---
-
-
-学习 nginx 是一条漫长但是充满乐趣的道路。从以往接触到 nginx 做一些网站架设的配置，到之后工作中遇到用 Open Resty，Kong 这样基于 nginx 实现 API Gateway，直至遇到了在 Cloud Flare 工作过的 Open Resty 作者。nginx 成了我今年上半年一直在学习研究的 Web Server。这是一篇只要接触过 nginx 运维相关工作的同学都能读懂的文章。原文来自 [The Architecture of Open Source Applications](http://aosabook.org/en/index.html) 中的 [nginx 主题](http://aosabook.org/en/nginx.html)。这篇文章的原文值很得反复研读。索性我也将它投稿到了掘金翻译计划，并自己翻译了一遍，希望能有同学共勉。
-
-# 参考文档
-* [春哥的 nginx 教程](https://openresty.org/download/agentzh-nginx-tutorials-zhcn.html)
-* [淘宝 Tengine 团队](http://tengine.taobao.org/book/)
 
 # 正文
 > * 原文作者：[Andrew Alexeev](http://aosabook.org/en/intro2.html#alexeev-andrew)
@@ -282,3 +275,7 @@ upstream 和负载均衡处理机制包括用于检测失败的上游服务器�
 值得一提的另一点是发展应该集中。Windows 版本的 nginx 可能是一个很好的例子，说明如何避免在既不是开发人员的核心竞争力或目标应用程序的情况下稀释开发工作。它同样适用于重写引擎，该引擎在多次尝试增强 nginx 时出现，具有更多功能以便与现有的旧设置向后兼容。
 
 但值得一提的是，尽管 nginx 开发者社区不是很大，但 nginx 的第三方模块和扩展一直是其受欢迎程度的重要组成部分。 Evan Miller，Piotr Sikora，Valery Kholodkov，Zhang Yichun（agentzh 中文名：章亦春）以及其他才华横溢的软件工程师所做的工作得到了 nginx 用户社区及其原始开发人员的赞赏。
+
+# 参考文档
+* [春哥的 nginx 教程](https://openresty.org/download/agentzh-nginx-tutorials-zhcn.html)
+* [淘宝 Tengine 团队](http://tengine.taobao.org/book/)
