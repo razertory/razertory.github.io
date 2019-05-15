@@ -1,6 +1,6 @@
 ---
 layout: post
-categories:
+categories: [algo]
 date: 2018-12-05 22:11:28 +0800
 title: NP 问题
 ---
