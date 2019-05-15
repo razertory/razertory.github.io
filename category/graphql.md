@@ -1,6 +1,6 @@
 ---
 layout: posts_by_category
 categories: graphql
-title: Graphql
+title: GraphQL
 permalink: /category/graphql
 ---

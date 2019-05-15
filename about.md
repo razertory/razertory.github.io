@@ -4,22 +4,11 @@ title: About
 permalink: /about/
 ---
 
-* `Razertory` 一直用的这个 ID，最早的时候用在高中的时候打英雄联盟上，大概就是山寨了 Razer 鼠标键盘的名字，就这样一直在用了～
-* 半吊子吉他指弹玩家
-* 编程语言中立流派，除了 Go 语言不偏爱不 diss 任何一种
-* 书魔 !!
+* 现就职于某 toB 创业公司
+* C，Java，Go，Ruby，Scala
+* 半吊子吉他指弹玩家，喜欢「押尾光太郎」
+* 邮箱: spring.razer@gmail.com 
 * 属猪  (´ ・ω・ `)
-* 我的邮箱: spring.razer[at]gmail.com || razertory[at]163.com
 
-### 「公众号」书魔 !! 说书人的分享
+### 用来说书的「公众号」
 ![avatar](./static/img/mp.weixin.jpg)
-
-### 小伙伴们的博客
-
-Haskell 狂魔 [Cailin's Blog](https://oshmkufa2010.github.io/)
-
-现居杭州蚂蚁的 Java 大佬 [屈定's Blog](https://mrdear.cn/)
-
-Android 搬砖工 [blog.luliangdev.cn](http://blog.luliangdev.cn)
-
-mikukonai [mikukonai.com](https://mikukonai.com)

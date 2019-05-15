@@ -1,7 +1,7 @@
 ---
 layout: posts_by_category
 categories: life
-title: Life
+title: 生活
 permalink: /category/life
 ---
 

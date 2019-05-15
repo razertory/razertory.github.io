@@ -18,21 +18,23 @@ collections:
 social:
     - icon: fa-github
       link: "https://github.com/razertory"
-    - icon: fa-twitter
-      link: "https://twitter.com/razertory"
 
 share:
   twitter_username: razertory
 
 urls:
+    - text: 标签
+      url: /category/algo
+
     - text: 关于我
       url: /about/
-    #- text: My Projects
-    #  url: /projects/
+
+    - text: 小伙伴们
+      url: /friends
+
     - text: 收集
       url: /collections
-    # - text: XML Feed
-    #   url: /feed.xml
+
 
 url: "http://razertory.me"
 baseurl: ""

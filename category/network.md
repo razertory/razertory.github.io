@@ -1,6 +1,6 @@
 ---
 layout: posts_by_category
 categories: network
-title: Network
+title: 网络
 permalink: /category/network
 ---

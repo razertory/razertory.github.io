@@ -1,6 +1,6 @@
 ---
 layout: posts_by_category
 categories: book
-title: Book
+title: 读书 
 permalink: /category/book
 ---
