@@ -4,11 +4,12 @@ title: 小伙伴们
 permalink: /friends/
 ---
 
+### 工友
 Haskell 狂魔 [Gensokyo](https://oshmkufa2010.github.io/)
 
 现居杭州蚂蚁的 Java 大佬 [屈定's Blog](https://mrdear.cn/)
 
-[V2EX](https://www.v2ex.com/?r=razertory) 上的朋友
+### 大隐隐于[V2EX](https://www.v2ex.com/?r=razertory) 
 
 Android 搬砖工 [blog.luliangdev.cn](http://blog.luliangdev.cn)
 
