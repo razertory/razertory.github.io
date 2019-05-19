@@ -34,7 +34,7 @@ Raft 在 CAP 理论中, 着重强调 C 和 P。
 
 - [disconnect()](https://github.com/razertory/MIT6.824/blob/master/src/raft/config.go#L258) 方法会 disable 掉这个节点的 RPC 调用，也就是说让这个节点不可用
 
-### 2A
+### 2A leader 选举
 
 *TestInitialElection2A*
 
@@ -46,8 +46,16 @@ Raft 在 CAP 理论中, 着重强调 C 和 P。
 
 要注意的是。第 1 点中，follower 变成了 canditate 的时候，要 term++；第 2 点里面一定要赋值给自己的 term 不然有很多 leaders。
 
-## TODO
 *TestReElection2A*
+
+可以注意到, 当选举出了 leader 之后， 测试 代码会 disconnect 掉它，并且经过一定时间的 sleep 再去检查有没有 leader。另一方面，将 leader 和剩余的两个中任意一个 disconnect之后也要确保再没有 leader。
+
+1. leader 断开之后，系统中剩余的节点又将进入超时倒计时选举新的 Leader。
+2. leader 断开之后，leader 与剩余节点的 term 就会不一样，因为此时剩余节点会继续开始新的 term
+3. leader 重连之后，由于 2 此时当任何一个节点发起 RequestVote 的时候，收到消息的 leader 在比较 term 之后发现如果自己小于请求投票的节点，那么自己就变成 follower。
+
+
+2A 用到了 Go 中的 select 来进行事件等待，也就是等待超时或者另外节点的请求/回复。一些读取 term 并赋值的地方需要加上 mu.Lock() 来避免 Data Race。
 
 
 
