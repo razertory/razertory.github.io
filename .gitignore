@@ -1,5 +1,7 @@
-_site*
-.sass-cache
-*.swp
-.jekyll-metadata
-*backup/
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
