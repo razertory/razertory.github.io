@@ -9,16 +9,16 @@ categories: graphql
 ### 缓存
 其实缓存这个词，我个人会觉得比较含糊，有时候我们会把 cache 和 buffer 这两个东西弄混淆
 
-`Cache` 为了弥补高速设备和低速设备的鸿沟而引入的中间层，最终起到“加快访问速度”的作用。比如：CPU 缓存，NoSQL缓存
+`Cache` 为了弥补高速设备和低速设备的鸿沟而引入的中间层，最终起到 “加快访问速度” 的作用。比如：CPU 缓存，NoSQL 缓存
 
-`Buffer` 主要目的进行流量整形，把突发的大数量较小规模的 I/O 整理成平稳的小数量较大规模的 I/O，以“减少响应次数”（比如从网上下电影，你不能下一点点数据就写一下硬盘，而是积攒一定量的数据以后一整块一起写，不然硬盘都要被你玩坏了，比如TCP做数据传递的时候，单位是“帧”而不是一个个的字节）
+`Buffer` 主要目的进行流量整形，把突发的大数量较小规模的 I/O 整理成平稳的小数量较大规模的 I/O，以 “减少响应次数”（比如从网上下电影，你不能下一点点数据就写一下硬盘，而是积攒一定量的数据以后一整块一起写，不然硬盘都要被你玩坏了，比如 TCP 做数据传递的时候，单位是“帧” 而不是一个个的字节）
 
-浏览器/APP -> 网络转发 -> 应用服务器 -> DB 每个地方都可以用缓存方式来做。比如这里的分享主要来自于应用服务器。
+浏览器 / APP -> 网络转发 -> 应用服务器 -> DB 每个地方都可以用缓存方式来做。比如这里的分享主要来自于应用服务器。
 
 ### Chatty
 其实在我另一篇博文里面有提到这一方面的优化，这里我打算详细分析。
 
-“GraphQL 是一种可以让程序员编写clean code的方法，每个type的field都有着单一的目的（single-purpose）。然而，如果我们不多加考虑，那么我们的GraphQL服务端就会变得非常’chatty’，或者说会执行很多重复的查询” – https://graphql.org/learn/best-practices(个人翻译)
+“GraphQL 是一种可以让程序员编写 clean code 的方法，每个 type 的 field 都有着单一的目的（single-purpose）。然而，如果我们不多加考虑，那么我们的 GraphQL 服务端就会变得非常’chatty’，或者说会执行很多重复的查询” – https://graphql.org/learn/best-practices(个人翻译)
 
 比如我司有一个服务端查询：
 
@@ -38,16 +38,16 @@ query clazz($id: ID) {
     }
 }
 ```
-这样一个查询，如果不做适当的处理会变得很慢。这里的查询会遍历两个列表 `subjects` 和 `activities` 用来获取 `teacher` 数据，如果做一下复杂度分析，可能很容易得到，执行SQL的数目就是两个列表的矩阵数，也就是O(N * M)。这样当然会很慢，所以不得不用上一些batching技术。
+这样一个查询，如果不做适当的处理会变得很慢。这里的查询会遍历两个列表 `subjects` 和 `activities` 用来获取 `teacher` 数据，如果做一下复杂度分析，可能很容易得到，执行 SQL 的数目就是两个列表的矩阵数，也就是 O(N * M)。这样当然会很慢，所以不得不用上一些 batching 技术。
 
 ```ruby
 gem 'graphql-batch'
 ```
 
-用上这个技术之后，我之前的这种大量SQL的查询，就会被整型成少量的 `in` 查询。这里关于 N + 1 query的东西不再赘述。做复杂度分析的时候就会发现SQL执行数目只和数据嵌套深度有关。
+用上这个技术之后，我之前的这种大量 SQL 的查询，就会被整型成少量的 `in` 查询。这里关于 N + 1 query 的东西不再赘述。做复杂度分析的时候就会发现 SQL 执行数目只和数据嵌套深度有关。
 
 ### Promise
-在做GraphQL Server开发的时候，我对一个事情一直很好奇，就是每个field获取是不是异步的？所以我做了以下实验：
+在做 GraphQL Server 开发的时候，我对一个事情一直很好奇，就是每个 field 获取是不是异步的？所以我做了以下实验：
 
 ``` ruby
 def blocking_query(id)
@@ -93,9 +93,9 @@ end
 Completed 200 OK in 12641ms
 ```
 
-可以发现我每个field的耗时被叠加起来了。同时发现每个field的获取打印线程都是一样的内容。
+可以发现我每个 field 的耗时被叠加起来了。同时发现每个 field 的获取打印线程都是一样的内容。
 
-这时候可以加上异步优化来处理，完成一个Promise，来自[issue](https://github.com/lgierth/promise.rb/issues/23#issuecomment-276437726)
+这时候可以加上异步优化来处理，完成一个 Promise，来自 [issue](https://github.com/lgierth/promise.rb/issues/23#issuecomment-276437726)
 
 ```ruby
 require 'promise'
@@ -151,18 +151,18 @@ end
 
 Completed 200 OK in 3577ms
 ```
-可以发现打印的线程堆栈是不同的内容，同时接口速度接近于单个field的执行速度。
+可以发现打印的线程堆栈是不同的内容，同时接口速度接近于单个 field 的执行速度。
 
 在阅读 `graphql-batch` 源码中我也发现了这样子类似的一段
 ```ruby
 def load(key)
   cache[cache_key(key)] ||= begin
     queue << key
-    ::Promise.new.tap { |promise| promise.source = self }
+    ::Promise.new.tap {|promise| promise.source = self}
   end
 end
 ```
-基于Promise来和缓存key的方式来完成。
+基于 Promise 来和缓存 key 的方式来完成。
 
 ### 后记
-缓存，异步，这一类的词眼在现代的研发体系中总是很常见，GraphQL 的ruby生态还需推进。
+缓存，异步，这一类的词眼在现代的研发体系中总是很常见，GraphQL 的 ruby 生态还需推进。

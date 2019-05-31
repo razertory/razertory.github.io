@@ -60,8 +60,8 @@ Julia Evans 的 [Async IO on Linux: select, poll, and epoll](http://jvns.ca/blog
 
 有 N 个任务都会对数据 a 进行 write（write 的方式需要取决于 a 的值），如果这 N 个任务并行执行完 a 的值和串行执行完不一致，那么这个并发就是不安全的。这个概念和 [数据竞态](https://docs.oracle.com/cd/E19205-01/820-0619/geojs/index.html) 类似。可以例举一些有并发安全问题的场景
 
-* 数据库中某column x 在业务中unique，程序员采用find x or insert
+* 数据库中某 column x 在业务中 unique，程序员采用 find x or insert
 * n++ 问题
 * 火车售票问题
-  
+
 总结下来，当存在 `n = f(n - 1)` 这样的场景时，很有可能出现并发安全问题

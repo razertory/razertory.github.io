@@ -43,7 +43,7 @@ public class Solution {
     }
 }
 ```
-本来以为这样的算法效率并不高，因为要反复执行 `||`运算。然而，然而，some times too naive |-_- 。事实是速度并不慢。在 `||`运算中，只要有一个`true`产生。那么这个表达式的值一定是 true。对于布尔运算的递归程序同样适用。所以在 debug 阶段可以看到当 helper 里面一旦有`true`的时候。递归就会停止。这里不得不佩服前人做的努力。
+本来以为这样的算法效率并不高，因为要反复执行 `||` 运算。然而，然而，some times too naive |-_- 。事实是速度并不慢。在 `||` 运算中，只要有一个 `true` 产生。那么这个表达式的值一定是 true。对于布尔运算的递归程序同样适用。所以在 debug 阶段可以看到当 helper 里面一旦有 `true` 的时候。递归就会停止。这里不得不佩服前人做的努力。
 
 ## 斐波那契
 先来一把传统的递归写法
@@ -52,7 +52,7 @@ public int fib(int i){
     if (i == 0){
         return 0;
     }
-    if ( i == 1) {
+    if (i == 1) {
         return 1;
     }
     return fib(i - 1) + fib(i - 2);
@@ -105,7 +105,7 @@ public boolean isSubsetSum(int[]set, int sum) {
 
 hard
 
-`状态转移方程`
+` 状态转移方程 `
 
 子集合的大小 0 < size <= set.length。这种情况下，需要进一步把大问题拆分成小问题，推导出状态转移方程。
 ```java
@@ -137,8 +137,8 @@ boolean isSubsetSum(int set[], int n, int sum){
 ```
 这个做法的复杂度为指数级别
 
-`动态规划矩阵`
-其实，在《算法导论》一书中，其实有一点可以很明确“应用于子问题重叠的情况”。分析上述的算法，可以发现有很多重叠的子问题。所以，有必要回到文章最开始的一点`加缓存`。这里考虑用一个矩阵来缓存结果集。
+` 动态规划矩阵 `
+其实，在《算法导论》一书中，其实有一点可以很明确 “应用于子问题重叠的情况”。分析上述的算法，可以发现有很多重叠的子问题。所以，有必要回到文章最开始的一点 ` 加缓存 `。这里考虑用一个矩阵来缓存结果集。
 ```java
 boolean isSubsetSum(int set[], int n, int sum) {
     boolean subset[][] = new boolean[sum+1][n+1];
@@ -157,7 +157,7 @@ boolean isSubsetSum(int set[], int n, int sum) {
         for (int j = 1; j <= n; j++)
         {
             subset[i][j] = subset[i][j-1];
-            if (i >= set[j-1])
+            if (i>= set[j-1])
             subset[i][j] = subset[i][j] ||
                     subset[i - set[j-1]][j-1];
         }

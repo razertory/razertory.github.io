@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2018-10-23 10:09:07 +0800
-title: MIT6.824 Map Reduce 
+title: MIT6.824 Map Reduce
 categories: [mit-6824]
 ---
 

@@ -27,7 +27,7 @@ type ReverseProxy struct {
 ```
 简直不要太好，虽然我也喜欢造轮子，可是好东西不用白不用啊。按照这个文件的逻辑，随后就发现了提供反向代理的方法 `ServeHTTP`。
 
-本质上，一个 http 代理服务器本质上还是实现了 `/src/net/http/server.go` 中的 `ListenAndServe(addr string, handler Handler)` 方法。这里的 addr 表示绑定的地址，handler 表示请求处理器。再去看handler 就会发现实际上做 http 开发只需要实现这个接口  
+本质上，一个 http 代理服务器本质上还是实现了 `/src/net/http/server.go` 中的 `ListenAndServe(addr string, handler Handler)` 方法。这里的 addr 表示绑定的地址，handler 表示请求处理器。再去看 handler 就会发现实际上做 http 开发只需要实现这个接口
 
 
 ```go
@@ -63,7 +63,7 @@ type Handler interface {
 
 * `ListenAndServe(addr string, handler Handler)` 启动服务, 客户端发起请求
 * `handler` 处理请求过来的流量交给反向代理模块, 这里需要实现接口
-* 反向代理模块按照用户自定义的方式去做负载均衡, 在接口的实现中调用反向代理中的`ServeHTTP`方法，注意这里两个方法同名，但是作用不同的。负载均衡的逻辑需要自己来写，其实就是判断流量交给哪台目标服务器。
+* 反向代理模块按照用户自定义的方式去做负载均衡, 在接口的实现中调用反向代理中的 `ServeHTTP` 方法，注意这里两个方法同名，但是作用不同的。负载均衡的逻辑需要自己来写，其实就是判断流量交给哪台目标服务器。
 * 目标服务器把响应给负载均衡服务器
 * 负载均衡服务器再传递回响应
 
