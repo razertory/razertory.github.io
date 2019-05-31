@@ -2,7 +2,7 @@
 layout: post
 title:  "「译」将 Rails 项目拆分成微服务架构"
 date:   2018-03-07 15:21:50 +0800
-categories: microservice
+categories: translation
 ---
 
 * 原文链接：* [https://dev.to/iriskatastic/split-your-rails-app-using-microservices-ckl]()
