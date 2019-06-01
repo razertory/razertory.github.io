@@ -2,7 +2,7 @@
 layout: post
 title:  我的「java-code-lab」
 date:   2018-06-01 13:23:53 +0800
-categories: [algo]
+tags: [algo]
 ---
 在念书期间，学习数据结构课程的时候，我发现了一个质量很好的 [Java 数据结构](https://github.com/buptdavid/datastructure) 项目，当时也是受益匪浅。后来的几年作者没有再维护，但我认为这会是一个非常好的模式。
 

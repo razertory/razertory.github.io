@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "动态规划"
-date:   2017-07-29 +0800
-categories: [algo]
+title: 动态规划
+date: 2017-07-29
+tag: [algo]
 ---
 
 从动态规划的本质来说，就是加缓存。

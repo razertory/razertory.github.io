@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: os
+tags: os
 date: 2019-02-02 13:25:29 +0800
 title: Go 实现负载均衡服务
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Java 控制 CPU 占用"
 date: 2018-10-13 00:40:18 +0800
-categories: [os]
+tags: [os]
 ---
 
 选自《编程之美》。

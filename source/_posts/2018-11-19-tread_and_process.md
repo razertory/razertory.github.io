@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: os
+tags: os
 date: 2018-11-19 13:55:48 +0800
 title: 线程、进程和协程以及 IO 多路复用实现并发
 ---

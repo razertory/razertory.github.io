@@ -13,17 +13,14 @@ menu:
     url: /
   archives:
     url: /archives
-  # tags:
-  #   url: /tags
-  th-list:
-    text: Categories
-    url: /categories
+  tags:
+    url: /tags
+  # th-list:
+  #   text: Categories
+  #   url: /categories
   github:
     url: https://github.com/razertory
     target: _blank
-  # zhihu:
-  #   url: https://www.zhihu.com/people/razertory
-  #   target: _blank
 
 # 你的头像url
 avatar: /img/avatar.jpg
@@ -102,7 +99,7 @@ less:
 
 # 以下评论插件开启一个即可
 # 是否开启 disqus
-disqus_shortname: false
+disqus_shortname: razertory
 # 是否开启友言评论, 填写友言用户id
 uyan_uid: false
 # 是否使用 gitment，https://github.com/imsun/gitment

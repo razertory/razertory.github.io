@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: os
+tags: os
 date: 2019-05-09 21:28:23 +0800
 title: select, poll, epoll
 ---
