@@ -17,7 +17,7 @@ tags: [algo]
 把所有子序列都找出来并求出最大和。利用两个循环，外循环记录开始下标，内循环记录结束下标。不断维护一个最大 sum。
 ``` Java
 class Solution {
-    // T:O(n^w) S:O(1)
+    // T:O(n^2) S:O(1)
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         int max = nums[0];
