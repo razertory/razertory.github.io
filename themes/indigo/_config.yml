@@ -8,19 +8,15 @@
 #    url: /about       链接，绝对或相对路径，必须。
 #    target: _blank    是否跳出，省略则在当前页面打开
 menu:
-  home:
-    text: 主页
-    url: /
-  archives:
-    url: /archives
   tags:
+    text: 所有标签
     url: /tags
-  # th-list:
-  #   text: Categories
-  #   url: /categories
-  github:
-    url: https://github.com/razertory
-    target: _blank
+  code:
+    text: 编程训练
+    url: /coding
+  external-link-square:
+    text: 关于我
+    url: /links
 
 # 你的头像url
 avatar: /img/avatar.jpg
@@ -38,9 +34,9 @@ email: razer.spring@gmail.com
 color: '#3F51B5'
 
 # 页面标题
-tags_title: Tags
-archives_title: Archives
-categories_title: Categories
+tags_title: 标签
+archives_title: 归档
+categories_title: 目录
 
 # 文章截断
 excerpt_render: false
@@ -144,7 +140,7 @@ canonical: false
 since_year: 2018
 
 # 用户页面中作者相关的描述性文字，如不需要设为 false
-about: 用户页面中作者相关的描述性文字，如不需要设为 false
+about: false #用户页面中作者相关的描述性文字，如不需要设为 false
 
 # “不蒜子”访问量统计，详见 http://ibruce.info/2015/04/04/busuanzi/
 # visit_counter:
