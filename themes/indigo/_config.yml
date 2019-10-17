@@ -12,8 +12,11 @@ menu:
     text: 所有标签
     url: /tags
   code:
-    text: 编程训练
+    text: 编程
     url: /coding
+  tasks:
+    text: MIT 6.824
+    url: mit6824
   external-link-square:
     text: 关于我
     url: /links
