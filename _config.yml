@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Razertory's Blog
-subtitle:
+title: "Razertory 的技术博客"
+subtitle: 一曲肝肠断，天涯何处觅知音
 description: Maker, Coder, Puzzle Solver
 keywords: Razertory
 author: Razertory
-language:
+language: cn
 timezone:
 
 # URL

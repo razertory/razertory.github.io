@@ -152,7 +152,7 @@ about: false #用户页面中作者相关的描述性文字，如不需要设为
 
 # 动态定义title
 title_change:
-  normal: Razertory's Blog
+  normal: "Razertory"
   leave: 一曲肝肠断，天涯何处觅知音
 
 # 设置为 true 发布后将使用 unpkg cdn 最新的主题样式
