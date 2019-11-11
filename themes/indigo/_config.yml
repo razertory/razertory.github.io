@@ -56,7 +56,7 @@ share: true
 
 # 是否开启打赏，关闭 reward: false
 reward:
-  title: 请我喝一杯咖啡
+  title: 假如我的文章对阁下有用，那么...
   wechat: /img/wechatpay.jpg     #微信，关闭设为 false
   alipay: /img/alipay.jpg     #支付宝，关闭设为 false
 
