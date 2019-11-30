@@ -11,11 +11,11 @@ Scala 课堂是 Twitter 启动的一系列讲座，用来帮助有经验的工�
 
 大部分课程除了 Scala 的交互命令行之外不需要其他软件。我们鼓励读者按顺序学习，并且不仅限于此。让这些课程作为您探索 Scala 的起点吧！
 
-[基础]()
+[基础](/2019/11/30/scala-school-basics/)
 值，函数，类，方法，继承，try-catch-finally。面向表达式编程
 
-[基础知识（续）]()
-样本类，对象，包，应用，更新，函数即对象（统一访问原则），模式匹配。
+[基础知识（续）](/2019/11/30/scala-school-bascis2/)
+样本类，对象，包，应用，更新，函数即对象（统一访问原则），模式匹配，样本类，异常。
 
 [集合]()
 列表，映射，功能组合 (map, foreach, filter, zip, folds)
@@ -50,3 +50,5 @@ Finagle 原语：Future, Service, Filter, Builder
 利用 Finagle 构建一个分布式搜索引擎
 
 **参考资料**
+* Scala 99 (https://github.com/shekhargulati/99-problems/tree/master/scala)
+* Databricks Scala 编程风格指南 (https://github.com/databricks/scala-style-guide/blob/master/README-ZH.md)
