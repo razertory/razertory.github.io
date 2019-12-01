@@ -145,10 +145,10 @@ val result = res1 match {
 ```
 参考 Effective Scala 对使用 [Options](https://twitter.github.com/effectivescala/#Functional%20programming-Options) 的意见。
 
-### 函数组合子（Functional Combinators）
+## 函数组合子（Functional Combinators）
 List(1, 2, 3) map squared 对列表中的每一个元素都应用了 squared 平方函数，并返回一个新的列表 List(1, 4, 9)。我们把类似于 map 的操作称作组合子。 （如果想要更好的定义，你可以看看 Stackoverflow 上对 [组合子](https://stackoverflow.com/questions/7533837/explanation-of-combinators-for-the-working-man) 的说明。）他们常被用在标准的数据结构上。
 
-#### map
+### map
 `map` 对列表中的每个元素应用一个函数，返回应用后的元素所组成的列表。
 
 ```scala
@@ -167,7 +167,7 @@ timesTwo: (i: Int)Int
 scala> numbers.map(timesTwo)
 res0: List[Int] = List(2, 4, 6, 8)
 ```
-#### foreach
+### foreach
 
 `foreach` 很像 map，但`没有返回值`。foreach 仅用于有副作用 `side-effects` 的函数。
 
@@ -183,8 +183,8 @@ scala> val doubled = numbers.foreach((i: Int) => i * 2)
 doubled: Unit = ()
 ```
 
-#### filter
-`filter` 移除任何对传入函数计算结果为 `false` 的元素。返回一个布尔值的函数通常被称为谓词函数 （或判定函数）。
+### filter
+`filter` 移除任何对传入函数计算结果为 `false` 的元素。返回一个布尔值的函数通常被称为`谓词函数` （或判定函数）。
 
 ```scala
 scala> numbers.filter((i: Int) => i % 2 == 0)
@@ -196,7 +196,7 @@ scala> numbers.filter(isEven)
 res2: List[Int] = List(2, 4)
 ```
 
-#### zip
+### zip
 `zip` 将两个列表的内容聚合到一个`对偶列表`中。
 
 ```scala
@@ -204,7 +204,7 @@ scala> List(1, 2, 3).zip(List("a", "b", "c"))
 res0: List[(Int, String)] = List((1,a), (2,b), (3,c))
 ```
 
-#### partition
+### partition
 `partition` 将使用给定的谓词函数分割列表。
 
 ```scala
@@ -213,14 +213,14 @@ scala> numbers.partition(_ % 2 == 0)
 res0: (List[Int], List[Int]) = (List(2, 4, 6, 8, 10),List(1, 3, 5, 7, 9))
 ```
 
-#### find
+### find
 `find` 返回集合中第一个匹配谓词函数的元素。
 
 ```scala
 scala> numbers.find((i: Int) => i > 5)
 res0: Option[Int] = Some(6)
 ```
-#### drop & dropWhile
+### drop & dropWhile
 `drop` 将删除`前 i` 个元素
 
 ```scala
@@ -235,7 +235,7 @@ scala> numbers.dropWhile(_ % 2 != 0)
 res0: List[Int] = List(2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
-#### foldLeft
+### foldLeft
 ```scala
 scala> numbers.foldLeft(0)((m: Int, n: Int) => m + n)
 res0: Int = 55
@@ -265,7 +265,7 @@ m: 36 n: 9
 m: 45 n: 10
 res0: Int = 55
 ```
-#### foldRight
+### foldRight
 和 foldLeft 一样，只是运行过程相反。在标准库的实现为：
 
 ```scala
@@ -288,7 +288,7 @@ m: 1 n: 54
 res0: Int = 55
 ```
 
-#### flatten
+### flatten
 `flatten` 将嵌套结构扁平化一个层级。
 
 ```scala
@@ -296,7 +296,7 @@ scala> List(List(1, 2), List(3, 4)).flatten
 res0: List[Int] = List(1, 2, 3, 4)
 ```
 
-#### flatMap
+### flatMap
 `flatMap` 是一种常用的组合子，结合映射 `mapping` 和扁平化 `flattening`。 `flatMap` 需要一个处理嵌套列表的函数，然后将结果串连起来。
 
 ```scala
@@ -316,7 +316,7 @@ res1: List[Int] = List(2, 4, 6, 8)
 
 参考 Effective Scala 对 [flatMap](https://twitter.github.com/effectivescala/#Functional%20programming-%60flatMap%60) 的意见。
 
-### 扩展函数组合子
+## 扩展函数组合子
 现在我们已经学过集合上的一些函数。
 
 我们将尝试写自己的函数组合子。
@@ -335,7 +335,7 @@ res0: List[Int] = List(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
 ```
 为什么是 `List[Int]()`？Scala 没有聪明到理解你的目的是将结果积聚在一个空的 Int 类型的列表中。
 
-#### Map?
+### Map?
 所有展示的函数组合子都可以在 Map 上使用。Map 可以被看作是一个二元组的列表，所以你写的函数要处理一个键和值的二元组。
 
 ```scala
@@ -356,4 +356,4 @@ res0: scala.collection.immutable.Map[String,Int] = Map((steve,100), (bob,101))
 scala> extensions.filter({case (name, extension) => extension < 200})
 res0: scala.collection.immutable.Map[String,Int] = Map((steve,100), (bob,101))
 ```
-为什么这个代码可以工作？为什么你可以传递一个部分模式匹配？
+为什么这个代码可以工作？为什么你可以传递一个部分模式匹配？[下一章](/2019/12/01/scala-school-pattern-matching-and-functional-composition/)将揭晓。
