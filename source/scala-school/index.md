@@ -17,7 +17,7 @@ Scala 课堂是 Twitter 启动的一系列讲座，用来帮助有经验的工�
 [基础知识（续）](/2019/11/30/scala-school-bascis2/)
 样本类，对象，包，应用，更新，函数即对象（统一访问原则），模式匹配，样本类，异常。
 
-[集合]()
+[集合](/2019/12/01/scala-school-collections/#drop-amp-dropWhile)
 列表，映射，功能组合 (map, foreach, filter, zip, folds)
 
 [模式匹配与函数组合]()
