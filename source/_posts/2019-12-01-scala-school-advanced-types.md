@@ -40,6 +40,8 @@ scala> (new Container[Float]).addIt(123.2F)
        (new Container[Float]).addIt(123.2)
         ^
 ```
+
+> 注意，新版本的 Scala 可能会提示：  view bounds are deprecated; use an implicit parameter instead.
 ### 其他类型限制
 方法可以通过隐式参数执行更复杂的类型限制。例如，List 支持对数字内容执行 sum，但对其他内容却不行。可是 Scala 的数字类型并不都共享一个超类，所以我们不能使用 `T <: Number`。相反，要使之能工作，Scala 的 math 库对适当的类型 T 定义了一个隐含的 `Numeric[T]`。 然后在 List 定义中使用它：
 
@@ -89,7 +91,7 @@ def min[B >: A](implicit cmp: Ordering[B]): A = {
 ```
 其主要优点是：
 
-集合中的元素不必实现 Ordered 特质，但 Ordered 的使用仍然可以执行静态类型检查。
+集合中的元素不必实现 Ordered trait，但 Ordered 的使用仍然可以执行静态类型检查。
 无需任何额外的库支持，你也可以定义自己的排序：
 ```scala
 scala> List(1,2,3,4).min
