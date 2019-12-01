@@ -20,7 +20,7 @@ Scala 课堂是 Twitter 启动的一系列讲座，用来帮助有经验的工�
 [集合](/2019/12/01/scala-school-collections/#drop-amp-dropWhile)
 列表，映射，功能组合 (map, foreach, filter, zip, folds)
 
-[模式匹配与函数组合]()
+[模式匹配与函数组合](/2019/12/01/scala-school-pattern-matching-and-functional-composition/)
 更多函数！偏函数，更多模式匹配
 
 [类型和多态基础]()
