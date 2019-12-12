@@ -1,7 +1,7 @@
 ---
 title: 有序数组转化为平衡二叉搜索树（BST）
 date: 2019-12-12 21:41:57
-tags: [algo]
+tags: 
 ---
 给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。
 

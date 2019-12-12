@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: os
+tags: 基础组件
 date: 2019-02-02 13:25:29 +0800
 title: Go 实现负载均衡服务
 ---

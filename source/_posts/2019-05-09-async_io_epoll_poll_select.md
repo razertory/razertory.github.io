@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: os
+tags: 操作系统
 date: 2019-05-09 21:28:23 +0800
 title: select, poll, epoll
 ---

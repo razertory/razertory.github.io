@@ -1,7 +1,7 @@
 ---
 title: Scala 课堂 - 基础
 date: 2019-11-30 21:26:36
-tags: [scala]
+tags: 
 ---
 
 ### 为什么选择 Scala?

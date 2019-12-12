@@ -2,7 +2,7 @@
 layout: post
 title:  "用 Netty 的一次 bug 跟踪"
 date:   2017-11-20 0:21:00 +0800
-tag: [network]
+tag: Java
 ---
 
 ### 问题

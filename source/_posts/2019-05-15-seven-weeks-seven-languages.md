@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: [book]
+tags: 读书
 date: 2019-03-01 20:57:15 +0800
 title: 「读书」七周七语言
 publish: true

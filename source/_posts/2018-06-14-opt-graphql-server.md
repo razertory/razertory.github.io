@@ -2,7 +2,7 @@
 layout: post
 title:  "GraphQL 优化分享"
 date: 2018-06-14 00:04:44
-tags: graphql
+tags: 系统设计
 ---
 上周给公司的研发同事们做了一次服务端的 GraphQL 优化分享，主要是后端同事，这里打算写博文的方式记下来。
 
