@@ -1,7 +1,7 @@
 ---
 title: 「读书」反应式设计模式
 date: 2019-08-04 10:23:27
-tags: [book]
+tags: 读书
 ---
 > 一直以来我都没有刻意去学设计模式这一块，因为认为语言本身的设计会需要人附带出一些[设计模式](https://www.runoob.com/design-pattern/strategy-pattern.html)，特别是以 Java 为主导的 OOP 语言，而这些设计模式出现其实就是让人为了接受这样的语言构造而又不得不学的东西。我认为「设计模式」应该是语言无关的，是 design-pattern 而不是 coding-pattern。
 

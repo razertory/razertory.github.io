@@ -1,7 +1,7 @@
 ---
 title: 链表中交换节点
 date: 2019-10-26 14:47:13
-tags: [algo]
+tags: 
 ---
 Given a linked list, swap every two adjacent nodes and return its head.
 You may not modify the values in the list's nodes, only nodes itself may be changed.

@@ -1,7 +1,7 @@
 ---
 title: 汉诺塔问题
 date: 2019-03-15 20:44:06
-tags: [algo]
+tags:
 ---
 
 描述一下问题，假设有 A，B，C 三个柱子。A 柱子上有一定数目从高到低是小到大顺序的盘子叠起来，每次可以移动一个柱子上的 1 个盘子。并且任何时候小盘子永远在大盘子上。现在的问题是如何把 A 的 N 个盘子移动到 C。[在线游戏](https://www.mathsisfun.com/games/towerofhanoi.html)

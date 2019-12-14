@@ -2,7 +2,7 @@
 layout: post                          # (require) default post layout
 title: "开源项目之 Nginx"                   # (require) a string title
 date: 2018-10-09 19:51:02 +0700       # (require) a post date
-tags: [translation]
+tags: 基础组件
 ---
 
 # 正文

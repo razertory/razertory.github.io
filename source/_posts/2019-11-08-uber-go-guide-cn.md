@@ -1,7 +1,7 @@
 ---
 title: uber-go-guide
 date: 2019-11-08 08:04:22
-tags: [translation]
+tags: Golang
 ---
 本文长期维护地址: https://github.com/xxjwxc/uber_go_guide_cn
 # Uber Go 语言编码规范

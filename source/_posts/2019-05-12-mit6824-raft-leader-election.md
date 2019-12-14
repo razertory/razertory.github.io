@@ -1,6 +1,5 @@
 ---
 layout: post
-tags: [mit-6824]
 date: 2019-05-12 13:43:13 +0800
 title: MIT6.824 Raft 2A
 published: true
