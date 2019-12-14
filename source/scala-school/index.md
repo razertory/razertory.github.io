@@ -11,22 +11,22 @@ Scala 课堂是 Twitter 启动的一系列讲座，用来帮助有经验的工�
 
 大部分课程除了 Scala 的交互命令行之外不需要其他软件。我们鼓励读者按顺序学习，并且不仅限于此。让这些课程作为您探索 Scala 的起点吧！
 
-[基础]()
+[基础](/2019/11/30/scala-school-basics/)
 值，函数，类，方法，继承，try-catch-finally。面向表达式编程
 
-[基础知识（续）]()
-样本类，对象，包，应用，更新，函数即对象（统一访问原则），模式匹配。
+[基础知识（续）](/2019/11/30/scala-school-bascis2/)
+样本类，对象，包，应用，更新，函数即对象（统一访问原则），模式匹配，样本类，异常。
 
-[集合]()
+[集合](/2019/12/01/scala-school-collections/#drop-amp-dropWhile)
 列表，映射，功能组合 (map, foreach, filter, zip, folds)
 
-[模式匹配与函数组合]()
+[模式匹配与函数组合](/2019/12/01/scala-school-pattern-matching-and-functional-composition/)
 更多函数！偏函数，更多模式匹配
 
-[类型和多态基础]()
+[类型和多态基础](/2019/12/01/scala-school-type-basics/)
 基本类型和类型多态性，类型推断，变性，边界，量化
 
-[高级类型]()
+[高级类型](/2019/12/01/scala-school-advanced-types/#结构类型)
 高级类型，视界，更高级多态性类型，递归类型，结构类型
 
 [简单构建工具]()
@@ -50,3 +50,5 @@ Finagle 原语：Future, Service, Filter, Builder
 利用 Finagle 构建一个分布式搜索引擎
 
 **参考资料**
+* Scala 99 (https://github.com/shekhargulati/99-problems/tree/master/scala)
+* Databricks Scala 编程风格指南 (https://github.com/databricks/scala-style-guide/blob/master/README-ZH.md)

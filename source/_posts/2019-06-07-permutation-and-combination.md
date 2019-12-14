@@ -4,6 +4,7 @@ date: 2019-03-07 16:49:40
 tags: [algo]
 ---
 
+### 排列组合
 排列 permutation（arrangement） 和组合 combination 纯粹的数学上的排列组合的定义是
 
 - 排列 就是指从给定 n 个数的元素中取出指定 r 个数的元素，进行排序
@@ -13,6 +14,7 @@ tags: [algo]
 
 数学中常用到的排列组合的公式主要用来统计目标个数。
 
+### 回溯法 
 在一些常见的算法问题中，有时候是需要输出期望的子集合。这个时候就需要采用回溯的方式来解决。
 
 维基百科的定义是
@@ -22,7 +24,6 @@ tags: [algo]
 
  ---
 
-### 无重复数组的全排列
 给定一个没有重复数字的序列，返回其所有可能的全排列（[原题]()）。如
 ```python
     Input: nums = [1,2,3]
@@ -52,5 +53,22 @@ tags: [algo]
     }
 }
  ```
-([源码](https://github.com/razertory/java-code-lab/blob/master/src/main/java/org/razertory/javacodelab/dfs/SubSet.java))
 
+### 完整代码
+```java
+public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList();
+        Arrays.sort(nums);
+        backTrack(list, new ArrayList(), nums, 0);
+        return list;
+    }
+
+private void backTrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
+    list.add(new ArrayList(tempList));
+    for (int i = start; i < nums.length; i++) {
+        tempList.add(nums[i]);
+        backTrack(list, tempList, nums, i + 1);
+        tempList.remove(tempList.size() - 1);
+    }
+}
+```
