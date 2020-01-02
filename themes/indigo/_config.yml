@@ -14,9 +14,9 @@ menu:
   code:
     text: 编程
     url: /coding
-  tasks:
-    text: MIT 6.824
-    url: mit6824
+  # tasks:
+  #   text: MIT 6.824
+  #   url: mit6824
   coffee:
     text: Scala 课堂
     url: /scala-school
