@@ -5,7 +5,7 @@ date: 2019-10-16 21:31:33
 ---
 > 编程能力是"对不同复杂度的问题（领域级/系统级/问题级），采用相对应工具降低复杂度，最后击破"的能力。
 
-题目全部选自 Leetcode 和 Codewars，其中 Leetcode 主要涉及数据结构和算法，以及并发编程；Codewars 主要涉及函数式编程。
+题目全部选自 Leetcode、Lintcode 和 Codewars，其中 Leetcode 和 Lintcode 主要涉及数据结构和算法，以及并发编程；Codewars 主要涉及函数式编程。
 
 ---
 ### 数据结构和算法
@@ -24,12 +24,11 @@ date: 2019-10-16 21:31:33
 **位运算**	
 [位运算实际问题](/2019/07/18/bit-operation/) [位运算实现加法](/2019/11/11/add-by-bit/) [二进制中 1 的个数](/2019/11/14/count-of-one/) [只出现了一次的数](/2019/11/17/single-number/) [个数多于一半的数](/2019/11/16/major-element/) [汉明距离](/2019/11/17/hamming-distance/)
 
-
 **搜索**	
 [各种层序遍历二叉树](2019/06/17/tree-level-order/) [完美的二分搜索](/2019/11/28/binary-search/) [有序数组转化为 BST](/2019/12/12/sorted-arr-to-bst) [无重复数组的全排列](/2019/03/07/permutation-and-combination/) [N皇后问题](/2019/03/09/n-queens-puzzle/)
 
 **动态规划**	
-[股票买卖最大利润](/2020/01/09/max-stock-profit/) [最大子序列](/2018/12/16/max-sub-array/) [抢劫房子](/2020/01/11/house-robber/) [最长回文子串](/2020/01/11/longest-palindromic-substring/) [二维数组中和最小路径](/2020/01/11/minimum-path-sum/) 编辑距离 [动态规划合集](/2017/07/29/dynamic-programming/)
+[股票买卖最大利润](/2020/01/09/max-stock-profit/) [最大子序列](/2018/12/16/max-sub-array/) [抢劫房子](/2020/01/11/house-robber/) [最长回文子串](/2020/01/11/longest-palindromic-substring/) [二维数组中和最小路径](/2020/01/11/minimum-path-sum/) [编辑距离](/2020/01/11/edit-distance/) [动态规划合集](/2017/07/29/dynamic-programming/)
 
 **随机算法**	
 完美洗牌 数据流中概率相等的抽取
