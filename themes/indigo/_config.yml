@@ -17,9 +17,9 @@ menu:
   # tasks:
   #   text: MIT 6.824
   #   url: mit6824
-  # coffee:
-  #   text: Scala 课堂
-  #   url: /scala-school
+  book:
+    text: 算法 wiki
+    url: /wiki
   external-link-square:
     text: 关于我
     url: /links
