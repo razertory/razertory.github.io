@@ -29,6 +29,8 @@ date: 2019-10-17 11:51:40
 **堆/优先队列**
 - 📖[堆排序和 PriorityQueue 源码解析
 ](https://zhuanlan.zhihu.com/p/25843530)
+- 📖[Optimal Purely Functional
+Priority Queues](https://www.brics.dk/RS/96/37/BRICS-RS-96-37.pdf)
 
 **双端队列 (Deque)**
 - 📖[Java 集合深入理解（10）：Deque 双端队列
