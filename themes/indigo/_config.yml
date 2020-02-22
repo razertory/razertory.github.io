@@ -116,8 +116,9 @@ uyan_uid: false
 gitalk:
   owner: razertory
   repo: razertory.github.io
-  client_id: f75aa11550a1270e6d86
-  client_secret: 4426df84dccd6506dd4c2eff0f233e67e00ae35f
+  # client_id: f75aa11550a1270e6d86
+  # client_secret: 4426df84dccd6506dd4c2eff0f233e67e00ae35f
+  access_token: c31444be137a00f482e74d50f295dfb071bd6bc3
 
 # Valine Comment system. https://valine.js.org
 valine:
