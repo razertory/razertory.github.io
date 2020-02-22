@@ -12,14 +12,15 @@ menu:
     text: 所有标签
     url: /tags
   code:
-    text: 编程
-    url: /coding
+    text: 算法题解
+    url: /algo-solution
+  book:
+    text: 算法 wiki
+    url: /algo-wiki
+
   # tasks:
   #   text: MIT 6.824
   #   url: mit6824
-  book:
-    text: 算法 wiki
-    url: /wiki
   external-link-square:
     text: 关于我
     url: /links
@@ -58,16 +59,16 @@ show_last_updated: true
 share: true
 
 # 是否开启打赏，关闭 reward: false
-reward:
-  title: 假如我的文章对阁下有用，那么...
-  wechat: /img/wechatpay.jpg     #微信，关闭设为 false
-  alipay: /img/alipay.jpg     #支付宝，关闭设为 false
+# reward:
+#   title: 假如我的文章对阁下有用，那么...
+#   wechat: /img/wechatpay.jpg     #微信，关闭设为 false
+#   alipay: /img/alipay.jpg     #支付宝，关闭设为 false
 
 # 是否开启搜索
 search: true
 
 # 是否大屏幕下文章页隐藏导航
-hideMenu: true
+hideMenu: false
 
 # 是否开启toc
 # toc: false
@@ -101,11 +102,10 @@ less:
 
 # 以下评论插件开启一个即可
 # 是否开启 disqus
-disqus_shortname: razertory
+# disqus_shortname: razertory
 # 是否开启友言评论, 填写友言用户id
 uyan_uid: false
 # 是否使用 gitment，https://github.com/imsun/gitment
-gitment: false
 # gitment:
 #   owner:
 #   repo:
@@ -113,11 +113,11 @@ gitment: false
 #   client_secret:
 
 # use gitalk://github.com/gitalk/gitalk
-gitalk: false
-#  owner:
-#  repo:
-#  client_id:
-#  client_secret:
+gitalk:
+  owner: razertory
+  repo: razertory.github.io
+  client_id: f75aa11550a1270e6d86
+  client_secret: 4426df84dccd6506dd4c2eff0f233e67e00ae35f
 
 # Valine Comment system. https://valine.js.org
 valine:

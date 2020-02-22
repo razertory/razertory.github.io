@@ -1,10 +1,13 @@
 ---
 layout: post
-title: 编程
+title: 算法题解
 date: 2019-10-16 21:31:33
 ---
-### 数据结构和算法 (Java)
-[项目](https://github.com/razertory/java-code-lab)
+项目
+- [java-code-lab](https://github.com/razertory/java-code-lab) Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。
+- [https://github.com/razertory/jianzhi-offer](https://github.com/razertory/jianzhi-offer) 剑指 offer
+
+---
 
 **排序**
 [快速排序](/2019/10/19/quick-sort/) [归并排序](/2019/10/26/merge-sort) [堆排序](/2019/10/20/heap-sort)
@@ -31,9 +34,4 @@ date: 2019-10-16 21:31:33
 [LRU 缓存](/2020/02/16/lru-cache/)
 
 ---
-
-### 并发
-生产者消费者模型 实现一个 Semaphore 类 Print In Order
-
----
-### 函数式
+- [Scala 函数式编程设计](/2020/02/20/functional-program-design-in-scala/)
