@@ -216,8 +216,66 @@ val n = sieve(from(2))(100) // 输出 547
 
 附：1. [Scala 完整代码](https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/WaterPouring.scala) 2. [python 解法](https://www.youtube.com/watch?v=q6M_pco_5Vo)
 
-
-
 ## W3
+> 下面会用 Scala 进行加法器模拟。对于计算机中，两个数如何相加，可以提前阅读 [维基百科-加法器](https://zh.wikipedia.org/wiki/%E5%8A%A0%E6%B3%95%E5%99%A8)，最好能够做一下[位运算实现加法](/2019/11/11/add-by-bit/)。
 
-## W3
+通过以上内容,我们需要知道的最重要的点在于：两个一位二进制数相加，将会产生两个输出，其中一个是当前位相加的值 S，另一个是相加后的进位信息 C。其中 S 可以用*异或门*，进位可以用*与门*。两个半加器用*或*门组合为一个全加器。
+
+![异或的操作通过三种门的组合实现](http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg)
+
+![full_adder.png](http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg)
+
+根据上图，我们至少需要实现的是
+
+- 电线: 用来传导信号，信号可以用 boolean 类型表示 0 和 1
+```scala
+class Wire {
+  private var sigVal = false
+  def getSignal: Boolean = sigVal
+  def setSignal(s: Boolean): Unit =
+    if (s != sigVal) {
+        sigVal = s
+        actions foreach(_())
+    }
+}
+```
+- 与门：输入两个电信号，输出 & 对应的信号
+
+```scala
+def andGate(in1: Wire, in2: Wire, output: Wire): Unit = ???
+```
+- 或门: 输入两个电信号，输出 | 对应的信号
+```scala
+def orGate(in1: Wire, in2: Wire, output: Wire): Unit = ???
+```
+- 逆变器: 输入电信号，输出 ! 对应的信号
+```scala
+def inverter(in: Wire, output: Wire): Unit = ???
+```
+在此基础上，实现出半加器和全加器
+
+```scala
+def halfAdder(a: Wire, b: Wire, s: Wire, c: Wire): Unit = {
+  val d = new Wire
+  val e = new Wire
+  orGate(a, b, d)
+  andGate(a, b, c)
+  inverter(c, e)
+  andGate(d, e, s)
+}
+```
+
+```scala
+def fullAdder(a: Wire, b: Wire, cin: Wire, sum: Wire, cout: Wire): Unit = {
+  val s = new Wire
+  val c1 = new Wire
+  val c2 = new Wire
+  halfAdder(b, cin, s, c1)
+  halfAdder(a, s, sum, c2)
+  orGate(c1, c2, cout)
+}
+```
+
+实现了全加器后。加入模拟信号的输入输出即可，完整代码 [模拟加法器](https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala)
+
+## W4
