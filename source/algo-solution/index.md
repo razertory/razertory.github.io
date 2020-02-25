@@ -5,7 +5,7 @@ date: 2019-10-16 21:31:33
 ---
 项目
 - [java-code-lab](https://github.com/razertory/java-code-lab) Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。
-- [https://github.com/razertory/jianzhi-offer](https://github.com/razertory/jianzhi-offer) 剑指 offer
+- [https://github.com/razertory/jianzhi-offer](https://github.com/razertory/jianzhi-offer) 《剑指 offer》
 
 ---
 
