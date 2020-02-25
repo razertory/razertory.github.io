@@ -1,12 +1,14 @@
 ---
 title: 链表的公共节点
 date: 2019-10-26 14:23:52
-tags: 
+tags:
 ---
 输入两个链表，找出它们的第一个公共结点。
-```java
-ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) 
-```
+
+
+[传送门](https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&tPage=2&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+
+---
 首先计算出两个链表的各自长度，然后计算出一个差值 delta。然后基于 delta 的值走对应的节点，当 delta 变为 0 的时候停止。并判断是否有公共节点
 
 ```java

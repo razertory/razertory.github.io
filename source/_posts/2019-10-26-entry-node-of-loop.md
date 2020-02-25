@@ -1,13 +1,14 @@
 ---
 title: 链表环的入口
 date: 2019-10-26 14:28:43
-tags: 
+tags:
 ---
 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
 
-```java
-ListNode EntryNodeOfLoop(ListNode pHead) 
-```
+
+[传送门](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4)
+
+---
 定义一个慢和一个快指针，当两个指针相遇的时候。快指针速度和慢指针一致，等再次相遇的时候这个点就是环入口。
 ```java
 ListNode EntryNodeOfLoop(ListNode pHead) {
