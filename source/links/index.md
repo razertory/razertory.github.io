@@ -12,8 +12,10 @@ date: 2019-10-16 21:01:48
 - https://github.com/razertory
 
 **友链**
-如果需要添加友链法，可以在 telegram 上直接联系我（这样很快），或者
+如果需要添加友链，可以在 telegram 上直接联系我（这样很快），或者发我邮件
 
 [windanchaos](https://blog.windanchaos.tech/)
 
 [oshmkufa](https://oshmkufa2010.github.io/)
+
+[counter2015](https://counter2015.com/)
