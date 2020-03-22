@@ -2,6 +2,7 @@
 title: mit6824-lab1 读论文
 date: 2019-08-03 10:20:20
 tags:
+published: false
 ---
 MapReduce 论文公布自 2003 [MapReduce: Simplified Data Processingn](https://research.google.com/archive/mapreduce-osdi04.pdf)。在这之前 google 每天已经有大量的数据需要处理。MapReduce 的诞生让程序员在面对大数据量环境下只需要专注于实现业务逻辑，并在一定程度上遵循当时 MapReduce 架构下的规则即可。在当时， MapReduce 已经被用到：计算 URL 访问频率、 分布式 Grep、倒排索引和分布式排序等。
 

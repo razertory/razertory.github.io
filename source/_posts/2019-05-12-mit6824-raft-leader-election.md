@@ -2,7 +2,7 @@
 layout: post
 date: 2019-05-12 13:43:13 +0800
 title: MIT6.824 Raft 2A
-published: true
+published: false
 ---
 
 ### 初识 Raft
