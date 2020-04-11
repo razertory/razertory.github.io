@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>伪共享 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统">
+    <meta name="description" content="数组和链表谁快？众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如 123456789101112public class CPUCache1 &amp;#123;    // 遍历数组    void traverseArray(int[] arr) &amp;#123;        for (int i : arr) &amp;#123">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="伪共享">
+<meta property="og:url" content="https://razertory.me/2019/07/13/false-share/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="数组和链表谁快？众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如 123456789101112public class CPUCache1 &amp;#123;    // 遍历数组    void traverseArray(int[] arr) &amp;#123;        for (int i : arr) &amp;#123">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="伪共享">
+<meta name="twitter:description" content="数组和链表谁快？众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如 123456789101112public class CPUCache1 &amp;#123;    // 遍历数组    void traverseArray(int[] arr) &amp;#123;        for (int i : arr) &amp;#123">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">伪共享</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">伪共享</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-07-13T12:41:36.000Z" itemprop="datePublished" class="page-time">
+  2019-07-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组和链表谁快？"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组和链表谁快？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CPU-缓存"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">CPU 缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并发场景的-CPU-缓存"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">并发场景的 CPU 缓存</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-false-share"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">伪共享</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-07-13 20:41:36" datetime="2019-07-13T12:41:36.000Z"  itemprop="datePublished">2019-07-13</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="数组和链表谁快？"><a href="#数组和链表谁快？" class="headerlink" title="数组和链表谁快？"></a>数组和链表谁快？</h2><p>众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CPUCache1</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 遍历数组</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverseArray</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : arr) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历链表</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traverseListNode</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>) head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CPUCache1Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> quantity = <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">traverseArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[quantity];</span><br><span class="line">        <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">new</span> CPUCache1().traverseArray(arr);</span><br><span class="line">        System.out.println(System.currentTimeMillis() - now);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">traverseListNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ListNode head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode tail = head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; quantity; i++) &#123;</span><br><span class="line">            tail.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">            tail = tail.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> now = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">new</span> CPUCache1().traverseListNode(head);</span><br><span class="line">        System.out.println(System.currentTimeMillis() - now);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在我这台的 MBP 上 traverseArray 耗费 5 毫秒，traverseListNode 耗费 26 毫秒。（多次测试稳定在这个数值）</p>
+<h3 id="CPU-缓存"><a href="#CPU-缓存" class="headerlink" title="CPU 缓存"></a>CPU 缓存</h3><p>上述的案例中，遍历数组计算机利用到了 CPU 缓存从而加快了速度。</p>
+<p>计算机系统中，CPU 缓存，内存，磁盘有着庞大的存取速度差异，所以往往会在这三者的协作之间通过设计缓存来达到更快的速度。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>多核心 CPU 中的缓存是分层的，每个核心独有缓存模块，不过 L3 是多核心共享。当计算机收到找寻变量的指令的时候就会按照 L1，L2，L3 ，RAM 这样的顺序寻找。Java 语言中的数组其实就是在一定程度上部分存到了缓存当中。这里产生了一个叫做缓存行的东西，它是 CPU 缓存中的最小单元，占 64 字节（早期的 CPU 是 32 字节）。Java 中的一个 int 占 4 字节，意味着一个缓存行可以存下 16 个 int 类型的变量。在遍历的时候就能利用到从而加快速度。链表就没有这个福利了。</p>
+<h3 id="并发场景的-CPU-缓存"><a href="#并发场景的-CPU-缓存" class="headerlink" title="并发场景的 CPU 缓存"></a>并发场景的 CPU 缓存</h3><p>那么在并发的场景中，又该如何利用 CPU 缓存呢？比如说这段代码 <a href="https://github.com/razertory/c-code-lab/blob/master/multithread/false_sharing.c" target="_blank" rel="noopener">false_sharing.c</a> 在我的 Mac 上打印出了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1) 8.85049 4.8528e+08 ips</span><br><span class="line">2) 22.4329 3.82917e+08 ips</span><br><span class="line">3) 30.1988 4.26669e+08 ips</span><br><span class="line">4) 35.8548 4.79151e+08 ips</span><br></pre></td></tr></table></figure>
+
+<p>原本认为，在每次增加线程的时候新的线程有着独立的内存空间。这个不假，但是内存中的一些数据会存入 CPU 缓存当中。在多核 CPU 中，每个核都会有自身独立的缓存区。当只有其中一个核的内容发生先变更的时候，由于内核发现内存中的变量和另一个未发生变更的内容不一致，这个时候就会花一定的时间去同步另一个核的内容。这个现象就称为<strong>伪共享</strong>（false sharing）。维基百科中伪共享的定义有这么一段</p>
+<blockquote>
+<p>False sharing is an inherent artifact of automatically synchronized cache protocols and can also exist in environments such as distributed file systems or databases, but current prevalence is limited to RAM caches.</p>
+</blockquote>
+<p>大意为伪共享目前是自动同步缓存协议中固有的机制。</p>
+<p>所以，现代编程语言如何解决这个问题的呢？</p>
+<p>以 Ruby、Python 为代表的动态语言，天生有全局解释锁（GIL）这么个东西，任何一个时刻本质上只有一个线程在跑，也就不需要考虑这个问题。</p>
+<p>以 Java，C++，Golang 为代表的静态语言采用补齐（Padding）的方式。比方说：Java 对象头占 8 个字节，如果定义的类所含的变量加起来也低于 64 个字节，那么就声明几个不用的变量让一个对象的实际内存大于 64 字节从而避免通过 CPU 缓存读写。在 Java 8 中，可以直接对一个对象加上 @sun.misc.Contended 并且开启 jvm 选项 -XX:-RestrictContended。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.006Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/07/13/false-share/" target="_blank" rel="external">https://razertory.me/2019/07/13/false-share/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/07/13/false-share/&title=《伪共享》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/07/13/false-share/&title=《伪共享》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/07/13/false-share/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《伪共享》 — Razertory 的技术博客&url=https://razertory.me/2019/07/13/false-share/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/07/13/false-share/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/07/18/bit-operation/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">位运算实际问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/20/5-manifestos/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">分享五个你应该了解的宣言</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/07/13/false-share/&title=《伪共享》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/07/13/false-share/&title=《伪共享》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/07/13/false-share/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《伪共享》 — Razertory 的技术博客&url=https://razertory.me/2019/07/13/false-share/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/07/13/false-share/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/07/13/false-share/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

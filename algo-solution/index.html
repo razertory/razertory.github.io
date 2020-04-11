@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>算法题解 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Razertory">
+    <meta name="description" content="项目  java-code-lab Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。 https://github.com/razertory/jianzhi-offer 《剑指 offer》   排序快速排序 归并排序 堆排序 链表反转链表 复制复杂链表 链表的公共节点 链表环的入口 删除重复的有序链表节点 链表相加 链表两两交换 二叉树重建二叉树 判断是否">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="website">
+<meta property="og:title" content="算法题解">
+<meta property="og:url" content="https://razertory.me/algo-solution/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="项目  java-code-lab Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。 https://github.com/razertory/jianzhi-offer 《剑指 offer》   排序快速排序 归并排序 堆排序 链表反转链表 复制复杂链表 链表的公共节点 链表环的入口 删除重复的有序链表节点 链表相加 链表两两交换 二叉树重建二叉树 判断是否">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法题解">
+<meta name="twitter:description" content="项目  java-code-lab Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。 https://github.com/razertory/jianzhi-offer 《剑指 offer》   排序快速排序 归并排序 堆排序 链表反转链表 复制复杂链表 链表的公共节点 链表环的入口 删除重复的有序链表节点 链表相加 链表两两交换 二叉树重建二叉树 判断是否">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">算法题解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">算法题解</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">算法题解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-16 21:31:33" datetime="2019-10-16T13:31:33.000Z"  itemprop="datePublished">2019-10-16</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>项目</p>
+<ul>
+<li><a href="https://github.com/razertory/java-code-lab" target="_blank" rel="noopener">java-code-lab</a> Java 实现的数据结构/算法以及计算机科学相关的代码和完整的 Junit 测试用例。</li>
+<li><a href="https://github.com/razertory/jianzhi-offer" target="_blank" rel="noopener">https://github.com/razertory/jianzhi-offer</a> 《剑指 offer》</li>
+</ul>
+<hr>
+<p><strong>排序</strong><br><a href="/2019/10/19/quick-sort/">快速排序</a> <a href="/2019/10/26/merge-sort">归并排序</a> <a href="/2019/10/20/heap-sort">堆排序</a></p>
+<p><strong>链表</strong><br><a href="/2019/10/26/reverse-list/">反转链表</a> <a href="/2019/10/26/copy-linked-list/">复制复杂链表</a> <a href="/2019/10/26/first-common-node/">链表的公共节点</a> <a href="/2019/10/26/entry-node-of-loop/">链表环的入口</a> <a href="/2019/10/26/delete-duplication/">删除重复的有序链表节点</a> <a href="/2019/10/26/add-two-numbers/">链表相加</a> <a href="/2019/10/26/swap-nodes-in-pairs/">链表两两交换</a></p>
+<p><strong>二叉树</strong><br><a href="/2019/07/20/rebuild-tree/">重建二叉树</a> <a href="/2019/10/27/is-subtree">判断是否是子树</a> <a href="/2019/10/27/is-post-order/">判断数组是 BST 后序遍历</a> <a href="/2019/11/04/sum-path/">和为定值的所有路径</a> <a href="/2019/11/04/is-bst/">判断是否是二叉搜索树</a></p>
+<p><strong>栈和队列</strong><br><a href="/2019/11/04/min-stack/">最小栈</a> <a href="/2019/11/10/queue-by-stack/">栈实现队列</a> <a href="/2019/11/10/valid-brackets/">括号的合法序列</a> <a href="/2019/03/15/hanoi-tower/">汉诺塔问题</a></p>
+<p><strong>位运算</strong><br><a href="/2019/07/18/bit-operation/">位运算实际问题-找毒药</a> <a href="/2019/11/11/add-by-bit/">位运算实现加法</a> <a href="/2019/11/14/count-of-one/">二进制中 1 的个数</a> <a href="/2019/11/17/single-number/">只出现了一次的数</a> <a href="/2019/11/16/major-element/">个数多于一半的数</a> <a href="/2019/11/17/hamming-distance/">汉明距离</a></p>
+<p><strong>搜索</strong><br><a href="2019/06/17/tree-level-order/">各种层序遍历二叉树</a> <a href="/2019/11/28/binary-search/">完美的二分搜索</a> <a href="/2019/12/12/sorted-arr-to-bst">有序数组转化为 BST</a> <a href="/2019/03/07/permutation-and-combination/">无重复数组的全排列</a> <a href="/2019/03/09/n-queens-puzzle/">N 皇后问题</a></p>
+<p><strong>动态规划</strong><br><a href="/2020/01/09/max-stock-profit/">股票买卖最大利润</a> <a href="/2018/12/16/max-sub-array/">最大子序列</a> <a href="/2020/01/11/house-robber/">抢劫房子</a> <a href="/2020/01/11/longest-palindromic-substring/">最长回文子串</a> <a href="/2020/01/11/minimum-path-sum/">二维数组中和最小路径</a> <a href="/2020/01/11/edit-distance/">编辑距离</a> <a href="/2017/07/29/dynamic-programming/">动态规划合集</a></p>
+<p><strong>高级数据结构</strong><br><a href="/2020/02/16/lru-cache/">LRU 缓存</a></p>
+<hr>
+<ul>
+<li><a href="/2020/02/20/functional-program-design-in-scala/">Scala 函数式编程设计</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.018Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/algo-solution/" target="_blank" rel="external">https://razertory.me/algo-solution/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/algo-solution/&title=《算法题解》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/algo-solution/&title=《算法题解》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/algo-solution/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法题解》 — Razertory 的技术博客&url=https://razertory.me/algo-solution/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/algo-solution/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/algo-solution/&title=《算法题解》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/algo-solution/&title=《算法题解》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/algo-solution/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法题解》 — Razertory 的技术博客&url=https://razertory.me/algo-solution/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/algo-solution/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/algo-solution/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

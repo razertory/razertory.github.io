@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>MySQL Top Tips | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="基础组件">
+    <meta name="description" content="MySQL 通过 /mysql/bin/mysqld 启动 uft8 作为 unicode 的子集，在 MySQL 的世界里就是 uft8mb3，当然 emoji 需要 uft8mb4 MySQL 会缓存查询，不过不会缓存一些系统函数以及系统表 （比如：mysql 、information_schema、 performance_schema) 的查询结果 MySQL 5.7.20 开始不再推荐使">
+<meta name="keywords" content="基础组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL Top Tips">
+<meta property="og:url" content="https://razertory.me/2019/05/31/100-tips-of-mysql/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="MySQL 通过 /mysql/bin/mysqld 启动 uft8 作为 unicode 的子集，在 MySQL 的世界里就是 uft8mb3，当然 emoji 需要 uft8mb4 MySQL 会缓存查询，不过不会缓存一些系统函数以及系统表 （比如：mysql 、information_schema、 performance_schema) 的查询结果 MySQL 5.7.20 开始不再推荐使">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL Top Tips">
+<meta name="twitter:description" content="MySQL 通过 /mysql/bin/mysqld 启动 uft8 作为 unicode 的子集，在 MySQL 的世界里就是 uft8mb3，当然 emoji 需要 uft8mb4 MySQL 会缓存查询，不过不会缓存一些系统函数以及系统表 （比如：mysql 、information_schema、 performance_schema) 的查询结果 MySQL 5.7.20 开始不再推荐使">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL Top Tips</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MySQL Top Tips</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-31T05:37:02.000Z" itemprop="datePublished" class="page-time">
+  2019-05-31
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-100-tips-of-mysql"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL Top Tips</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-31 13:37:02" datetime="2019-05-31T05:37:02.000Z"  itemprop="datePublished">2019-05-31</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>MySQL 通过 /mysql/bin/mysqld 启动</p>
+<p>uft8 作为 unicode 的子集，在 MySQL 的世界里就是 uft8mb3，当然 emoji 需要 uft8mb4</p>
+<p>MySQL 会缓存查询，不过不会缓存一些系统函数以及系统表 （比如：mysql 、information_schema、 performance_schema) 的查询结果</p>
+<p>MySQL 5.7.20 开始不再推荐使用缓存，并在 MySQL 8.0 删除</p>
+<p>如果你发现很难权衡用什么存储引擎，或者对存储引擎没有太多了解，那么直接用默认的 InnoDB 吧</p>
+<p>InnoDB 在 MySQL 5.6 以及以后的版本中，大多数的 DDL 语句都不会锁表了。相对的，如果用的之前的版本，都是会锁的</p>
+<p>InnoDB 是行存储的 （默认 Compact 行格式），存下的是每一行的原始数据和额外信息，比如：VARCHAR 这种变长字段实际用的长度，null 值列表（如果没有 null 值也就没有这个列表），trx_id 事务 id</p>
+<p>InnoDB 默认会给主键创建一个 B+ 树作为聚簇索引，其中，聚簇索引的叶子节点包含了所有的用户数据</p>
+<p>InnoDB 对非主键创建的 B+ 树索引的叶子节点包含主键和索引列，这种索引称为<strong>二级索引</strong>。其中一个二级索引只有一个 B+ 树，即使是联合索引</p>
+<p>InnoDB 当 where 条件只为一个二级索引列的时候，会在索引叶子节点找到主键，然后通过主键的聚簇索引找到真实记录，这个过程称为<strong>回表</strong></p>
+<p>InnoDB 对非主键的联合索引采取按照联合索引前边的列排序，如果命中，则按照这个顺序往后。比如：针对一个表 user_posts (id, user_id, post_id) 的联合索引 index_on_user_id_post_id。这里我们称为<strong>前缀匹配规则</strong></p>
+<p>更多详情见 <a href="https://dev.mysql.com/doc/refman/5.7/en/multiple-column-indexes.html" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#有效</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> user_posts <span class="keyword">where</span> user_id = <span class="number">343</span> <span class="keyword">and</span> post_id = <span class="number">121</span></span><br><span class="line"><span class="comment">#有效</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> user_posts <span class="keyword">where</span> user_id = <span class="number">343</span></span><br><span class="line"><span class="comment">#无效</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> user_posts <span class="keyword">where</span> post_id = <span class="number">121</span></span><br><span class="line"><span class="comment">#无效</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> user_posts <span class="keyword">where</span> user_id = <span class="number">343</span> <span class="keyword">or</span> post_id = <span class="number">121</span></span><br></pre></td></tr></table></figure>
+
+<p>InnoDB 创建的联合索引时，尽量让区分度高的列在左边</p>
+<p>在业务上有唯一保证的列或者联合列时，一定用唯一索引，杜绝脏数据的产生</p>
+<p>一个表上索引建的越多，就会占用越多的存储空间，在增删改记录的时候性能就越差</p>
+<p>InnoDB 对于含有索引列的模糊匹配，只会在前缀确认的情况下才会生效</p>
+<p>InnoDB 对于 order by 含有索引列的查询是能够通过索引排序的，不过这不包含：1. 混用 ASC 与 DESC 的时候 2. 含有非索引列的时候 3. 联合索引顺序不遵循则<strong>前缀匹配规则</strong>的</p>
+<p>InnoDB 对于一个使用到索引的搜索条件和没有使用该索引的搜索条件使用 OR 连接起来后是无法使用该索引的</p>
+<p>InnoDB 对于含有多个引列，并且每个列都有二级索引的查询，一般的做法是不断通过二级索引找到 B+ 树的叶子节点之后进行多次回表操作。某些特殊情况下会先合并索引，只进行一次回表操提升性能。不过，既然都用到多个列了，那么直接用联合索引就好了</p>
+<p>MySQL inner join 的 on 语句，本质上和 where 是一样的。也就是说可以把一个 inner join 换成 where 的写法</p>
+<p>MySQL 的 join 使用的是 嵌套循环连接 算法，在这个算法中，被 join 的表 （被驱动表） 如果数目大且没有索引，性能会急剧下降。这种情况如果实在无法避免，可以试着把 join buffer 参数调大，同时避免使用 select * 使不必要的数据占用空间</p>
+<p>尽量让所有的查询都能做到 explain 下来至少 range，最好是 ref 甚至 consts</p>
+<p>InnoDB 对任何一条记录进行写的改动的时候，会同时把当前的 trx_id 也写入</p>
+<p>MySQL 默认开启 <code>REPEATABLE READ</code> 事务隔离级别，这种方式原本是会有幻读问题的。快照读通过 undo log 解决，当前读通过 gap lock 解决。</p>
+<p>MySQL MVCC 中读操作分为快照读和当前读</p>
+<ul>
+<li>快照读：读到的是已经提交了的事务。比如 select .. where</li>
+<li>当前读：读到的永远是最新的内容，比如有一个事务修改了一个记录且没有提交。比如 update .. where</li>
+</ul>
+<p>RC 和 RR 最本质的区别在于生成 <code>ReadView</code> 的时机不同</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.004Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/05/31/100-tips-of-mysql/" target="_blank" rel="external">https://razertory.me/2019/05/31/100-tips-of-mysql/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础组件/">基础组件</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/31/100-tips-of-mysql/&title=《MySQL Top Tips》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/31/100-tips-of-mysql/&title=《MySQL Top Tips》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/05/31/100-tips-of-mysql/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL Top Tips》 — Razertory 的技术博客&url=https://razertory.me/2019/05/31/100-tips-of-mysql/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/05/31/100-tips-of-mysql/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/07/deliberate-practice-of-tech/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">技术人的刻意练习</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/05/09/async_io_epoll_poll_select/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">select, poll, epoll</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/31/100-tips-of-mysql/&title=《MySQL Top Tips》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/31/100-tips-of-mysql/&title=《MySQL Top Tips》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/05/31/100-tips-of-mysql/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL Top Tips》 — Razertory 的技术博客&url=https://razertory.me/2019/05/31/100-tips-of-mysql/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/05/31/100-tips-of-mysql/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/05/31/100-tips-of-mysql/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

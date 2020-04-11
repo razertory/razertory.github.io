@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>所以怎么减少 bug 呢？ | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="思考">
+    <meta name="description" content="从软件工程诞生之初，「减少 bug」成了所有开发团队的共同目标。要减少 bug 就要知道 bug 是怎么来的: 原因 产品设计。产品逻辑存在漏洞，或者悖论。表现出来的症状是用户使用成本高，以及在非常规的操作情况下，产生了非常意外的结果。例如服务器报错，客户端闪退，严重的比如支付相关的系统带来巨大的隐患。  业务理解。对业务不熟悉，写出的代码一定程度上和业务相背。  细节把控。没有处理好代码中的边界">
+<meta name="keywords" content="思考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="所以怎么减少 bug 呢？">
+<meta property="og:url" content="https://razertory.me/2019/09/22/how-to-reduce-bug/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="从软件工程诞生之初，「减少 bug」成了所有开发团队的共同目标。要减少 bug 就要知道 bug 是怎么来的: 原因 产品设计。产品逻辑存在漏洞，或者悖论。表现出来的症状是用户使用成本高，以及在非常规的操作情况下，产生了非常意外的结果。例如服务器报错，客户端闪退，严重的比如支付相关的系统带来巨大的隐患。  业务理解。对业务不熟悉，写出的代码一定程度上和业务相背。  细节把控。没有处理好代码中的边界">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="所以怎么减少 bug 呢？">
+<meta name="twitter:description" content="从软件工程诞生之初，「减少 bug」成了所有开发团队的共同目标。要减少 bug 就要知道 bug 是怎么来的: 原因 产品设计。产品逻辑存在漏洞，或者悖论。表现出来的症状是用户使用成本高，以及在非常规的操作情况下，产生了非常意外的结果。例如服务器报错，客户端闪退，严重的比如支付相关的系统带来巨大的隐患。  业务理解。对业务不熟悉，写出的代码一定程度上和业务相背。  细节把控。没有处理好代码中的边界">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">所以怎么减少 bug 呢？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">所以怎么减少 bug 呢？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-22T07:41:36.000Z" itemprop="datePublished" class="page-time">
+  2019-09-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因"><span class="post-toc-number">1.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决-amp-避免"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决&amp;避免</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-how-to-reduce-bug"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">所以怎么减少 bug 呢？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-22 15:41:36" datetime="2019-09-22T07:41:36.000Z"  itemprop="datePublished">2019-09-22</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>从软件工程诞生之初，「减少 bug」成了所有开发团队的共同目标。要减少 bug 就要知道 bug 是怎么来的:</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
+<li><p>产品设计。产品逻辑存在漏洞，或者悖论。表现出来的症状是用户使用成本高，以及在非常规的操作情况下，产生了非常意外的结果。例如服务器报错，客户端闪退，严重的比如支付相关的系统带来巨大的隐患。</p>
+</li>
+<li><p>业务理解。对业务不熟悉，写出的代码一定程度上和业务相背。</p>
+</li>
+<li><p>细节把控。没有处理好代码中的边界条件。</p>
+</li>
+<li><p>历史数据。新的 feature 不可避免的会去读写历史数据，而历史数据可能有的是脏数据。</p>
+</li>
+<li><p>基础不足。例如对语言、框架不熟悉，或者理解错了。出现了主观上认为意料之外的事情</p>
+</li>
+<li><p>准外部原因。例如某些框架可能自身有没有修复或者没有被发现的 bug</p>
+</li>
+<li><p>外部原因。比如各种服务提供商出现了故障。</p>
+</li>
+<li><p>技术协调问题。 比如前端和服务端，服务端之间的微服务调用，一方提供的服务没有按照预期的逻辑执行</p>
+</li>
+</ol>
+<h3 id="解决-amp-避免"><a href="#解决-amp-避免" class="headerlink" title="解决&amp;避免"></a>解决&amp;避免</h3><ol>
+<li><p>产品尽量做到可以顺利进行 「prd review」，部分具体的实现需要和 dev 一起讨论。大多数情况下，简化逻辑是可以优先考虑的点，对用户和开发都会比较友好。</p>
+</li>
+<li><p>程序员自身的理解能力和工作态度。理解能力原则上在招聘期间就需要被过滤，工作态度需要从管理者自上而下地去影响，这是一个需要长期控制调整的事情。</p>
+</li>
+<li><p>提高编程能力和保持 unit test 来最大程度避免遗漏掉代码中的边界条件。</p>
+</li>
+<li><p>数据库设计满足基础范式和现代化的设计规则。如果已存在脏数据，那么依照问题的严重性来确定短期内是否考虑加大时间成本。同时关键节点打印好日志，并完善日志收集系统。</p>
+</li>
+<li><p>原则上通过招聘来控制。但个人的学习积累也同样重要，需要避免个人发展速度慢于公司发展速度。</p>
+</li>
+<li><p>技术选型上保持谨慎的态度。如果某些技术没有经过可靠的验证，原则上不引入。除非这个技术实现方式非常清晰，并且团队成员一致认可。</p>
+</li>
+<li><p>编码上与第 3 点保持一致。架构设计上做到能够熔断、降级，确保不因为单独故障影响到整个系统。</p>
+</li>
+<li><p>给项目/API加上 change log 甚至 hook 来确保协议稳定，搭配上自动生成的文档。开发过程中保持高效的沟通。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.008Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/09/22/how-to-reduce-bug/" target="_blank" rel="external">https://razertory.me/2019/09/22/how-to-reduce-bug/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/思考/">思考</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/09/22/how-to-reduce-bug/&title=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/09/22/how-to-reduce-bug/&title=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/09/22/how-to-reduce-bug/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&url=https://razertory.me/2019/09/22/how-to-reduce-bug/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/09/22/how-to-reduce-bug/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/10/19/quick-sort/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">快速排序</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/04/reactive-design-pattern/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">「读书」反应式设计模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/09/22/how-to-reduce-bug/&title=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/09/22/how-to-reduce-bug/&title=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/09/22/how-to-reduce-bug/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《所以怎么减少 bug 呢？》 — Razertory 的技术博客&url=https://razertory.me/2019/09/22/how-to-reduce-bug/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/09/22/how-to-reduce-bug/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/09/22/how-to-reduce-bug/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

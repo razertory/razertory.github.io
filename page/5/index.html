@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Razertory">
+    <meta name="description" content="Maker, Coder, Puzzle Solver">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Razertory 的技术博客">
+<meta property="og:url" content="https://razertory.me/page/5/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="Maker, Coder, Puzzle Solver">
+<meta property="og:locale" content="cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Razertory 的技术博客">
+<meta name="twitter:description" content="Maker, Coder, Puzzle Solver">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Razertory 的技术博客</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Razertory 的技术博客</h1>
+        <h5 class="subtitle">
+            
+                一曲肝肠断，天涯何处觅知音
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-tree-level-order"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-06-17 12:48:27" datetime="2019-06-17T04:48:27.000Z"  itemprop="datePublished">2019-06-17</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/06/17/tree-level-order/">各种层序遍历二叉树</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        BFSBFS 我觉得可以从两个方向理解。第一种，对某个树或者图的数据结构而言，就是某个节点相连接的节点都遍历，再不断对刚遍历的节点做同样的操作直到最后遍历完所有节点。第二种，当数据结构是树形的时候这个规律可以衍生为按照层来遍历。按照当前的理解，BFS 一般可以用一个队列来实现，这是因为按照 FIFO 的特性。对于节点相连接的节点都遍历的时候，遍历结束了之后需要从最第一个遍历的节点开始。
+
+ ...
+    
+
+        <a href="/2019/06/17/tree-level-order/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-deliberate-practice-of-tech"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-06-07 09:02:14" datetime="2019-06-07T01:02:14.000Z"  itemprop="datePublished">2019-06-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/06/07/deliberate-practice-of-tech/">技术人的刻意练习</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        刻意练习这个词是我很早之前在知乎上看到的，是我一直忽略的东西。
+从上大学起我就在想程序员是一个什么样的职业。我拿去和很多职业做了对比
+
+匠人，比如说那种铸剑师。开凿矿岩，冶炼铁矿，制作胚子，最后冷萃，打磨抛光
+
+武士。练习体力，意志力，心理素质，战斗技巧，不断和人战斗 
+
+音乐家，比如说吉他手。学习音乐基础，指法，识谱，演奏
+
+
+在我心里，做这些的工作的人们应该是对自己的事情怀有自我驱动的意...
+    
+
+        <a href="/2019/06/07/deliberate-practice-of-tech/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/思考/">思考</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-100-tips-of-mysql"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-31 13:37:02" datetime="2019-05-31T05:37:02.000Z"  itemprop="datePublished">2019-05-31</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/05/31/100-tips-of-mysql/">MySQL Top Tips</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        MySQL 通过 /mysql/bin/mysqld 启动
+uft8 作为 unicode 的子集，在 MySQL 的世界里就是 uft8mb3，当然 emoji 需要 uft8mb4
+MySQL 会缓存查询，不过不会缓存一些系统函数以及系统表 （比如：mysql 、information_schema、 performance_schema) 的查询结果
+MySQL 5.7.20 开始不再...
+    
+
+        <a href="/2019/05/31/100-tips-of-mysql/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础组件/">基础组件</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-async_io_epoll_poll_select"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-09 21:28:23" datetime="2019-05-09T13:28:23.000Z"  itemprop="datePublished">2019-05-09</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/05/09/async_io_epoll_poll_select/">select, poll, epoll</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。
+首先，他们分别来自于 &lt;sys/select.h&gt;，&lt;sys/poll.h&gt;，&lt;sys/epoll.h&gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。
+当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 soc...
+    
+
+        <a href="/2019/05/09/async_io_epoll_poll_select/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-hanoi-tower"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-15 20:44:06" datetime="2019-03-15T12:44:06.000Z"  itemprop="datePublished">2019-03-15</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/15/hanoi-tower/">汉诺塔问题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        描述一下问题，假设有 A，B，C 三个柱子。A 柱子上有一定数目从高到低是小到大顺序的盘子叠起来，每次可以移动一个柱子上的 1 个盘子。并且任何时候小盘子永远在大盘子上。现在的问题是如何把 A 的 N 个盘子移动到 C。在线游戏
+1.N = 1 ，A 移动到 C 就好。
+2.N = 2，先移动第一个到 B，再把第二个移动到 C，再把 B 的移动到 C 就好。
+3.N = 3 …
+也许刚拿到的...
+    
+
+        <a href="/2019/03/15/hanoi-tower/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-n-queens-puzzle"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-09 09:23:09" datetime="2019-03-09T01:23:09.000Z"  itemprop="datePublished">2019-03-09</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/09/n-queens-puzzle/">N 皇后问题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        N 皇后问题是最早一位棋手提出了八皇后问题之后，推演而来的。八皇后问题的规则是：
+
+在 8 * 8 的盘中放置 8 个皇后
+任何一个皇后的横，竖，斜对角都不能别的皇后
+
+我们要从中找到尽可能多的摆放方法。下图是解法之一
+
+                
+                    
+                    
+                
+          ...
+    
+
+        <a href="/2019/03/09/n-queens-puzzle/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-permutation-and-combination"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-07 16:49:40" datetime="2019-03-07T08:49:40.000Z"  itemprop="datePublished">2019-03-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/07/permutation-and-combination/">无重复数组的全排列</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        排列组合排列 permutation（arrangement） 和组合 combination 纯粹的数学上的排列组合的定义是
+
+排列 就是指从给定 n 个数的元素中取出指定 r 个数的元素，进行排序
+组合 从给定 n 个数的元素中仅仅取出指定 r 个数的元素，不考虑排序
+
+排列与组合唯一的区别在于操作元素的顺序是否影响了统计的结果。
+数学中常用到的排列组合的公式主要用来统计目标个数。
+回溯...
+    
+
+        <a href="/2019/03/07/permutation-and-combination/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-seven-weeks-seven-languages"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-01 20:57:15" datetime="2019-03-01T12:57:15.000Z"  itemprop="datePublished">2019-03-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/01/seven-weeks-seven-languages/">「读书」七周七语言</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        程序员对于编程语言的争论，是一场永远都不会停止的战争。但社会在进步，科技在进步，那么就让大家继续吵下去吧 :)
+这是一本讲述七种不同类型编程语言：Ruby，Io，Prolog，Scala，Erlang Clorjure 和 Haskell 代表的现代编程语言的重要特性和编程范式的书。这里面的语言多多少少被大家听过或者用过。他们分别作为某个领域的代表而汇集到一本书里。
+Ruby这门语言是我目前...
+    
+
+        <a href="/2019/03/01/seven-weeks-seven-languages/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ddia"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-02-01 21:26:55" datetime="2019-02-01T13:26:55.000Z"  itemprop="datePublished">2019-02-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/02/01/ddia/">「读书」数据密集型应用系统设计</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        这是一本讲述现代互联网应用中，开发者们如何进行正确的存储和处理数据的书。
+当今的互联网应用大多是数据密集型的。与之相对的是 CPU 密集型。
+什么是数据密集型？
+当数据的数量，复杂度和数据的更新速度容易成为一个产品在用户增长，功能迭代，用户体验度提升的瓶颈的时候，我们就认为这种应用是数据密集型应用。上述的问题往往会给现在的工程师带来各种挑战，比如：数据库 CPU 报警，应用服务器内存报警，开...
+    
+
+        <a href="/2019/02/01/ddia/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-max-sub-array"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-16 22:14:05" datetime="2018-12-16T14:14:05.000Z"  itemprop="datePublished">2018-12-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/16/max-sub-array/">最大子序列</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        题目给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。示例：
+123输入：[-2,1,-3,4,-1,2,1,-5,4],输出：6解释：连续子数组 [4,-1,2,1] 的和最大，为 6。
+
+暴力法把所有子序列都找出来并求出最大和。利用两个循环，外循环记录开始下标，内循环记录结束下标。不断维护一个最大 sum。
+12345678910111...
+    
+
+        <a href="/2018/12/16/max-sub-array/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    </div>
+</nav>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/page/5/&title=Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/page/5/&title=Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/page/5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Razertory 的技术博客&url=https://razertory.me/page/5/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/page/5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/page/5/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

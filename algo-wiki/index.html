@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>算法 wiki | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Razertory">
+    <meta name="description" content="🎬视频 | 📖文章   关于刷题  按照什么顺序刷 Leetcode  NP 问题  📖什么是 P 问题、NP 问题和 NPC 问题 📖NP 完全的理解  链表  📖Java LinkedList 源码解析 🎬刷题找工作 - 花花酱 - 链表 (Linked List)  栈  📖函数调用过程中栈到底是怎么压入和弹出的？   队列 哈希表  📖Java HashMap 源码解析">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="website">
+<meta property="og:title" content="算法 wiki">
+<meta property="og:url" content="https://razertory.me/algo-wiki/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="🎬视频 | 📖文章   关于刷题  按照什么顺序刷 Leetcode  NP 问题  📖什么是 P 问题、NP 问题和 NPC 问题 📖NP 完全的理解  链表  📖Java LinkedList 源码解析 🎬刷题找工作 - 花花酱 - 链表 (Linked List)  栈  📖函数调用过程中栈到底是怎么压入和弹出的？   队列 哈希表  📖Java HashMap 源码解析">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法 wiki">
+<meta name="twitter:description" content="🎬视频 | 📖文章   关于刷题  按照什么顺序刷 Leetcode  NP 问题  📖什么是 P 问题、NP 问题和 NPC 问题 📖NP 完全的理解  链表  📖Java LinkedList 源码解析 🎬刷题找工作 - 花花酱 - 链表 (Linked List)  栈  📖函数调用过程中栈到底是怎么压入和弹出的？   队列 哈希表  📖Java HashMap 源码解析">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">算法 wiki</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">算法 wiki</h1>
+        <h5 class="subtitle">
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            <blockquote>
+<p>🎬视频 | 📖文章</p>
+</blockquote>
+<hr>
+<p><strong>关于刷题</strong></p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/104983442" target="_blank" rel="noopener">按照什么顺序刷 Leetcode</a></li>
+</ul>
+<p><strong>NP 问题</strong></p>
+<ul>
+<li>📖<a href="http://www.matrix67.com/blog/archives/105" target="_blank" rel="noopener">什么是 P 问题、NP 问题和 NPC 问题</a></li>
+<li>📖<a href="/2018/12/05/np-complete/">NP 完全的理解</a></li>
+</ul>
+<p><strong>链表</strong></p>
+<ul>
+<li>📖<a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/LinkedList.md" target="_blank" rel="noopener">Java LinkedList 源码解析</a></li>
+<li>🎬<a href="https://www.youtube.com/playlist?list=PLLuMmzMTgVK6a-2aAwPieEIIuIJY6JTSq" target="_blank" rel="noopener">刷题找工作 - 花花酱 - 链表 (Linked List)</a></li>
+</ul>
+<p><strong>栈</strong></p>
+<ul>
+<li>📖<a href="https://www.zhihu.com/question/22444939" target="_blank" rel="noopener">函数调用过程中栈到底是怎么压入和弹出的？
+</a></li>
+</ul>
+<p>队列</p>
+<p><strong>哈希表</strong></p>
+<ul>
+<li>📖<a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/HashMap.md" target="_blank" rel="noopener">Java HashMap 源码解析</a></li>
+</ul>
+<p><strong>堆/优先队列</strong></p>
+<ul>
+<li>📖<a href="https://zhuanlan.zhihu.com/p/25843530" target="_blank" rel="noopener">堆排序和 PriorityQueue 源码解析
+</a></li>
+<li>📖<a href="https://www.brics.dk/RS/96/37/BRICS-RS-96-37.pdf" target="_blank" rel="noopener">Optimal Purely Functional<br>Priority Queues</a></li>
+</ul>
+<p><strong>双端队列 (Deque)</strong></p>
+<ul>
+<li>📖<a href="https://blog.csdn.net/u011240877/article/details/52865173" target="_blank" rel="noopener">Java 集合深入理解（10）：Deque 双端队列
+</a></li>
+</ul>
+<p>可并堆</p>
+<p>左偏堆</p>
+<p>二叉查找树</p>
+<p>Treap</p>
+<p>伸展树</p>
+<p>并查集</p>
+<p>集合计数问题</p>
+<p>二分图的识别</p>
+<p>平衡二叉树</p>
+<p>二叉排序树</p>
+<p>线段树</p>
+<p>一维线段树</p>
+<p>二维线段树</p>
+<p>树状数组</p>
+<p>一维树状数组</p>
+<p>N 维树状数组</p>
+<p>字典树</p>
+<p>后缀数组，后缀树</p>
+<p>块状链表</p>
+<p>哈夫曼树</p>
+<p>桶，跳跃表</p>
+<p>Trie 树（静态建树、动态建树）</p>
+<p>AC 自动机</p>
+<p>LCA 和 RMQ 问题</p>
+<p>KMP 算法</p>
+<p>图论 基本图算法图</p>
+<p>广度优先遍历</p>
+<p>深度优先遍历</p>
+<p>拓扑排序</p>
+<p>割边割点</p>
+<p>强连通分量</p>
+<p>Tarjan 算法</p>
+<p>双连通分量</p>
+<p>强连通分支及其缩点</p>
+<p>图的割边和割点</p>
+<p>最小割模型、网络流规约</p>
+<p>2SAT 问题</p>
+<p>欧拉回路</p>
+<p>哈密顿回路</p>
+<p>最小生成树</p>
+<p>Prim 算法</p>
+<p>Kruskal 算法（稀疏图）</p>
+<p>Sollin 算法</p>
+<p>次小生成树</p>
+<p>第 k 小生成树</p>
+<p>最优比例生成树</p>
+<p>最小树形图</p>
+<p>最小度限制生成树</p>
+<p>平面点的欧几里德最小生成树</p>
+<p>平面点的曼哈顿最小生成树</p>
+<p>最小平衡生成树</p>
+<p>最短路径</p>
+<p>有向无环图的最短路径&gt;拓扑排序</p>
+<p>非负权值加权图的最短路径&gt;Dijkstra 算法（可使用二叉堆优化）</p>
+<p>含负权值加权图的最短路径&gt;Bellmanford 算法</p>
+<p>含负权值加权图的最短路径&gt;Spfa 算法</p>
+<p>（稠密带负权图中 SPFA 的效率并不如 BellmanFord 高）</p>
+<p>全源最短路弗洛伊德算法 Floyd</p>
+<p>全源最短路 Johnson 算法</p>
+<p>次短路径</p>
+<p>第 k 短路径</p>
+<p>差分约束系统</p>
+<p>平面点对的最短路径（优化）</p>
+<p>双标准限制最短路径</p>
+<p>最大流</p>
+<p>增广路&gt;FordFulkerson 算法</p>
+<p>预推流</p>
+<p>Dinic 算法</p>
+<p>有上下界限制的最大流</p>
+<p>节点有限制的网络流</p>
+<p>无向图最小割&gt;StoerWagner 算法</p>
+<p>有向图和无向图的边不交路径</p>
+<p>FordFulkerson 迭加算法</p>
+<p>含负费用的最小费用最大流</p>
+<p>匹配</p>
+<p>Hungary 算法</p>
+<p>最小点覆盖</p>
+<p>最小路径覆盖</p>
+<p>最大独立集问题</p>
+<p>二分图最优完备匹配 KuhnMunkras 算法</p>
+<p>不带权二分匹配：匈牙利算法</p>
+<p>带权二分匹配：KM 算法</p>
+<p>一般图的最大基数匹配</p>
+<p>一般图的赋权匹配问题</p>
+<p>拓扑排序</p>
+<p>弦图</p>
+<p>稳定婚姻问题</p>
+<p>搜索 广搜的状态优化</p>
+<p>利用 M 进制数存储状态</p>
+<p>转化为串用 hash 表判重</p>
+<p>按位压缩存储状态</p>
+<p>双向广搜</p>
+<p>A *算法</p>
+<p>深搜的优化</p>
+<p>位运算</p>
+<p>剪枝</p>
+<p>函数参数尽可能少</p>
+<p>层数不易过大</p>
+<p>双向搜索或者是轮换搜索</p>
+<p>IDA *算法</p>
+<p>记忆化搜索</p>
+<p>动态规划 四边形不等式理论</p>
+<p>不完全状态记录</p>
+<p>青蛙过河问题</p>
+<p>利用区间 dp</p>
+<p>背包类问题</p>
+<p>01 背包，经典问题</p>
+<p>无限背包，经典问题</p>
+<p>判定性背包问题</p>
+<p>带附属关系的背包问题</p>
+<p>+1 背包问题</p>
+<p>双背包求最优值</p>
+<p>构造三角形问题</p>
+<p>带上下界限制的背包问题 (012 背包）</p>
+<p>线性的动态规划问题</p>
+<p>积木游戏问题</p>
+<p>决斗（判定性问题）</p>
+<p>圆的最大多边形问题</p>
+<p>统计单词个数问题</p>
+<p>棋盘分割</p>
+<p>日程安排问题</p>
+<p>最小逼近问题（求出两数之比最接近某数/两数之和等于某数等等）</p>
+<p>方块消除游戏（某区间可以连续消去求最大效益）</p>
+<p>资源分配问题</p>
+<p>数字三角形问题</p>
+<p>漂亮的打印</p>
+<p>邮局问题与构造答案</p>
+<p>最高积木问题</p>
+<p>两段连续和最大</p>
+<p>2 次幂和问题</p>
+<p>N 个数的最大 M 段子段和</p>
+<p>交叉最大数问题</p>
+<p>判定性问题的 dp（如判定整除、判定可达性等）</p>
+<p>模 K 问题的 dp</p>
+<p>特殊的模 K 问题，求最大（最小）模 K 的数</p>
+<p>变换数问题</p>
+<p>单调性优化的动态规划</p>
+<p>1SUM 问题</p>
+<p>2SUM 问题</p>
+<p>序列划分问题（单调队列优化）</p>
+<p>剖分问题（多边形剖分/石子合并/圆的剖分/乘积最大）</p>
+<p>凸多边形的三角剖分问题</p>
+<p>乘积最大问题</p>
+<p>多边形游戏（多边形边上是操作符，顶点有权值）</p>
+<p>石子合并 (N^3/N^2/NLogN 各种优化）</p>
+<p>贪心的动态规划</p>
+<p>最优装载问题</p>
+<p>部分背包问题</p>
+<p>乘船问题</p>
+<p>贪心策略</p>
+<p>双机调度问题 Johnson 算法</p>
+<p>状态 dp</p>
+<p>牛仔射击问题（博弈类）</p>
+<p>哈密顿路径的状态 dp</p>
+<p>两支点天平平衡问题</p>
+<p>一个有向图的最接近二部图</p>
+<p>树型 dp</p>
+<p>完美服务器问题（每个节点有 3 种状态）</p>
+<p>小胖守皇宫问题</p>
+<p>网络收费问题</p>
+<p>树中漫游问题</p>
+<p>树上的博弈</p>
+<p>树的最大独立集问题</p>
+<p>树的最大平衡值问题</p>
+<p>构造树的最小环</p>
+<p>数学 数论 中国剩余定理</p>
+<p>欧拉函数</p>
+<p>欧几里得定理</p>
+<p>欧几里德辗转相除法求 GCD（最大公约数）</p>
+<p>扩展欧几里得</p>
+<p>大数分解与素数判定</p>
+<p>佩尔方程</p>
+<p>同余定理（大数求余）</p>
+<p>素数测试</p>
+<p>一千万以内：筛选法</p>
+<p>一千万以外：米勒测试法</p>
+<p>连分数逼近</p>
+<p>因式分解</p>
+<p>循环群生成元</p>
+<p>素数与整除问题</p>
+<p>进制位</p>
+<p>同余模运算</p>
+<p>组合数学</p>
+<p>排列组合</p>
+<p>容斥原理</p>
+<p>递推关系和生成函数</p>
+<p>Polya 计数法</p>
+<p>Polya 计数公式</p>
+<p>Burnside 定理</p>
+<p>N 皇后构造解</p>
+<p>幻方的构造</p>
+<p>满足一定条件的 hamilton 圈的构造</p>
+<p>Catalan 数</p>
+<p>Stirling 数</p>
+<p>斐波拉契数</p>
+<p>调和数</p>
+<p>连分数</p>
+<p>MoBius 反演</p>
+<p>偏序关系理论</p>
+<p>加法原理和乘法原理</p>
+<p>计算几何</p>
+<p>基本公式</p>
+<p>叉乘</p>
+<p>点乘</p>
+<p>常见形状的面积、周长、体积公式</p>
+<p>坐标离散化</p>
+<p>线段</p>
+<p>判断两线段（一直线、一线段）是否相交</p>
+<p>求两线段的交点</p>
+<p>多边形</p>
+<p>判定凸多边形，顶点按顺时针或逆时针给出，（不）允许相邻边共线</p>
+<p>判点在凸多边形内或多边形边上，顶点按顺时针或逆时针给出</p>
+<p>判点在凸多边形内，顶点按顺时针或逆时针给出，在多边形边上返回 0</p>
+<p>判点在任意多边形内，顶点按顺时针或逆时针给出</p>
+<p>判线段在任意多边形内，顶点按顺时针或逆时针给出，与边界相交返回 1</p>
+<p>多边形重心</p>
+<p>多边形切割（半平面交）</p>
+<p>扫描线算法</p>
+<p>多边形的内核</p>
+<p>三角形</p>
+<p>内心</p>
+<p>外心</p>
+<p>重心</p>
+<p>垂心</p>
+<p>费马点</p>
+<p>圆</p>
+<p>判直线和圆相交，包括相切</p>
+<p>判线段和圆相交，包括端点和相切</p>
+<p>判圆和圆相交，包括相切</p>
+<p>计算圆上到点 p 最近点，如 p 与圆心重合，返回 p 本身</p>
+<p>计算直线与圆的交点，保证直线与圆有交点</p>
+<p>计算线段与圆的交点可用这个函数后判点是否在线段上</p>
+<p>计算圆与圆的交点，保证圆与圆有交点，圆心不重合</p>
+<p>计算两圆的内外公切线</p>
+<p>计算线段到圆的切点</p>
+<p>点集最小圆覆盖</p>
+<p>可视图的建立</p>
+<p>对踵点</p>
+<p>经典问题</p>
+<p>平面凸包</p>
+<p>三维凸包</p>
+<p>Delaunay 剖分/Voronoi 图</p>
+<p>计算方法</p>
+<p>二分法</p>
+<p>二分法求解单调函数相关知识</p>
+<p>用矩阵加速的计算</p>
+<p>迭代法</p>
+<p>三分法</p>
+<p>解线性方程组</p>
+<p>LUP 分解</p>
+<p>高斯消元</p>
+<p>解模线性方程组</p>
+<p>定积分计算</p>
+<p>多项式求根</p>
+<p>周期性方程</p>
+<p>线性规划</p>
+<p>快速傅立叶变换</p>
+<p>随机算法</p>
+<p>0/1 分数规划</p>
+<p>三分法求解单峰（单谷）的极值</p>
+<p>迭代逼近</p>
+<p>矩阵法</p>
+<p>博弈论</p>
+<p>极大极小过程</p>
+<p>Nim 问题</p>
+
+        </div>
+
+        
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+    </article>
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/algo-wiki/&title=《算法 wiki》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/algo-wiki/&title=《算法 wiki》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/algo-wiki/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法 wiki》 — Razertory 的技术博客&url=https://razertory.me/algo-wiki/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/algo-wiki/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/algo-wiki/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

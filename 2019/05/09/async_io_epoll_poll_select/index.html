@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>select, poll, epoll | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="操作系统">
+    <meta name="description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="select, poll, epoll">
+<meta property="og:url" content="https://razertory.me/2019/05/09/async_io_epoll_poll_select/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="select, poll, epoll">
+<meta name="twitter:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">select, poll, epoll</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">select, poll, epoll</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-09T13:28:23.000Z" itemprop="datePublished" class="page-time">
+  2019-05-09
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#select"><span class="post-toc-number">1.</span> <span class="post-toc-text">select</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#poll"><span class="post-toc-number">2.</span> <span class="post-toc-text">poll</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#epoll"><span class="post-toc-number">3.</span> <span class="post-toc-text">epoll</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">参考</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-async_io_epoll_poll_select"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">select, poll, epoll</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-09 21:28:23" datetime="2019-05-09T13:28:23.000Z"  itemprop="datePublished">2019-05-09</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。</p>
+<p>首先，他们分别来自于 <code>&lt;sys/select.h&gt;</code>，<code>&lt;sys/poll.h&gt;</code>，<code>&lt;sys/epoll.h&gt;</code>。如果是 Mac OS，是没有第三个的，其中前两个都在 <code>/usr/include/sys</code>。</p>
+<p>当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket，这个 socket 相当于一个状态机，最基本的包括是否可读，是否可写，服务端和客户端在进行数据传输的过程中，这个 socket 的状态就会不断发生变化。这只是一个客户端的情况，实际上肯定是有很多的。也就是说，服务端需要同时控制许多的 socket 的读写。并且总是需要以最快的时间，最小的系统开销来向 socket 读或者写数据。庆幸的是，这些事情都由开发操作系统内核的工程师们搞定了。</p>
+<blockquote>
+<p>fd: 一个文件描述符; fds: 一组文件描述符</p>
+</blockquote>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><blockquote>
+<p>fd_set ：<code>&lt;sys/select.h&gt;</code> 提供的文件描述符集合，是一个能存放最多 1024 个元素的数组。</p>
+</blockquote>
+<p>select 需要传入 fd_set 的地址，然后将它们修改成只包含就绪并用来读写。这个方法的签名为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照顺序，参数的意思分别是</span></span><br><span class="line"><span class="comment">// fd_set 的 最大编号，准备就绪读的，准备就绪写的，异常的，以及超时时间</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>简单点，比如说你有 fds，编号 1 到 5 并且只想让内核告诉你哪些 fd 可读。那么只需要调用 select(5, fds, NULL, NULL, NULL) 就好了。<br>服务端会不断地循环调用这个方法来做数据的读写。</p>
+<p>按照 select 的做法，假设最大为 600 的五个 fd 传入，那么 select 会从 0 开始遍历到 600，这样做会浪费掉大量的 CPU 资源。</p>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><p>poll 与 select 相比较，最大的区别在于不再使用 fd_set 这样的数据结构。而是为每一个 fd 都封装了一个 <code>pollfd</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> fd; <span class="comment">// 对应的 fd</span></span><br><span class="line">    <span class="keyword">short</span> events;</span><br><span class="line">    <span class="keyword">short</span> revents;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>只需要给 poll() 方法传入已经打开的 fds，方法签名为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span> <span class="params">(struct pollfd *fds, <span class="keyword">unsigned</span> <span class="keyword">int</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上述 select 的案例中，同样最大 600 的五个 fd 传入，poll 只需要传入这个 5 个 fds 即可。在调用了 poll() 之后， 就绪的 pollfd 中的 revents 就会被修改，也就能确认哪些 fds 就绪。</p>
+<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3><p>epoll 包含了多个方法，使用起来实际上会分成几个步骤</p>
+<ul>
+<li>初始化 epoll 事件驱动所用到的数据结构 <code>epoll_event</code></li>
+<li><code>epoll_create()</code> 初始化当前的 context</li>
+<li>初始化 <code>epoll_event</code> 中的 <code>data.fd</code> 关联到当前系统的 fds</li>
+<li>依照 <code>epoll_event</code> 的内容，调用 <code>epoll_ctl()</code> 来对当前的 context 进行控制，通常是给 context 写入或者删除 fds</li>
+<li><code>epoll_wait()</code> 只返回就绪的 fds</li>
+</ul>
+<p>由于没有无效的遍历，epoll 的理论时间复杂度是 O(1)。 select 和 poll 的复杂度是 O(n)。</p>
+<p><a href="https://github.com/razertory/c-code-lab/blob/master/async_io/README.md" target="_blank" rel="noopener">https://github.com/razertory/c-code-lab/blob/master/async_io/README.md</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XNOXutMzYQE" target="_blank" rel="noopener">https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XNOXutMzYQE</a></p>
+<p><a href="https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/" target="_blank" rel="noopener">https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/</a></p>
+<p><a href="https://book.douban.com/subject/25809330/" target="_blank" rel="noopener">《Linux/Unix 系统编程手册》</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.003Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/05/09/async_io_epoll_poll_select/" target="_blank" rel="external">https://razertory.me/2019/05/09/async_io_epoll_poll_select/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/05/09/async_io_epoll_poll_select/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/05/31/100-tips-of-mysql/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MySQL Top Tips</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/15/hanoi-tower/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">汉诺塔问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/05/09/async_io_epoll_poll_select/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/05/09/async_io_epoll_poll_select/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

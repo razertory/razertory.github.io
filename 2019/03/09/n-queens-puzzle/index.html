@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>N 皇后问题 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="N 皇后问题是最早一位棋手提出了八皇后问题之后，推演而来的。八皇后问题的规则是：  在 8 * 8 的盘中放置 8 个皇后 任何一个皇后的横，竖，斜对角都不能别的皇后  我们要从中找到尽可能多的摆放方法。下图是解法之一">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="N 皇后问题">
+<meta property="og:url" content="https://razertory.me/2019/03/09/n-queens-puzzle/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="N 皇后问题是最早一位棋手提出了八皇后问题之后，推演而来的。八皇后问题的规则是：  在 8 * 8 的盘中放置 8 个皇后 任何一个皇后的横，竖，斜对角都不能别的皇后  我们要从中找到尽可能多的摆放方法。下图是解法之一">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="https://razertory.me/img/eight-queen-chessborad.jpg">
+<meta property="og:image" content="https://razertory.me/img/4queens.jpg">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="N 皇后问题">
+<meta name="twitter:description" content="N 皇后问题是最早一位棋手提出了八皇后问题之后，推演而来的。八皇后问题的规则是：  在 8 * 8 的盘中放置 8 个皇后 任何一个皇后的横，竖，斜对角都不能别的皇后  我们要从中找到尽可能多的摆放方法。下图是解法之一">
+<meta name="twitter:image" content="https://razertory.me/img/eight-queen-chessborad.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">N 皇后问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">N 皇后问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-09T01:23:09.000Z" itemprop="datePublished" class="page-time">
+  2019-03-09
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-n-queens-puzzle"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">N 皇后问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-09 09:23:09" datetime="2019-03-09T01:23:09.000Z"  itemprop="datePublished">2019-03-09</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>N 皇后问题是最早一位棋手提出了八皇后问题之后，推演而来的。八皇后问题的规则是：</p>
+<ul>
+<li>在 8 * 8 的盘中放置 8 个皇后</li>
+<li>任何一个皇后的横，竖，斜对角都不能别的皇后</li>
+</ul>
+<p>我们要从中找到尽可能多的摆放方法。下图是解法之一</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/eight-queen-chessborad.jpg" alt="八皇后问题" title>
+                </div>
+                <div class="image-caption">八皇后问题</div>
+            </figure>
+
+<p>随后，这个问题被推演成为了 N 皇后问题。也就是当棋盘大小为 N（N &gt; 0），皇后个数为 N 的时候，有多少种摆放方法。目前前 10 个分别是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">N =&gt; [1, 2, 3, 4, 5,  6, 7,  8,  9,   10]</span><br><span class="line">U =&gt; [1, 0, 0, 1, 2,  1, 6,  12, 46,  92]</span><br><span class="line">D =&gt; [1, 0, 0, 2, 10, 4, 40, 92, 352, 724]</span><br><span class="line"></span><br><span class="line"># N 棋盘大小</span><br><span class="line"># U 不包括对称的解</span><br><span class="line"># D 包括了对称的解</span><br></pre></td></tr></table></figure>
+
+<p>注意到六皇后问题的解的个数比五皇后问题的解的个数要少。现在还没有已知公式可以对 n 计算 n 皇后问题的解的个数，也就是说这个问题现在还只能由程序来解答。</p>
+<p>核心的思路是：给棋盘定义坐标，比如左上是（0，0）横轴为 x 竖轴 为 y。如果抽象成为一个二维数组，x 和 y 就是数组元素的 index。当一个皇后落子之后，那么相对应的所有 x 和 y 以及对角线就都不能下这里被称为<strong>控制区域</strong>。也就是当一个皇后（坐标为 x，y）落子之后那么棋盘的 colomns[x] 和 rows[y] 以及对角线就都被控制。</p>
+<p>这里最先想到的是每个位置遍历，总共记录 n^2 个位置。不过这一步可以精简为记录历行，因为我们知道一行如果落子了就不在考虑这一行。也就是说如果从 0 开始往棋盘的下方遍历，那么落子之后只需要记录这一列是否下过即可。用 colomns[x] 来表示这一列。</p>
+<p>对于对角线，一个 8 * 8 的棋盘中对角线的个数是 15 个 <code>/</code> + 15 个 <code>\</code>。这个很容易推算，对于一个标准的 n * n 棋盘，单个方向的对角线个数</p>
+<blockquote>
+<p>diag = 2 * n - 1</p>
+</blockquote>
+<p>也即是说对角线是否被控制可以用对角线的数组表示。假设 <code>/</code> 是 diag1， <code>\</code> 是 diag2。</p>
+<p>那么又有一个问题了，一个落子所控制的对角线能否被找到呢。比如说落在 (x, y) 处在，那么是否能找到对应的 diag1 和 diag2 呢？答案是可以的。 至于如何推算的，画一下图就知道啦。</p>
+<ul>
+<li>对于  <code>/</code>，对应的是 <code>diag1[x + y]</code></li>
+<li>对于  <code>\</code>，对应的是 <code>diag1[x - y + n - 1]</code></li>
+</ul>
+<p>至此，落子之后控制区域如何表示就没有问题了。</p>
+<p>接下来就是探究怎么找到所有的落子。本质上这是一个典型的<strong>回溯法</strong>。</p>
+<p>作为回溯算法的一种，自然是用树形空间来表示递归。例如当 n = 4 的时候，搜索空间可以用一颗 4 叉树来表示</p>
+<p> <img src="/img/4queens.jpg" alt></p>
+<p>首先从 0 开始遍历棋盘的 x 轴。并在此基础上，递归地寻找后面的位置。递归期间可以落子，那么就放入棋盘，同时更新控制的区域，继续递归。当发现递归到树的底层，或者说后面的节点全都不能遍历的时候回溯。反之，就继续遍历。</p>
+<p> 这种的典型的多插树搜索很大程度基本的递归结构是</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recur</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  <span class="title">for</span> <span class="title">i</span> <span class="title">in</span> <span class="title">range</span></span></span><br><span class="line"><span class="function">   <span class="title">recur</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<p> 树的节点个数通常是 range 的大小， recur 的深度是树的深度。</p>
+<p> 那么至此可以开始设计这个 leetcode 上难度为 hard 的<a href="https://leetcode.com/problems/n-queens/" target="_blank" rel="noopener">题目</a> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; board;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span>[] cols;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span>[] diag1;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span>[] diag2;</span><br><span class="line">    <span class="keyword">private</span> List&lt;List&lt;String&gt;&gt; solution;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; solveNQueens(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        solution = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        board = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span>[] charArray = <span class="keyword">new</span> <span class="keyword">char</span>[n];</span><br><span class="line">        Arrays.fill(charArray, <span class="string">'.'</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            board.add(<span class="keyword">new</span> String(charArray));</span><br><span class="line">        &#125;</span><br><span class="line">        cols = <span class="keyword">new</span> <span class="keyword">boolean</span>[n];</span><br><span class="line">        diag1 = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">2</span> * n - <span class="number">1</span>];</span><br><span class="line">        diag2 = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="number">2</span> * n - <span class="number">1</span>];</span><br><span class="line">        nQueens(n, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> solution;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">nQueens</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (y == n) &#123;</span><br><span class="line">            solution.add(<span class="keyword">new</span> ArrayList&lt;&gt;(board));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; n; x++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!available(x, y, n)) <span class="keyword">continue</span>;</span><br><span class="line">            updateBoard(x, y, n, <span class="keyword">true</span>);</span><br><span class="line">            nQueens(n, y + <span class="number">1</span>);</span><br><span class="line">            updateBoard(x, y, n, <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">available</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> !cols[x] &amp;&amp; !diag1[x + y] &amp;&amp; !diag2[x - y + n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateBoard</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> n, <span class="keyword">boolean</span> put)</span> </span>&#123;</span><br><span class="line">        cols[x] = put;</span><br><span class="line">        diag1[x + y] = put;</span><br><span class="line">        diag2[x - y + n - <span class="number">1</span>] = put;</span><br><span class="line">        <span class="keyword">char</span>[] columns = board.get(y).toCharArray();</span><br><span class="line">        columns[x] = put ? <span class="string">'Q'</span> : <span class="string">'.'</span>;</span><br><span class="line">        board.set(y, <span class="keyword">new</span> String(columns));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附: 完整的<a href="https://github.com/razertory/java-code-lab/blob/master/src/main/java/org/razertory/javacodelab/backtrack/NQueen.java" target="_blank" rel="noopener">代码&amp;测试用例</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.004Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/03/09/n-queens-puzzle/" target="_blank" rel="external">https://razertory.me/2019/03/09/n-queens-puzzle/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/03/09/n-queens-puzzle/&title=《N 皇后问题》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/03/09/n-queens-puzzle/&title=《N 皇后问题》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/03/09/n-queens-puzzle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《N 皇后问题》 — Razertory 的技术博客&url=https://razertory.me/2019/03/09/n-queens-puzzle/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/03/09/n-queens-puzzle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/15/hanoi-tower/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">汉诺塔问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/07/permutation-and-combination/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">无重复数组的全排列</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/03/09/n-queens-puzzle/&title=《N 皇后问题》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/03/09/n-queens-puzzle/&title=《N 皇后问题》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/03/09/n-queens-puzzle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《N 皇后问题》 — Razertory 的技术博客&url=https://razertory.me/2019/03/09/n-queens-puzzle/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/03/09/n-queens-puzzle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/03/09/n-queens-puzzle/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

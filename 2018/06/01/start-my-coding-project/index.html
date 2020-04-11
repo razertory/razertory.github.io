@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>我的「java-code-lab」 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="思考">
+    <meta name="description" content="在念书期间，学习数据结构课程的时候，我发现了一个质量很好的 Java 数据结构 项目，当时也是受益匪浅。后来的几年作者没有再维护，但我认为这会是一个非常好的模式。 记得在 OJ 上做 ACM 时，我总会去思考这个代码会如何去通过测试用例，达到 Accepted 状态，记得当时的同学、学长说是后台有一个跑测试用例的服务。通过这个服务可以检查你代码的语法正确性、结果正确性以及时间空间复杂度。 后来在工">
+<meta name="keywords" content="思考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的「java-code-lab」">
+<meta property="og:url" content="https://razertory.me/2018/06/01/start-my-coding-project/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="在念书期间，学习数据结构课程的时候，我发现了一个质量很好的 Java 数据结构 项目，当时也是受益匪浅。后来的几年作者没有再维护，但我认为这会是一个非常好的模式。 记得在 OJ 上做 ACM 时，我总会去思考这个代码会如何去通过测试用例，达到 Accepted 状态，记得当时的同学、学长说是后台有一个跑测试用例的服务。通过这个服务可以检查你代码的语法正确性、结果正确性以及时间空间复杂度。 后来在工">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的「java-code-lab」">
+<meta name="twitter:description" content="在念书期间，学习数据结构课程的时候，我发现了一个质量很好的 Java 数据结构 项目，当时也是受益匪浅。后来的几年作者没有再维护，但我认为这会是一个非常好的模式。 记得在 OJ 上做 ACM 时，我总会去思考这个代码会如何去通过测试用例，达到 Accepted 状态，记得当时的同学、学长说是后台有一个跑测试用例的服务。通过这个服务可以检查你代码的语法正确性、结果正确性以及时间空间复杂度。 后来在工">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">我的「java-code-lab」</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">我的「java-code-lab」</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-01T05:23:53.000Z" itemprop="datePublished" class="page-time">
+  2018-06-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内容"><span class="post-toc-number">1.</span> <span class="post-toc-text">内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试"><span class="post-toc-number">2.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对于学习者"><span class="post-toc-number">3.</span> <span class="post-toc-text">对于学习者</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-start-my-coding-project"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">我的「java-code-lab」</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-01 13:23:53" datetime="2018-06-01T05:23:53.000Z"  itemprop="datePublished">2018-06-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在念书期间，学习数据结构课程的时候，我发现了一个质量很好的 <a href="https://github.com/buptdavid/datastructure" target="_blank" rel="noopener">Java 数据结构</a> 项目，当时也是受益匪浅。后来的几年作者没有再维护，但我认为这会是一个非常好的模式。</p>
+<p>记得在 OJ 上做 ACM 时，我总会去思考这个代码会如何去通过测试用例，达到 <code>Accepted</code> 状态，记得当时的同学、学长说是后台有一个跑测试用例的服务。通过这个服务可以检查你代码的语法正确性、结果正确性以及时间空间复杂度。</p>
+<p>后来在工作中我接触到了 TDD 开发模式，或者说代码开始有单元测试，所以就会想起了这个项目，打算重做一个。一来自我学习，当程序、数据结构、算法与我有更深的理解；二是验证这种模式对于他人的益处是否有我想象的那样多。</p>
+<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>基础的数据结构和算法必不可少，那么基础的程度我想先以红皮书《算法》为主。确保在这个点上，我能做到最好。随后，我会加入《算法导论》的内容和案例。几个好处：第一，《算法导论》提到的案例以及实现都是工业级的，比如切割钢条，DNA 最长公共序列，股票涨幅等。第二，《算法导论》里面给出了大量的数学推导和论证。所以在后期做性能测试的时候，如果我的测试结果和预想的有偏差，我可以找到理论依据或者的确是自己出 bug 的地方。再者，并发编程，IO，网络编程，设计模式以及一些系统设计的内容同样是这个项目会涉及的。除了基础的算法或者数据结构我应该去实现，同时我也会从 Leetcode，Lintcode，剑指 Offer 上去寻找一些相关的题目的解答和测试用例。举个例子就是我们实现 Kth Bigest 这种问题的时候，有一种就是快排的做法，可以发现只要对快排做少许的修改就可以实现；当然，用堆也是个很好的选择。</p>
+<p>这个项目除了数据结构和算法，还有包括但不限于设计模式，网络 IO，并发编程等计算机领域较为基础的案例实现与测试。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在实际的项目开发中，编写测试代码是很多公司为了保证软件质量的推荐方法。但是在这个项目里面，除了证明算法的正确性。更多的是在于能够让使用者在研究某个代码的时候，能够方便、清晰发现程序是怎么跑的。这一点很重要，相比于只给出代码和代码的图文讲解，我认为：每个人的理解能力和理解方式都是不同的，但做编码工作的人，大量的认知和理论都会实现到代码上。所以，只有很清楚自己要写什么样的代码的时候，才能真正按照意图写出来。这一点，我认为通过测试用例的方式是最好。当我想理解一段代码的时候，我可以 debug，可以试做修改通过跑测试的方式来证明自己的思路是没有问题的。</p>
+<p>在编写测试代码的时候，我常常遇到了一些问题，比如给定一个数组生成最低二叉搜索树，我该如何证明生成的二叉搜索树是最低的。在我写单例模式的测试代码的时候，我发现我需要模拟并发的情景来证明一些线程安全问题。这个过程充满了挑战和乐趣。</p>
+<h3 id="对于学习者"><a href="#对于学习者" class="headerlink" title="对于学习者"></a>对于学习者</h3><p>我认为不管是实现一个经典的算法，还是 finish a problem，最重要的是要学会如何解决问题。所谓的问题是什么呢？在这个项目里，问题就是测试代码里面的内容。程序要实现的，就是以某种方式通过测试用例。这些我和一些 contributors 的实现对于每一个学习者来说只是一个参考和值得质疑的（质疑程序的性能和正确性；包括测试代码是否合乎逻辑）。我认为，当拿到一个新的算法时，最好先去自己实现一遍，然后去对应的 unit test 跑一遍，当其中有疑难的时候，记得 debug。只有在源码 + debug 的投射下，所有的疑惑都会被散去，那些看起来含糊不清的逻辑也会变得清晰。</p>
+<p><a href="https://github.com/razertory/java-code-lab" target="_blank" rel="noopener">地址</a></p>
+<blockquote>
+<p>Talk is cheap. Show me the test!</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.001Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2018/06/01/start-my-coding-project/" target="_blank" rel="external">https://razertory.me/2018/06/01/start-my-coding-project/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/思考/">思考</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/06/01/start-my-coding-project/&title=《我的「java-code-lab」》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/06/01/start-my-coding-project/&title=《我的「java-code-lab」》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/06/01/start-my-coding-project/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《我的「java-code-lab」》 — Razertory 的技术博客&url=https://razertory.me/2018/06/01/start-my-coding-project/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/06/01/start-my-coding-project/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/14/opt-graphql-server/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">GraphQL 优化分享</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/07/把rails项目拆分为微服务/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">将 Rails 项目拆分成微服务架构</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/06/01/start-my-coding-project/&title=《我的「java-code-lab」》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/06/01/start-my-coding-project/&title=《我的「java-code-lab」》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/06/01/start-my-coding-project/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《我的「java-code-lab」》 — Razertory 的技术博客&url=https://razertory.me/2018/06/01/start-my-coding-project/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/06/01/start-my-coding-project/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2018/06/01/start-my-coding-project/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

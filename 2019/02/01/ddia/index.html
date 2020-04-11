@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>「读书」数据密集型应用系统设计 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="读书">
+    <meta name="description" content="这是一本讲述现代互联网应用中，开发者们如何进行正确的存储和处理数据的书。 当今的互联网应用大多是数据密集型的。与之相对的是 CPU 密集型。 什么是数据密集型？ 当数据的数量，复杂度和数据的更新速度容易成为一个产品在用户增长，功能迭代，用户体验度提升的瓶颈的时候，我们就认为这种应用是数据密集型应用。上述的问题往往会给现在的工程师带来各种挑战，比如：数据库 CPU 报警，应用服务器内存报警，开发迭代">
+<meta name="keywords" content="读书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「读书」数据密集型应用系统设计">
+<meta property="og:url" content="https://razertory.me/2019/02/01/ddia/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="这是一本讲述现代互联网应用中，开发者们如何进行正确的存储和处理数据的书。 当今的互联网应用大多是数据密集型的。与之相对的是 CPU 密集型。 什么是数据密集型？ 当数据的数量，复杂度和数据的更新速度容易成为一个产品在用户增长，功能迭代，用户体验度提升的瓶颈的时候，我们就认为这种应用是数据密集型应用。上述的问题往往会给现在的工程师带来各种挑战，比如：数据库 CPU 报警，应用服务器内存报警，开发迭代">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「读书」数据密集型应用系统设计">
+<meta name="twitter:description" content="这是一本讲述现代互联网应用中，开发者们如何进行正确的存储和处理数据的书。 当今的互联网应用大多是数据密集型的。与之相对的是 CPU 密集型。 什么是数据密集型？ 当数据的数量，复杂度和数据的更新速度容易成为一个产品在用户增长，功能迭代，用户体验度提升的瓶颈的时候，我们就认为这种应用是数据密集型应用。上述的问题往往会给现在的工程师带来各种挑战，比如：数据库 CPU 报警，应用服务器内存报警，开发迭代">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">「读书」数据密集型应用系统设计</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">「读书」数据密集型应用系统设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-01T13:26:55.000Z" itemprop="datePublished" class="page-time">
+  2019-02-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-ddia"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">「读书」数据密集型应用系统设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-01 21:26:55" datetime="2019-02-01T13:26:55.000Z"  itemprop="datePublished">2019-02-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这是一本讲述现代互联网应用中，开发者们如何进行正确的存储和处理数据的书。</p>
+<p>当今的互联网应用大多是数据密集型的。与之相对的是 CPU 密集型。</p>
+<p>什么是数据密集型？</p>
+<p>当数据的数量，复杂度和数据的更新速度容易成为一个产品在用户增长，功能迭代，用户体验度提升的瓶颈的时候，我们就认为这种应用是数据密集型应用。上述的问题往往会给现在的工程师带来各种挑战，比如：数据库 CPU 报警，应用服务器内存报警，开发迭代缓慢，API 接口响应过长等等。</p>
+<p>一个互联网应用的系统，绝大多数情况下，都需要我们满足稳定性，可扩展性和可维护性。例如：当部分硬件故障或者有一些人为 bug 的时候，系统各项指标能保持在预期之上，用户／数据量的增长的时候，工程师短时间内就能良好应对，新人的到来的时候能够快速理解系统并加入到开发。</p>
+<p>为了让系统朝着一个正确的方向演进，这本书 《Design Data Intensive Applications》 第一章讲述了数据的模型选用，存储与检索的以及序列化／反序列化。我觉得第一章给予读者的，刚好是告诉一个项目启动的时候，知道如何做数据模型的选型，包括数据库，缓存，查询方式的选择等，避免给中后期留下过多的坑。第二章非常直白地说明了分布式存储的应用方式和场景，主要考虑的是容错，容灾难，分布式事务和分布式一致性等。这几点个人非常感兴趣。第三章主要讲大数据的处理，比如 MapReduce，消息队列以及作者对未来系统架构的构想，包括：Lambda 架构与函数式编程将会大放异彩，unix 哲学将与数据库哲学相庭抗礼，分布式存储会变得普遍。</p>
+<p>一块硬盘的平均无故障时间是 10 到 50 年，因此从数学期望上讲，在拥有 10_000 个硬盘的存储集群上，平均每天会有 1 个硬盘发生故障。有经验的运维会选用批次号不同的硬盘来避免同一时间大范围的物理故障。对于工程师而言，出现 bug 的概率或多或少。一旦项目庞大，生产环境，出 bug 的数学期望同样很容易达到一个比较高的情况。当然，这里就不赘述。</p>
+<p>我们需要认可的一件事是，东西早晚会坏掉的。作者认为：没有林丹妙药可以拯救上述的问题。我们应当接受，在设计系统的时候，做出良好的抽象，解耦合，充分的测试，明确详细的监控和随时准备一个模拟生产环境的沙盒子。只有不断的把每个细节都做好，从整体到局部，系统才会朝着健康的方向发展。</p>
+<p>项目初期的时候，数据模型的选取通常因为项目的复杂度并不算高而变得很含糊。弄清楚一些要点，会让工作顺利许多。数据的查询通常依赖两种方式，索引或者搜索引擎。如今的哈希索引，B/B+ 树，LSM 树在工业场景下都有非常厉害的实现，比如 InnoDB， MongoDB。OLAP 场景和 OLTP 场景在某些情况下很难做到同时满足，需要工程师去做 trade off。考虑到可扩展和可维护，需要把应用服务器与存储服务器之间做好细致的工作划分。建立秩序，省却搜索——德国谚语</p>
+<p>数据的传输往往离不开网络协议的数据的序列化 / 反序列化。当今在大多数 REST 服务中，JSON 占据着主导地位，这与前端工程师的付出密切相关。也是因为微服务的流行，当下的系统中，某个服务端节点很有可能是别的服务端的客户端。当然，除了 JSON，各种二进制协议比如 Protocol Buffers 有着更好的性能与不错的可维护性。但问题是这些协议在数据可读之前需要解码。</p>
+<p>如今数据的检索和存储已经可以有多台机器同时参与，在这里姑且称之为分布式数据存储。它可以带来更大的负载能力，比如一些 OLAP 场景对数据库 CPU 有极大的消耗，这个时候可以做横向扩展。同时分布式存储可以带来更优质的容错能力。我很喜欢 replication 这个单词，正如之前提到的，当某个硬盘故障了，我们又需要对这硬盘数据进行读写。这个时候就要考虑它一定需要副本了。我们可以理解为多个存储内容相同的硬盘，互为对方的副本。而副本的存在又产生了一致性问题甚至推导出 CAP 理论。基本的 Master-Slave 架构，到 Paxos ，Raft 分布式一致性算法都是在解决副本一致性的问题。分布式场景中，还有一个经典的问题——分布式事务。我们需要理解数据库事务的 ACID 特性和经典的二阶段提交算法。真实世界中，节点的失效或者故障，网络问题比如离线，超时，重传等，都给分布式系统带来无限的挑战。在这里真佩服 etcd，Spanner，TiDB 这些为了分布式系统贡献智慧的项目。分布式系统还有一大堆说不完的有意思的，想知道的同学可以买书了～</p>
+<p>如今是一个各种数据系统大杂烩的时代，Redis 可以用作消息队列，Kafka 可以拿来持久化数据。传统的关系型数据库要求用户采用特定的格式存储数据，而分布式文件系统里面只是字节序列，可以是文本图像，视频，特征向量或者任何类型的数据。这些数据存到庞大的数据中心的系统中，被一些批处理系统进行数据清洗交由消费方使用。这里 unix 编程哲学重新回到了我们的眼中：输入是不可变的，输出是为了作为另一个（未知的）程序的输入，而复杂的问题是通过编写 “做好一件事” 的小工具来解决的。</p>
+<p>相对的，在流式系统中，输入我们认为是无限的，增量的。比如采用消息队列我们认为是一个不断发布消费，数据不断增长的过程。这里又两种模式，一种是基于 FIFO 模型的，当消息 pop 的时候就消失了；还有一种是基于日志的，多个消费者可以互不影响读取内容。这两者各有优劣，需要权衡。比如对性能吞吐量，顺序要求高的情况下，采用日志的。消息处理大多数情况下需要人为实现幂等。在基于日志的流式系统中应用状态是事件流对于时间积分的结果，所以从数学的角度而言我们的的确确可以把这种系统当作持久化存储和查询的工具。</p>
+<p>在未来，流式系统和分布式系统会被更多人接受和理解。不过为了保证现实世界的因关系，比如：两个人在对方好友列表里面互相删除之后，就不会再看到对方的动态，可是在实现分布式存储之后，如果技术上没有处理好，就会发现依然可以互刷动态。再比如：银行转账 A 扣钱，B 获得钱，结果两者没有满足转账后的数目。全局有序和分布式事务是一定要妥妥实现的。数据库的拆分将会变得低成本，或者直接上分布式数据库。函数式编程由于超强的 DSL 能力会给予数据处理场景优质的工具集。</p>
+<p>本书在每个章节之后，都附上了大量的参考文献，其中多数是近年的经典论文。很推荐细细读一下，比如 Map Reduce，BigTable 这种。可以很明显体会到，作者将这些论文的内容，基于许多公司的业务场景，开发历程整理出了此书。对于工程师，这本书可以给予大多数人一个关于当今数据系统大而全的视角，在系统设计这个层次收获更多。对于学生可能不太适合。</p>
+<p>我觉得服务端工程师，做的最主要的事情就是和数据打交道。通过正确的数据分析与算法优化，可以让许多的企业为此尝到甜头。这本书的最后有一句非常有意思的话：we should stop regarding users as metrics to be optimized, and remember that they are humans who deserve respect, dignity and agency。手机里的 APP 为我们提供了足够的便利，同时我们的行为喜好数据也进入了这些 APP 的后端。这些应用的创作者和运营者应当尊重用户的喜好与隐私。</p>
+<p>希望你也喜欢这本书。😊</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.003Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/02/01/ddia/" target="_blank" rel="external">https://razertory.me/2019/02/01/ddia/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/02/01/ddia/&title=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/02/01/ddia/&title=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/02/01/ddia/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&url=https://razertory.me/2019/02/01/ddia/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/02/01/ddia/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/01/seven-weeks-seven-languages/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">「读书」七周七语言</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/16/max-sub-array/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">最大子序列</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/02/01/ddia/&title=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/02/01/ddia/&title=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/02/01/ddia/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「读书」数据密集型应用系统设计》 — Razertory 的技术博客&url=https://razertory.me/2019/02/01/ddia/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/02/01/ddia/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/02/01/ddia/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

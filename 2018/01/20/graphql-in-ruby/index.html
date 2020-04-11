@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>向 GraphQL 迁移 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="系统设计">
+    <meta name="description" content="时间大概是 17 年九月，我司的新 App 开工。在技术选型上，我们很激进地选择了 graphql instead of restful。当时想到的理由是很简单，但是也无可厚非的：我们的 App 和后期将要做的新 Web 在业务上有很大的相通性，并且功能模块有不少类似的地方，所以用 graphql 这样的技术来做 API 层复用性会很高。后期在做一些管理后台的时候，效率也会高不少。 很有幸的是，">
+<meta name="keywords" content="系统设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="向 GraphQL 迁移">
+<meta property="og:url" content="https://razertory.me/2018/01/20/graphql-in-ruby/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="时间大概是 17 年九月，我司的新 App 开工。在技术选型上，我们很激进地选择了 graphql instead of restful。当时想到的理由是很简单，但是也无可厚非的：我们的 App 和后期将要做的新 Web 在业务上有很大的相通性，并且功能模块有不少类似的地方，所以用 graphql 这样的技术来做 API 层复用性会很高。后期在做一些管理后台的时候，效率也会高不少。 很有幸的是，">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向 GraphQL 迁移">
+<meta name="twitter:description" content="时间大概是 17 年九月，我司的新 App 开工。在技术选型上，我们很激进地选择了 graphql instead of restful。当时想到的理由是很简单，但是也无可厚非的：我们的 App 和后期将要做的新 Web 在业务上有很大的相通性，并且功能模块有不少类似的地方，所以用 graphql 这样的技术来做 API 层复用性会很高。后期在做一些管理后台的时候，效率也会高不少。 很有幸的是，">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">向 GraphQL 迁移</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">向 GraphQL 迁移</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-19T16:21:00.000Z" itemprop="datePublished" class="page-time">
+  2018-01-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">开发模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查询性能"><span class="post-toc-number">2.</span> <span class="post-toc-text">查询性能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#before"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">before</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#after"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">after</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#架构"><span class="post-toc-number">3.</span> <span class="post-toc-text">架构</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-graphql-in-ruby"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">向 GraphQL 迁移</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-20 00:21:00" datetime="2018-01-19T16:21:00.000Z"  itemprop="datePublished">2018-01-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>时间大概是 17 年九月，我司的新 App 开工。在技术选型上，我们很激进地选择了 <code>graphql</code> instead of restful。当时想到的理由是很简单，但是也无可厚非的：我们的 App 和后期将要做的新 Web 在业务上有很大的相通性，并且功能模块有不少类似的地方，所以用 graphql 这样的技术来做 API 层复用性会很高。后期在做一些管理后台的时候，效率也会高不少。</p>
+<p>很有幸的是，自己成了研发团队中这个技术的主要推进者。我们的服务端主语言是 Ruby，所以像 github，Shopify 这样的 GraphQL + Ruby 的领先者对我们而言如同教科书一般。我研究了几乎每个 Github 的 Query 和 Mutation，所以很大程度上也受于他们优质的思路，和客户端同学们踩了一些坑，但最后也都得出了这个在开发过程中，很多方面都会优于 rest 的结论。具体的优势，和官方说的差不多，我也不愿再赘述。这篇博客，更多的是关于技术的感悟和一些架构上的理念。吹架构可能有点悬乎。好吧，就再抽象一点，应该是做工程的一些总结；当然 GraphQL 的干货内容也不会少的。</p>
+<h2 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h2><p>用 graphql 很大程度上，省去了一些不必要的沟通成本。当你受够了用 rest 要去构建 API 文档之后，graphql 这种天然的 <code>代码即文档</code> 的便捷性让团队受益匪浅。服务端只需要在编码期间，按照标准的写法，加上对应的 desc 方法，就可以无缝生成对应的文档。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GuardianType = GraphQL::ObjectType.define <span class="keyword">do</span></span><br><span class="line">  name <span class="string">'Guardian'</span></span><br><span class="line">  description <span class="string">'A guardian has his/her children'</span></span><br><span class="line"></span><br><span class="line">  field <span class="symbol">:id</span>, types.ID</span><br><span class="line">  field <span class="symbol">:name</span>, types.String</span><br><span class="line">  field <span class="symbol">:children</span>, types[ChildType]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>也许很多人会问，这样做，服务端的业务逻辑不久会分散一部分到客户端上了？客户端的工作量不就提升了？</p>
+<p>但实际上，graphql 的自动化 + 强类型 + ‘强结构’让客户端的工作量反而下降了。首先，客户端的的确是要写查询代码，就像是服务端写 SQL 一样。但是 graph 的查询要比 SQL 简单了不知道多少倍，更准确的，我可以称之为 <code>描述</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">query guardian&#123;</span><br><span class="line">  guardain(id: 9527)&#123;</span><br><span class="line">    id</span><br><span class="line">    name</span><br><span class="line">    children&#123;</span><br><span class="line">      id</span><br><span class="line">      name</span><br><span class="line">      avatar</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在传统的 rest 开发模式中，客户端并不知道一个请求服务端会返回什么结果。除非有准确，准时，详尽的文档。客户端会恐惧，服务端某个返回结果数据结构不对自己 crash 了。所以反而会在这一层上，思考很多。（我们评价一个技术体系的工作成本，除了实际的编码产出，还应该评估思考，权衡所带来的开销）维护未知响应结果的开销，总是会大于自己决定响应结果的开销。</p>
+<blockquote>
+<p>技术上的恐惧感，往往来源于未知。没有测试，不知道原理，没有约定，没有规范，都是会带来未知。</p>
+</blockquote>
+<h2 id="查询性能"><a href="#查询性能" class="headerlink" title="查询性能"></a>查询性能</h2><p>解决 N+1 query 和查询环几乎是 graphql 服务端使用者遇到的第一个问题。</p>
+<p>我记得在遇到这个问题的时候，我看到了 Facebook 官方出的 dataloader 来解决。所以像我们这种 Ruby 栈的团队，自然就选用了 Shopify 团队的 <a href="https://github.com/razertory/graphql-batch" target="_blank" rel="noopener">graphql-batch</a>，现在回忆起来依旧记得当时的兴奋感。好吧，还是贴两张图，对比一下。</p>
+<h4 id="before"><a href="#before" class="headerlink" title="before"></a>before</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">INFO <span class="comment">-- : (0.019141s) DESCRIBE `activities`</span></span><br><span class="line">INFO <span class="comment">-- : (0.018571s) SELECT * FROM `activities` WHERE (`subject_id` = 26)</span></span><br><span class="line">INFO <span class="comment">-- : (0.017604s) SELECT * FROM `activities` WHERE (`subject_id` = 32)</span></span><br><span class="line">INFO <span class="comment">-- : (0.015813s) SELECT * FROM `activities` WHERE (`subject_id` = 25)</span></span><br><span class="line">INFO <span class="comment">-- : (0.016458s) SELECT * FROM `activities` WHERE (`subject_id` = 28)</span></span><br><span class="line">INFO <span class="comment">-- : (0.016015s) SELECT * FROM `activities` WHERE (`subject_id` = 29)</span></span><br><span class="line">INFO <span class="comment">-- : (0.016588s) SELECT * FROM `activities` WHERE (`subject_id` = 27)</span></span><br><span class="line">INFO <span class="comment">-- : (0.019075s) SELECT * FROM `activities` WHERE (`subject_id` = 33)</span></span><br><span class="line">INFO <span class="comment">-- : (0.014484s) SELECT * FROM `activities` WHERE (`subject_id` = 31)</span></span><br><span class="line">INFO <span class="comment">-- : (0.017730s) SELECT * FROM `activities` WHERE (`subject_id` = 35)</span></span><br><span class="line">INFO <span class="comment">-- : (0.017332s) SELECT * FROM `activities` WHERE (`subject_id` = 34)</span></span><br><span class="line">INFO <span class="comment">-- : (0.015393s) SELECT * FROM `activities` WHERE (`subject_id` = 36)</span></span><br><span class="line">INFO <span class="comment">-- : (0.016545s) SELECT * FROM `activities` WHERE (`subject_id` = 39)</span></span><br><span class="line">INFO <span class="comment">-- : (0.014443s) SELECT * FROM `activities` WHERE (`subject_id` = 40)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="after"><a href="#after" class="headerlink" title="after"></a>after</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INFO <span class="comment">-- : (0.022229s) SELECT * FROM `subjects` WHERE ((`clazz_id` = 1) AND (`grade_id` = 1)) ORDER BY `ordering`</span></span><br><span class="line">INFO <span class="comment">-- : (0.018933s) DESCRIBE `activities`</span></span><br><span class="line">INFO <span class="comment">-- : (0.105159s) SELECT * FROM `activities` WHERE (`subject_id` IN (26, 32, 25, 28, 29, 27, 33, 31, 35, 34, 36, 39, 40))</span></span><br></pre></td></tr></table></figure>
+
+<p>作为一个非主流入门的 Ruby 用户（我第一个开始做的 Ruby 项目是用 Grape + ActiveRecord 搭建的），rails 其实也是最近才开始真正用上的。当遇到第一个让人兴奋的东西时，自然得去读他的源码。不过读之前，当发现了这个神奇的一幕时，我的第一直觉告诉我是不是和 JDBC 规范中的 prepared statement 一样？让相同语法的 sql 不再多执行，只要换 sql 的参数就行。这样 MySQl 编译开销就小了很多。反正缓存无处不在。不，难道是动态规划？。好吧，都是猜的。既然这个玩意儿解决了一个重要瓶颈问题，那么不管出于兴趣层面，还是业务层面，尽可能去熟悉它一定是很好的想法。</p>
+<p>首先，这个玩意儿是学习了 Facebook 官方的 dataloader 做的。如果有去了解，自然猜到，这个项目用了 <code>promise.rb</code>。可以在源码里面看到这样的调用，并且作者的 sample 里面也很清晰地说明了这个玩意儿的输出开始就是个 Promise 对象。所以对于 graphql ruby 的</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resolve -&gt; (obj, arg, ctx) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样的 do block 块就应该和普通的 http api 框架不一样。可以理解的是，一次 graph 请求的，所需要的每个 field 对于服务端来说，是并发获取的。这里并发，肯定用了他自己的一套策略。可以猜测的是，就是用的异步 I/O的方式。所以从这一点来说，这个库本质上和 graphql ruby 是完全契合的。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Ruby 在编程表达能力上，几乎是我见过的所有服务端语言中最强的。元编程 + Rails + 各种库，几乎算得上是互联网创业公司的神兵利器。当然，语言这种东西，好坏得看上下文的，不同的话在不同的语境中效果还是不一样的。至少对于我司的业务和人员编制，加上对于往后的预估，在大量的论证下，大家都对技术选型达成了一致。我们需要技术团队有强大的业务推进能力，并且能做出高效稳定的服务。</p>
+<p>现在看来，这样的选择没有错。这里可以大致展示（公司没钱，服务器释放掉了 –): <a href="http://rc.kid17.com:10000" target="_blank" rel="noopener">http://rc.kid17.com:10000</a></p>
+<p>随着产品的重构和业务的迁移，我们的流量开始逐步转向 graphql 服务，各个规范也建立起来。随着业务模块的复杂度增高，用户数量的增加和数据量的增大，新一轮的挑战即将开始。首先就是要把这个巨大复杂的 Rails + GraphQL 项目拆掉，第二个就是确定新的架构，第三点就是拥抱变化，让这个项目本身变得可以维护，扩展和改进。</p>
+<p>我司的的产品中，有两套用户体系，就像是美团的商家版和客户版，拉钩、Boss 的求职版和企业版。两种不同的身份的角色参与到整个业务。我们有 feed 流，电商，电子书，用户管理，教学管理等业务模块。我目前的想法是让 graphql 去代理这些服务给客户端调用。最外层用 <a href="https://github.com/Kong/kong" target="_blank" rel="noopener">Kong</a> 去完成用户鉴权和 ngixn 的一些基本功能。</p>
+<p>以上拙见，都来自于各种踩坑之后的感悟。</p>
+<p>ps: 很期待可以认识同样在用graphql 的团队或个人，欢迎打扰 <code>wechat: chendalichun</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.001Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2018/01/20/graphql-in-ruby/" target="_blank" rel="external">https://razertory.me/2018/01/20/graphql-in-ruby/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统设计/">系统设计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/01/20/graphql-in-ruby/&title=《向 GraphQL 迁移》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/01/20/graphql-in-ruby/&title=《向 GraphQL 迁移》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/01/20/graphql-in-ruby/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《向 GraphQL 迁移》 — Razertory 的技术博客&url=https://razertory.me/2018/01/20/graphql-in-ruby/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/01/20/graphql-in-ruby/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/07/把rails项目拆分为微服务/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">将 Rails 项目拆分成微服务架构</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/20/使用netty踩过的坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">用 Netty 的一次 bug 跟踪</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/01/20/graphql-in-ruby/&title=《向 GraphQL 迁移》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/01/20/graphql-in-ruby/&title=《向 GraphQL 迁移》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/01/20/graphql-in-ruby/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《向 GraphQL 迁移》 — Razertory 的技术博客&url=https://razertory.me/2018/01/20/graphql-in-ruby/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/01/20/graphql-in-ruby/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2018/01/20/graphql-in-ruby/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

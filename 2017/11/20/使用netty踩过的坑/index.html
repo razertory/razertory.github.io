@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>用 Netty 的一次 bug 跟踪 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="问题在给我司旧系统解决性能问题的时候，有一个让我印象深刻的事件。我们有个历史项目，是用 Netty 做的 Http 服务器，这个项目在运行一段时间之后，几乎所有的接口都会变得很慢。通过一系列的观察，可以发现的是，每次重启服务器，接口就会变得很快，然后只要过了一周，即使在并发量及低的情况下，接口依然很慢。我最终定位到了瓶颈出现在了一个点上：通过 lsof -i 这个命令，可以看到项目所绑定的 808">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Netty 的一次 bug 跟踪">
+<meta property="og:url" content="https://razertory.me/2017/11/20/使用netty踩过的坑/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="问题在给我司旧系统解决性能问题的时候，有一个让我印象深刻的事件。我们有个历史项目，是用 Netty 做的 Http 服务器，这个项目在运行一段时间之后，几乎所有的接口都会变得很慢。通过一系列的观察，可以发现的是，每次重启服务器，接口就会变得很快，然后只要过了一周，即使在并发量及低的情况下，接口依然很慢。我最终定位到了瓶颈出现在了一个点上：通过 lsof -i 这个命令，可以看到项目所绑定的 808">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Netty 的一次 bug 跟踪">
+<meta name="twitter:description" content="问题在给我司旧系统解决性能问题的时候，有一个让我印象深刻的事件。我们有个历史项目，是用 Netty 做的 Http 服务器，这个项目在运行一段时间之后，几乎所有的接口都会变得很慢。通过一系列的观察，可以发现的是，每次重启服务器，接口就会变得很快，然后只要过了一周，即使在并发量及低的情况下，接口依然很慢。我最终定位到了瓶颈出现在了一个点上：通过 lsof -i 这个命令，可以看到项目所绑定的 808">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用 Netty 的一次 bug 跟踪</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用 Netty 的一次 bug 跟踪</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-19T16:21:00.000Z" itemprop="datePublished" class="page-time">
+  2017-11-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复现"><span class="post-toc-number">2.</span> <span class="post-toc-text">复现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分析-amp-解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">分析 &amp; 解决</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-使用netty踩过的坑"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用 Netty 的一次 bug 跟踪</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-20 00:21:00" datetime="2017-11-19T16:21:00.000Z"  itemprop="datePublished">2017-11-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在给我司旧系统解决性能问题的时候，有一个让我印象深刻的事件。我们有个历史项目，是用 Netty 做的 Http 服务器，这个项目在运行一段时间之后，几乎所有的接口都会变得很慢。通过一系列的观察，可以发现的是，每次重启服务器，接口就会变得很快，然后只要过了一周，即使在并发量及低的情况下，接口依然很慢。我最终定位到了瓶颈出现在了一个点上：通过 <code>lsof -i</code> 这个命令，可以看到项目所绑定的 8080 端口上，有着大量的 CLOSE_WAIT 的 tcp socket fd。具体的表征就是</p>
+<p>#本地复现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">66387 springchan  435u  IPv6 0x978a4f8b9aa9a147      0t0  TCP localhost:http-alt-&gt;localhost:56126 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  436u  IPv6 0x978a4f8b9aa9b847      0t0  TCP localhost:http-alt-&gt;localhost:56127 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  437u  IPv6 0x978a4f8bacc17987      0t0  TCP localhost:http-alt-&gt;localhost:56319 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  438u  IPv6 0x978a4f8b9a8d4287      0t0  TCP localhost:http-alt-&gt;localhost:56129 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  439u  IPv6 0x978a4f8b9a8d53c7      0t0  TCP localhost:http-alt-&gt;localhost:56130 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  440u  IPv6 0x978a4f8b9a8d3707      0t0  TCP localhost:http-alt-&gt;localhost:56131 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  441u  IPv6 0x978a4f8b9a8d3147      0t0  TCP localhost:http-alt-&gt;localhost:56132 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  442u  IPv6 0x978a4f8bae270707      0t0  TCP localhost:http-alt-&gt;localhost:56350 (CLOSE_WAIT)</span><br><span class="line">java    66387 springchan  443u  IPv6 0x978a4f8b9a8d4e07      0t0  TCP localhost:http-alt-&gt;localhost:56134 (CLOSE_WAIT)</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，有着大量的 tcp socket 资源在并发量很低的情况下依旧处于 CLOSE_WAIT 的状态。可以肯定的是，这种现象一定是不健康的。CLOSE_WAIT 处于 TCP 四次分手过程中，客户端首先给服务端发送了 fin 报，服务端接受之后就会回应一个 ack 报给对方，同时状态切换为 CLOSE_WAIT。接下来呢，服务端真正需要考虑的事情是察看是否还有数据发送给对方 ，如果没有的话，那么就可以 close 这个 SOCKET，发送 FIN 报文给对方，也即关闭连接。所以你在 CLOSE_WAIT 状态下，需要完成的事情是等待你去关闭连接。这个时候，这两个过程是可以控制的，第一种，服务端不再发送报文给客户端，直接 close。第二种，服务端发送 fin 报给客户端，同时自己处于 LAST_ACK 状态。所以我比较确定的是，服务端在管理 TCP 连接的阶段出了问题。</p>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>第一步，我用 ab test 复现这个情况，这个还是比较容易的。在本地，我对任何一个接口并发请求，这个时候可以看到服务端有大量的 ESTABLISHED 状态的 socket。第二步，我强行让请求端发送 fin 报，其实很简单：<code>ctr + c</code>。这个时候如我所料，这些 socket 都变成 CLOSE_WAIT 状态。</p>
+<h3 id="分析-amp-解决"><a href="#分析-amp-解决" class="headerlink" title="分析 &amp; 解决"></a>分析 &amp; 解决</h3><p>这个老项目本身就是个单体应用，所以可以很确认问题是出在了项目代码这一块。可以猜测的是，是使用 Netty 的方式不对。所以我第一步，去研究了 Netty 的基本原理。</p>
+<p>直接发现问题出现在了 <code>channelRead()</code> 这个方法里面。按照官方的说明，使用者的服务里面不应该有阻塞调用。这会严重耗费系统资源。如果有阻塞调用，希望放在线程池里。所以我将项目中的阻塞调用层，统一用了线程池来管理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpServerInboundHandler</span>  <span class="keyword">extends</span> <span class="title">ChannelInboundHandlerAdapter</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Route(ctx, msg).init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelReadComplete</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ctx.flush();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exceptionCaught</span><span class="params">(ChannelHandlerContext ctx, Throwable cause)</span> </span>&#123;</span><br><span class="line">    	ctx.flush();</span><br><span class="line">        ctx.channel().close();</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改之后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpServerInboundHandler</span>  <span class="keyword">extends</span> <span class="title">ChannelInboundHandlerAdapter</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    ExecutorService executor =Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span></span>&#123;</span><br><span class="line">        executor.execute(<span class="keyword">new</span> Route(ctx, msg));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelReadComplete</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ctx.flush();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exceptionCaught</span><span class="params">(ChannelHandlerContext ctx, Throwable cause)</span> </span>&#123;</span><br><span class="line">    	ctx.flush();</span><br><span class="line">        ctx.channel().close();</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里让线程池来处理阻塞调用层的业务。经过 ab 测试发现不会再有类似的问题出现。</p>
+<p>Netty 本质上是一个纯异步的框架，用来做一些并发高，实时性强的系统，比如通信，游戏等。但对于普通的互联网服务，比如由 tomcat，jetty 构建的一些服务而言，netty 可能并不适合。Netty 设计之初意在高性能通信，用有限的资源产出最大的并发量级。所以使用者不得不很清楚 socket 编程，select，poll 模型等。这对于单纯的非实时高并发应用开发者来说，增加了不少复杂度。如果是 Java 生态的，并且需要自己实现一些服务治理功能的，基于 Netty 开发是个明智的选择。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.000Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2017/11/20/使用netty踩过的坑/" target="_blank" rel="external">https://razertory.me/2017/11/20/使用netty踩过的坑/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2017/11/20/使用netty踩过的坑/&title=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2017/11/20/使用netty踩过的坑/&title=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2017/11/20/使用netty踩过的坑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&url=https://razertory.me/2017/11/20/使用netty踩过的坑/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2017/11/20/使用netty踩过的坑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/20/graphql-in-ruby/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">向 GraphQL 迁移</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/11/tiny-http/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C 实现 http 服务器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2017/11/20/使用netty踩过的坑/&title=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2017/11/20/使用netty踩过的坑/&title=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2017/11/20/使用netty踩过的坑/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Netty 的一次 bug 跟踪》 — Razertory 的技术博客&url=https://razertory.me/2017/11/20/使用netty踩过的坑/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2017/11/20/使用netty踩过的坑/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2017/11/20/使用netty踩过的坑/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

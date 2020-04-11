@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>「读书」七周七语言 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="读书">
+    <meta name="description" content="程序员对于编程语言的争论，是一场永远都不会停止的战争。但社会在进步，科技在进步，那么就让大家继续吵下去吧 :) 这是一本讲述七种不同类型编程语言：Ruby，Io，Prolog，Scala，Erlang Clorjure 和 Haskell 代表的现代编程语言的重要特性和编程范式的书。这里面的语言多多少少被大家听过或者用过。他们分别作为某个领域的代表而汇集到一本书里。 Ruby这门语言是我目前工作中">
+<meta name="keywords" content="读书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「读书」七周七语言">
+<meta property="og:url" content="https://razertory.me/2019/03/01/seven-weeks-seven-languages/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="程序员对于编程语言的争论，是一场永远都不会停止的战争。但社会在进步，科技在进步，那么就让大家继续吵下去吧 :) 这是一本讲述七种不同类型编程语言：Ruby，Io，Prolog，Scala，Erlang Clorjure 和 Haskell 代表的现代编程语言的重要特性和编程范式的书。这里面的语言多多少少被大家听过或者用过。他们分别作为某个领域的代表而汇集到一本书里。 Ruby这门语言是我目前工作中">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「读书」七周七语言">
+<meta name="twitter:description" content="程序员对于编程语言的争论，是一场永远都不会停止的战争。但社会在进步，科技在进步，那么就让大家继续吵下去吧 :) 这是一本讲述七种不同类型编程语言：Ruby，Io，Prolog，Scala，Erlang Clorjure 和 Haskell 代表的现代编程语言的重要特性和编程范式的书。这里面的语言多多少少被大家听过或者用过。他们分别作为某个领域的代表而汇集到一本书里。 Ruby这门语言是我目前工作中">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">「读书」七周七语言</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">「读书」七周七语言</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-01T12:57:15.000Z" itemprop="datePublished" class="page-time">
+  2019-03-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ruby"><span class="post-toc-number">1.</span> <span class="post-toc-text">Ruby</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Io"><span class="post-toc-number">2.</span> <span class="post-toc-text">Io</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Prolog"><span class="post-toc-number">3.</span> <span class="post-toc-text">Prolog</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Scala"><span class="post-toc-number">4.</span> <span class="post-toc-text">Scala</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Erlang"><span class="post-toc-number">5.</span> <span class="post-toc-text">Erlang</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Clorjure"><span class="post-toc-number">6.</span> <span class="post-toc-text">Clorjure</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Haskell"><span class="post-toc-number">7.</span> <span class="post-toc-text">Haskell</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-seven-weeks-seven-languages"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">「读书」七周七语言</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-01 20:57:15" datetime="2019-03-01T12:57:15.000Z"  itemprop="datePublished">2019-03-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>程序员对于编程语言的争论，是一场永远都不会停止的战争。但社会在进步，科技在进步，那么就让大家继续吵下去吧 :)</p>
+<p>这是一本讲述七种不同类型编程语言：Ruby，Io，Prolog，Scala，Erlang Clorjure 和 Haskell 代表的现代编程语言的重要特性和编程范式的书。这里面的语言多多少少被大家听过或者用过。他们分别作为某个领域的代表而汇集到一本书里。</p>
+<h3 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h3><p>这门语言是我目前工作中的主语言，包括对应的生态。语法简单但又灵活，超强的 DSL 能力和丰富的社区资源给我的工作提供了巨大的便捷和效率。 Ruby 或者 Ruby on Rails 是一种在开发过程当中，程序员能够按照自然语言的思维并且很容易写出符合预期逻辑的程序。这让项目的迭代速度不会打折扣。</p>
+<p>当数据量变大之后，它的内存管理和执行效率的劣势就慢慢展露出来。随之而来的还有” 过于灵活 “的语法特性导致了一旦 Code Review 没有做到位并且代码风格与团队成员差异巨大的情况出现时，维护项目阅读代码就变得很糟糕。我们曾经常出现服务器内存不足的报警消息，也偶尔因为难以维护部分旧有的糟糕代码而不得不进行重构。可以说 —— 动态语言一时爽，重构现场火葬场（逃</p>
+<h3 id="Io"><a href="#Io" class="headerlink" title="Io"></a>Io</h3><p>这一门原型语言。什么是原型语言？ 在传统的面向对象语言中，比如 Java、Ruby、C++、Python，我们通常需要定义一个称为 class 的东西，然后再基于这个 class 创建对象。而 Io 这门语言是只操作对象的，简单说就是 Io 有一个叫做根对象 Object 的东西，我们需要定义一个对象直接 Car := Object clone 即可。在 Io 这本语言的上下文中，一切都是由对象和消息组成。这一点很像 Ruby 中的元编程，甚至我个人会认为元编程学习了 Io。同样，这门基于消息的编程语言在实现 actor 作为并发模型就变得轻而易举。我们会在 Scala、Erlang 和 Haskell 以及今后众多流行编程语言中再见到 actor。Io 的语法很简单，几乎没有可以被叫做语法糖的东西，甚至关键字也少的可怜。这门语言让我想到了当今国内算是火热的 Go 语言，简单高效却给人强大的印象。</p>
+<h3 id="Prolog"><a href="#Prolog" class="headerlink" title="Prolog"></a>Prolog</h3><p>这是一门逻辑编程语言。和 SQL 一样，Prolog 基 于数据库，但是其数据由逻辑规则和关系组成; 和 SQL 一样，Prolog 包含两个部分: 一部分用于 描述数据，而另一部分则用于查询数据。在 Prolog 中，数据以逻辑规则的形式存在。这个是很有意思的一件事情，如果读者看过 伊曼努尔 · 康德 所著的《纯粹理性批判》会更加体会到这门语言的编程哲学。比如说，在 Prolog 中，数据的标准存放格式如下：</p>
+<p>「事实 」关于真实世界的基本断言（对没错，就是你测试代码中的 assert）—— Babe 是一头猪，猪喜欢玩泥巴</p>
+<p>「规则」真实世界的推论（if then）—— 如果你是一头猪，那么你喜欢玩泥巴</p>
+<p>「查询」向真实世界寻求一个问题（布尔表达式）——  Babe 喜欢玩泥巴吗？</p>
+<p>按照大多数语言通常的 Coding Pattern，应该是这样</p>
+<p>收集和整理逻辑</p>
+<p>用程序表达逻辑</p>
+<p>找出所有可能的解决方法</p>
+<p>通过程序验证这些可能的解决方法</p>
+<p>这是标准的做法，给大家清晰的脉络，并且也容易维护。</p>
+<p>然而，Prolog 会给人一种神乎其技的感觉。对的，大多数语言写代码都是 how 需要我们自主阐述逻辑，然而 Prolog 是一种 what，当我们人为定义好问题之后，让计算机来解决。书中的「地图着色问题」、「数独问题」有详细解释。</p>
+<p>曾几何时，基于规则的 AI 和 NLP 领域让这门语言大放异彩。随着后来深度学习，基于统计算法的兴起，以前这种，呵呵。。</p>
+<h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><p>是一把名贵的瑞士军刀，因为它什么都有。运行在宇宙最强虚拟机 JVM 上，融合了面向对象和函数式编程。语法给我的感觉是吸收了 Java/Ruby/Haskell。最近刚好在写 Scala 还有学 Akka，后期会专门补充。</p>
+<h3 id="Erlang"><a href="#Erlang" class="headerlink" title="Erlang"></a>Erlang</h3><p>回到一个原始的原则，在技术选型上我始终认为工程师需要考虑所用技术的三个指标：开发效率，执行效率和可维护性。在 Erlang 中，以下的特质都给予了 Erlang 不错的上述指标</p>
+<p>pattern matching 比如说有两个 kv 数据结构，如何最方便比较结构是否一致。很大程度上避免大量的 if-else</p>
+<p>函数 通过 export 方式让函数给外部模块调用，加上 pattern matching 可以非常方便写测试代码</p>
+<p>消息传递 不同的 erlang 进程可以通过消息传递的方式共享变量</p>
+<p>热更新 修改了代码可以不重启服务器生效</p>
+<p>parse_transform 通过发送和接受 AST 来使用模块</p>
+<p>spawn 一个 erlang 进程只是在 erlang 虚拟机中的进程并且只占用极少的操作系统资源，高并发的情况下表现优异。</p>
+<p>如今在天朝南部沿海某城市，很多基于 OTP 框架的游戏公司依然是 Erlang 的忠实用户。</p>
+<h3 id="Clorjure"><a href="#Clorjure" class="headerlink" title="Clorjure"></a>Clorjure</h3><p>如果有看过 SICP 那本书，就一定知道 Lisp 的威力，当然有不少大 V 都写过赞誉它的文章比如：阮一峰博客中的译文「为什么 Lisp 语言如此先进？」</p>
+<p><a href="http://www.ruanyifeng.com/blog/2010/10/why_lisp_is_superior.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2010/10/why_lisp_is_superior.html</a></p>
+<p>还有陈皓的「Lisp 的永恒之道」<a href="https://coolshell.cn/articles/7526.html" target="_blank" rel="noopener">https://coolshell.cn/articles/7526.html</a> 都非常认可 Lisp 的很多理念以及这门语言带给现代编程界的影响。</p>
+<p>所以，当这门语言跑到了 JVM 上之后，又会产生什么样的效果呢？</p>
+<p>工程化的环境。由于 JVM 平台的的推力，clorjure 朝着一种工业化的通用的方向发展并且简化了 Lisp 中的括号写法。在 Java 中常常会有设计接口来做工程化的抽象，clorjure 中有「协议」的概念。如果需要调用 Java 自带的方法，比如 Object.toString()，可以直接这样</p>
+<p>Object<br>(toString [this] (str “[“ (your object) “]”))<br>就可以直接调用了。这相当于扩展了 Java（附带了 Lisp 的函数式和宏），也可以认为扩展了 Lisp（结合了面向对象）。所以我决定学 Scala，😂</p>
+<p>clorjure 中还有原子和代理来保证并发安全，原子和大多数语言的 atom 类似，代理是说当某个对象被代理之后，使用者可以异步修改代理对象的值，更新发生在另外的线程，并且每次只有一个函数可以修改代理的状态。</p>
+<h3 id="Haskell"><a href="#Haskell" class="headerlink" title="Haskell"></a>Haskell</h3><p>我认为 Haskell 一定是高纯度的函数式语言。</p>
+<p>模式匹配拒绝大量的 if-else，尾递归优化让递归更高效，元组则让函数写得更加简洁且富有表达力 🕶️。一个列表被定义为 head 和 tail 两个部分，那么列表的定义就是 head 和 tail 的模式匹配，特别是列表推导编程，严谨而且聪明。惰性求值，高阶函数，monad（一个自函子范畴上的幺半群），柯里化… Haskell 在作者的观点里是本书中最难学的语言，但也是最引人深思和启发的语言。在笔者与 Scala 前辈的交流中听到里许多关于 Haskell 的赞誉。</p>
+<p>回到一个偏哲学意义的问题：如果编程是在给输入的问题找到一个解，那么，是否存在任何情况下只要我们输入出问题的定义，就能让计算机返回解的场景？</p>
+<p>希望你也喜欢这本书。😊</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.004Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/03/01/seven-weeks-seven-languages/" target="_blank" rel="external">https://razertory.me/2019/03/01/seven-weeks-seven-languages/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&title=《「读书」七周七语言》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&title=《「读书」七周七语言》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/03/01/seven-weeks-seven-languages/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「读书」七周七语言》 — Razertory 的技术博客&url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/07/permutation-and-combination/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">无重复数组的全排列</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/01/ddia/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">「读书」数据密集型应用系统设计</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&title=《「读书」七周七语言》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&title=《「读书」七周七语言》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/03/01/seven-weeks-seven-languages/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「读书」七周七语言》 — Razertory 的技术博客&url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/03/01/seven-weeks-seven-languages/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/03/01/seven-weeks-seven-languages/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

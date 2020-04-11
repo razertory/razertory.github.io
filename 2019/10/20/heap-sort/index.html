@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>堆排序 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="堆是一种能方便解决 top 问题的树形数据结构，利用这个性质也可以用来解决排序问题。首先生成最大堆，然后逆序遍历该数组，过程中通过比较堆的最大值。如果小于，就放到数组的最后一个，并且调整堆。所以在堆排序中，如何构建堆和调整堆成为了问题的关键。最简单，有效的做法就是用一个一位数组来表示堆。比如一颗二叉树可以用数组来表示： 123456[9, 4, 7, 3, 1, 2]     9    / \">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="https://razertory.me/2019/10/20/heap-sort/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="堆是一种能方便解决 top 问题的树形数据结构，利用这个性质也可以用来解决排序问题。首先生成最大堆，然后逆序遍历该数组，过程中通过比较堆的最大值。如果小于，就放到数组的最后一个，并且调整堆。所以在堆排序中，如何构建堆和调整堆成为了问题的关键。最简单，有效的做法就是用一个一位数组来表示堆。比如一颗二叉树可以用数组来表示： 123456[9, 4, 7, 3, 1, 2]     9    / \">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="堆排序">
+<meta name="twitter:description" content="堆是一种能方便解决 top 问题的树形数据结构，利用这个性质也可以用来解决排序问题。首先生成最大堆，然后逆序遍历该数组，过程中通过比较堆的最大值。如果小于，就放到数组的最后一个，并且调整堆。所以在堆排序中，如何构建堆和调整堆成为了问题的关键。最简单，有效的做法就是用一个一位数组来表示堆。比如一颗二叉树可以用数组来表示： 123456[9, 4, 7, 3, 1, 2]     9    / \">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">堆排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">堆排序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-20T06:20:42.000Z" itemprop="datePublished" class="page-time">
+  2019-10-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-heap-sort"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">堆排序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-20 14:20:42" datetime="2019-10-20T06:20:42.000Z"  itemprop="datePublished">2019-10-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>堆是一种能方便解决 top 问题的树形数据结构，利用这个性质也可以用来解决排序问题。首先生成最大堆，然后逆序遍历该数组，过程中通过比较堆的最大值。如果小于，就放到数组的最后一个，并且调整堆。所以在堆排序中，如何构建堆和调整堆成为了问题的关键。<br>最简单，有效的做法就是用一个一位数组来表示堆。比如一颗二叉树可以用数组来表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[9, 4, 7, 3, 1, 2]</span><br><span class="line">     9</span><br><span class="line">    / \</span><br><span class="line">   4   7</span><br><span class="line">  / \  /  </span><br><span class="line"> 3   1 2</span><br></pre></td></tr></table></figure>
+
+<p>在一位数组表示法中，比如 root 节点 9 的下标是 0，它的两个子节点下标分别是 1，2 … 通过不断比较可以发现规律。下标为 <code>n</code> 的树的节点，两个子节点的下标分别是 <code>2 * n + 1</code>, <code>2 * n + 2</code>; 同样的，如果一个节点下标是 <code>m</code>，对应的父节点的下标是 <code>(m - 1) / 2</code>。那么当给一个转换成二叉树的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[3, 1, 2, 5, 6]</span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   1   2</span><br><span class="line">  / \     </span><br><span class="line"> 5   6</span><br></pre></td></tr></table></figure>
+
+<p>需要通过一个方法让这个二叉树满足最大堆性质。</p>
+<p>首先，在这个二叉树中每个节点对应的数在数组中都有对应的下标，按照上述的根节点，子节点的关系，在数组中间之后的数就不会有对应的子节点了假设数组长度是 m，那么（2 * m / 2 + 1) &gt;  m 这种情况显然不需要。也就是说目前只需要从下标为 5 / 2 = 2 的节点开始。（考虑到整数相除会有取整，因此这个地方从中间开始只是为了性能更好）。这个时候，</p>
+<ul>
+<li>从下标为 2 的节点 <code>2</code> 开始，发现没有子节点，下标减 1</li>
+<li>从下标为 1 的节点 <code>1</code> 开始，发现左节点更大，于是交换变成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[3, 5, 2, 1, 6]</span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   5   2</span><br><span class="line">  / \     </span><br><span class="line"> 1   6</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>此时，节点 <code>1</code> 没有子节点，继续从下标 1 比较，发现右节点更大，于是交换变成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[3, 6, 2, 1, 5]</span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   6   2</span><br><span class="line">  / \     </span><br><span class="line"> 1   5</span><br></pre></td></tr></table></figure>
+
+<p>此时，节点 <code>5</code> 没有子节点，下标减 1</p>
+<ul>
+<li>从下标为 0 的节点 <code>3</code> 开始，发现左节点更大，于是交换变成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[6, 3, 2, 1, 5]</span><br><span class="line">     6 </span><br><span class="line">    / \</span><br><span class="line">   3   2</span><br><span class="line">  / \     </span><br><span class="line"> 1   5</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>此时，节点 <code>3</code> 的右边节点更大，于是交换变成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[6, 5, 2, 1, 3]</span><br><span class="line">     6 </span><br><span class="line">    / \</span><br><span class="line">   5   2</span><br><span class="line">  / \     </span><br><span class="line"> 1   3</span><br></pre></td></tr></table></figure>
+
+<p>此时，节点 <code>3</code> 没有子节点，下标减 1</p>
+<ul>
+<li>下标目前已经小于 0 结束。</li>
+</ul>
+<p>以上就是如何构建堆的过程，可以看到本质上就是<strong>利用数组中节点之前的关系，通过比较大小的方法来交换顺序</strong>。</p>
+<p>当一个最大堆构建成功后，如何做排序呢？</p>
+<p>在最大堆中，把 root 节点和数组中最后一个值交换。这个时候把数组分为两个区域，<code>有序区</code>和<code>无序区</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[3, 5, 2, 1, 6]</span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   5   2</span><br><span class="line">  / \     </span><br><span class="line"> 1   6</span><br></pre></td></tr></table></figure>
+
+<p>此时认为 <code>[6]</code> 为有序区，<code>[3, 5, 2, 1]</code> 为无序区。此时可以认为堆是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    3</span><br><span class="line">   / \</span><br><span class="line">  5   2</span><br><span class="line"> /      </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>这个时候继续调整成为最大堆即可。最终有序区会逐渐填满的同时，无序区会逐渐变小直到消失。这个过程可以表示为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = end/<span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">    siftDown(arr, i, end);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">siftDown</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent = i, child = <span class="number">2</span> * parent + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (child &lt;= end) &#123;</span><br><span class="line">      <span class="keyword">if</span> (child+<span class="number">1</span> &lt;= end &amp;&amp; arr[child+<span class="number">1</span>] &gt; arr[child]) ++child;</span><br><span class="line">      <span class="keyword">if</span> (arr[parent] &gt;= arr[child]) <span class="keyword">break</span>;</span><br><span class="line">      swap(arr, parent, child);</span><br><span class="line">      parent = child;</span><br><span class="line">      child = <span class="number">2</span> * parent + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.008Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/10/20/heap-sort/" target="_blank" rel="external">https://razertory.me/2019/10/20/heap-sort/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/10/20/heap-sort/&title=《堆排序》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/10/20/heap-sort/&title=《堆排序》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/10/20/heap-sort/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《堆排序》 — Razertory 的技术博客&url=https://razertory.me/2019/10/20/heap-sort/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/10/20/heap-sort/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/10/26/merge-sort/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">归并排序</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/19/quick-sort/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">快速排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/10/20/heap-sort/&title=《堆排序》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/10/20/heap-sort/&title=《堆排序》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2019/10/20/heap-sort/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《堆排序》 — Razertory 的技术博客&url=https://razertory.me/2019/10/20/heap-sort/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2019/10/20/heap-sort/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2019/10/20/heap-sort/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

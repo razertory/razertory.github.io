@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Scala 函数式编程设计 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="在这个 2020 年初的特殊时期。 Scala 是一门现代化，多范式的 JVM 语言。 传送门（可能需要🚀)  Functional Program Design in Scala on Coursera 没什么用的 certificate   W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样 1234567abstract class JSONcase cla">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 函数式编程设计">
+<meta property="og:url" content="https://razertory.me/2020/02/20/functional-program-design-in-scala/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="在这个 2020 年初的特殊时期。 Scala 是一门现代化，多范式的 JVM 语言。 传送门（可能需要🚀)  Functional Program Design in Scala on Coursera 没什么用的 certificate   W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样 1234567abstract class JSONcase cla">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg">
+<meta property="og:updated_time" content="2020-03-28T13:02:10.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala 函数式编程设计">
+<meta name="twitter:description" content="在这个 2020 年初的特殊时期。 Scala 是一门现代化，多范式的 JVM 语言。 传送门（可能需要🚀)  Functional Program Design in Scala on Coursera 没什么用的 certificate   W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样 1234567abstract class JSONcase cla">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                所有标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-wiki"  >
+                <i class="icon icon-lg icon-book"></i>
+                算法 wiki
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Scala 函数式编程设计</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Scala 函数式编程设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-20T15:53:05.000Z" itemprop="datePublished" class="page-time">
+  2020-02-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#W1"><span class="post-toc-number">1.</span> <span class="post-toc-text">W1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#case-class-和模式匹配"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">case class 和模式匹配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数即对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">函数即对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#普通函数"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">普通函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#偏函数"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">偏函数</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#W2"><span class="post-toc-number">2.</span> <span class="post-toc-text">W2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LazyList"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">LazyList</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#惰性求值-Lazy-Evaluation"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">惰性求值 Lazy Evaluation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Infinite-Sequences"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Infinite Sequences</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目：倒水问题"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">题目：倒水问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#W3"><span class="post-toc-number">3.</span> <span class="post-toc-text">W3</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#W4"><span class="post-toc-number">4.</span> <span class="post-toc-text">W4</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Functional-Reactive-Programming-FRP"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Functional Reactive Programming (FRP)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现-FRP"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">实现 FRP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Var-和-Signal"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">Var 和 Signal</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#维护订阅关系"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">维护订阅关系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#维护调用栈"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">维护调用栈</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-functional-program-design-in-scala"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Scala 函数式编程设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-20 23:53:05" datetime="2020-02-20T15:53:05.000Z"  itemprop="datePublished">2020-02-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在这个 2020 年初的特殊时期。</p>
+<p>Scala 是一门现代化，多范式的 JVM 语言。</p>
+<p>传送门（可能需要🚀)</p>
+<ul>
+<li><a href="https://www.coursera.org/learn/progfun2" target="_blank" rel="noopener">Functional Program Design in Scala on Coursera</a></li>
+<li><a href="https://www.coursera.org/account/accomplishments/certificate/BP5FRUVSFPN8" target="_blank" rel="noopener">没什么用的 certificate</a></li>
+</ul>
+<hr>
+<h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><h3 id="case-class-和模式匹配"><a href="#case-class-和模式匹配" class="headerlink" title="case class 和模式匹配"></a>case class 和模式匹配</h3><p>用 Scala 来表示 JSON 对象可以这样</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">JSON</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">class</span> <span class="title">JSeq</span> (<span class="params">elems: <span class="type">List</span>[<span class="type">JSON</span>]</span>) <span class="keyword">extends</span> <span class="title">JSON</span>  <span class="title">//</span> <span class="title">JSON</span> <span class="title">的数组</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">class</span> <span class="title">JObj</span> (<span class="params">bindings: <span class="type">Map</span>[<span class="type">String</span>, <span class="type">JSON</span>]</span>) <span class="keyword">extends</span> <span class="title">JSON</span> <span class="title">//</span> <span class="title">JSON</span> <span class="title">对象</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">class</span> <span class="title">JNum</span> (<span class="params">num: <span class="type">Double</span></span>) <span class="keyword">extends</span> <span class="title">JSON</span> <span class="title">//</span> <span class="title">数字类型</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">class</span> <span class="title">JStr</span> (<span class="params">str: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">JSON</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">class</span> <span class="title">JBool</span>(<span class="params">b: <span class="type">Boolean</span></span>) <span class="keyword">extends</span> <span class="title">JSON</span></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">object</span> <span class="title">JNull</span> <span class="keyword">extends</span> <span class="title">JSON</span> <span class="title">//</span> <span class="title">空</span></span></span><br></pre></td></tr></table></figure>
+
+<p>所以，</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"firstName"</span> : <span class="string">"John"</span>,</span><br><span class="line">    <span class="attr">"lastName"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">    <span class="attr">"address"</span> : &#123;</span><br><span class="line">        <span class="attr">"streetAddress"</span> : <span class="string">"21 2 nd Street"</span>,</span><br><span class="line">        <span class="attr">"state"</span> : <span class="string">"NY"</span>,</span><br><span class="line">        <span class="attr">"postalCode"</span>: <span class="number">10021</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"phoneNumbers"</span>: [</span><br><span class="line">        &#123;<span class="attr">"type"</span> : <span class="string">"home"</span>,<span class="attr">"number "</span>: <span class="string">"212 555 -1234"</span>&#125; ,</span><br><span class="line">        &#123;<span class="attr">"type"</span> : <span class="string">"fax"</span>,<span class="attr">"number "</span>: <span class="string">"646 555 -4567"</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以表示为</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> data = <span class="type">JObj</span>(<span class="type">Map</span>(</span><br><span class="line">    <span class="string">"firstName"</span> -&gt; <span class="type">JStr</span>(<span class="string">"John"</span>),</span><br><span class="line">    <span class="string">"lastName"</span> -&gt; <span class="type">JStr</span>(<span class="string">"Smith"</span>),</span><br><span class="line">    <span class="string">"address"</span> -&gt; <span class="type">JObj</span>(<span class="type">Map</span>(</span><br><span class="line">    <span class="string">"streetAddress"</span> -&gt; <span class="type">JStr</span>(<span class="string">"21 2nd Street"</span>),</span><br><span class="line">    <span class="string">"state"</span> -&gt; <span class="type">JStr</span>(<span class="string">"NY"</span>),</span><br><span class="line">    <span class="string">"postalCode"</span> -&gt; <span class="type">JNum</span>(<span class="number">10021</span>)</span><br><span class="line">)),</span><br><span class="line"><span class="string">"phoneNumbers"</span> -&gt; <span class="type">JSeq</span>(<span class="type">List</span>(</span><br><span class="line">    <span class="type">JObj</span>(<span class="type">Map</span>(</span><br><span class="line">    <span class="string">"type"</span> -&gt; <span class="type">JStr</span>(<span class="string">"home"</span>), <span class="string">"number"</span> -&gt; <span class="type">JStr</span>(<span class="string">"212 555-1234"</span>)</span><br><span class="line">)),</span><br><span class="line"><span class="type">JObj</span>(<span class="type">Map</span>(</span><br><span class="line">    <span class="string">"type"</span> -&gt; <span class="type">JStr</span>(<span class="string">"fax"</span>), <span class="string">"number"</span> -&gt; <span class="type">JStr</span>(<span class="string">"646 555-4567"</span>)</span><br><span class="line">)) )) ))</span><br></pre></td></tr></table></figure>
+
+<p>比如说我要实现一个打印 JSON 对象的方法，就可以</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span></span>(json: <span class="type">JSON</span>): <span class="type">String</span> = json <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">JSeq</span>(elems) =&gt;</span><br><span class="line">    <span class="string">"["</span> + (elems map show mkString <span class="string">", "</span>) + <span class="string">"]"</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">JObj</span>(bindings) =&gt;</span><br><span class="line">    <span class="keyword">val</span> assocs = bindings map &#123;</span><br><span class="line">        <span class="keyword">case</span> (key, value) =&gt; <span class="string">"\""</span> + key + <span class="string">"\": "</span> + show(value)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">"&#123;"</span> + (assocs mkString <span class="string">", "</span>) + <span class="string">"&#125;"</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">JNum</span>(num) =&gt; num.toString</span><br><span class="line">    <span class="keyword">case</span> <span class="type">JStr</span>(str) =&gt; '\<span class="string">"' + str + '\"'</span></span><br><span class="line"><span class="string">    case JBool(b) =&gt; b.toString</span></span><br><span class="line"><span class="string">    case JNull =&gt; "</span><span class="string">null"</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述的 show(data) 就输出</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res1: <span class="type">String</span> = &#123;<span class="string">"firstName"</span>: <span class="string">"John"</span>, <span class="string">"lastName"</span>: <span class="string">"Smith"</span>, <span class="string">"address"</span>: &#123;<span class="string">"streetAddress"</span>: <span class="string">"21 2nd Street"</span>, <span class="string">"state"</span>: <span class="string">"NY"</span>, <span class="string">"postalCode"</span>: <span class="number">10021.0</span>&#125;, <span class="string">"phoneNumbers"</span>: [&#123;<span class="string">"type"</span>: <span class="string">"home"</span>, <span class="string">"number"</span>: <span class="string">"212 555-1234"</span>&#125;, &#123;<span class="string">"type"</span>: <span class="string">"fax"</span>, <span class="string">"number"</span>: <span class="string">"646 555-4567"</span>&#125;]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第 6 行代码里面 map 传入的函数是，我们知道，在这里 map 函数的签名是 <code>def map[B](f: (A) =&gt; B): List[B]</code><br>那么第六行的 <code>f</code> 就是 <code>case (key, value) =&gt; &quot;\&quot;&quot; + key + &quot;\&quot;: &quot; + show(value)</code>。 这个函数如果单独拎出来，其实就是</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> f: (<span class="type">String</span>, <span class="type">JSON</span>) =&gt; <span class="type">String</span> = &#123; <span class="keyword">case</span> (key, value) =&gt; key + ”: ” + value &#125; <span class="comment">// 注意看 JObj 定义</span></span><br></pre></td></tr></table></figure>
+
+<p>所以用 case class 最方便的地方在于<strong>模式匹配中的 decompose</strong></p>
+<h3 id="函数即对象"><a href="#函数即对象" class="headerlink" title="函数即对象"></a>函数即对象</h3><p>任何情况下，函数 <code>A =&gt; B</code> 其实就是</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala.<span class="type">Function1</span>[<span class="type">A</span>, <span class="type">B</span>]</span><br></pre></td></tr></table></figure>
+
+<p>的简写。</p>
+<h4 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h4><p>根据 Function1 的定义</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Function1</span>[-<span class="type">A</span>, +<span class="type">R</span>] </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">A</span>): <span class="type">R</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> f1: <span class="type">Int</span> =&gt; <span class="type">Int</span> = (x: <span class="type">Int</span>) =&gt; x + <span class="number">1</span></span><br><span class="line"><span class="keyword">val</span> f2 = <span class="keyword">new</span> <span class="type">Function1</span>[<span class="type">Int</span>, <span class="type">Int</span>] &#123;<span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">Int</span>) = x + <span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>f1 和 f2 等价。</p>
+<h4 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h4><p>对于偏函数 PartialFunction 定义为</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">PartialFunction</span>[-<span class="type">A</span>, +<span class="type">R</span>] <span class="keyword">extends</span> <span class="title">Function1</span>[-<span class="type">A</span>, +<span class="type">R</span>] </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">A</span>): <span class="type">R</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isDefinedAt</span></span>(x: <span class="type">A</span>): <span class="type">Boolean</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> f1: <span class="type">PartialFunction</span>[<span class="type">String</span>, <span class="type">String</span>] = &#123; <span class="keyword">case</span> <span class="string">"ping"</span> =&gt; <span class="string">"pong"</span> &#125;</span><br><span class="line"><span class="keyword">val</span> f2 = <span class="keyword">new</span> <span class="type">PartialFunction</span>[<span class="type">String</span>, <span class="type">String</span>] &#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">String</span>) = x <span class="keyword">match</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"ping"</span> =&gt; <span class="string">"pong"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isDefinedAt</span></span>(x: <span class="type">String</span>) = x <span class="keyword">match</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"ping"</span> =&gt; <span class="literal">true</span></span><br><span class="line">        <span class="keyword">case</span> _ =&gt; <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>f1 和 f2 等价。</p>
+<p>ps: 以上，「等价」的意思是两个函数只要输入相同，输出一定相同。</p>
+<h2 id="W2"><a href="#W2" class="headerlink" title="W2"></a>W2</h2><h3 id="LazyList"><a href="#LazyList" class="headerlink" title="LazyList"></a>LazyList</h3><p>下面代码</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(x: <span class="type">Int</span>): <span class="type">Boolean</span> = &#123;</span><br><span class="line">  println(x + <span class="string">" "</span>)</span><br><span class="line">  x % <span class="number">11</span> == <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> v1 = (<span class="number">1</span> to <span class="number">100000</span>).filter(f)(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> v2 = (<span class="number">1</span> to <span class="number">100000</span>).to(<span class="type">LazyList</span>).filter(f)(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>v1 和 v2 等价。计算 v1 的时候会打印 <code>1 2 3...9999 100000</code>, 而计算 v2 的时候打印 <code>1 2 3 ... 21 22</code>。这是因为对于 v2，<code>(1 to 100000).to(LazyList)</code> 产生的是 <code>scala.collection.immutable.LazyList</code>。其中官方文档对其有个简单的描述</p>
+<blockquote>
+<p>This class implements an immutable linked list that evaluates elements in order and only when needed</p>
+</blockquote>
+<p>也就是当 LazyList 里面的元素被需要的时候，才会进行有序计算，并且计算会终止知道所需的元素计算结束。这也就是为什么会有上述的输出了。</p>
+<h3 id="惰性求值-Lazy-Evaluation"><a href="#惰性求值-Lazy-Evaluation" class="headerlink" title="惰性求值 Lazy Evaluation"></a>惰性求值 Lazy Evaluation</h3><p>在 Scala 里面，Lazy 意味着两点</p>
+<ul>
+<li><strong>尽量延后求值计算</strong></li>
+<li><strong>只计算一次</strong></li>
+</ul>
+<p>例如</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">expr</span> </span>= &#123;</span><br><span class="line">  <span class="keyword">val</span> x = &#123; print(”x”); <span class="number">1</span> &#125;</span><br><span class="line">  <span class="keyword">lazy</span> <span class="keyword">val</span> y = &#123; print(”y”); <span class="number">2</span> &#125;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">z</span> </span>= &#123; print(”z”); <span class="number">3</span> &#125;</span><br><span class="line">  z + y + x + z + y + x <span class="comment">// last line</span></span><br><span class="line">&#125;</span><br><span class="line">expr</span><br></pre></td></tr></table></figure>
+
+<p>这样的输出为 <code>xzyz</code></p>
+<h3 id="Infinite-Sequences"><a href="#Infinite-Sequences" class="headerlink" title="Infinite Sequences"></a>Infinite Sequences</h3><p>利用 LazyList 的特性，可以构造出无限序列。比如</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">from</span></span>(n: <span class="type">Int</span>): <span class="type">LazyList</span>[<span class="type">Int</span>] = n #:: from(n + <span class="number">1</span>) <span class="comment">// 无限序列</span></span><br><span class="line">from: (n: <span class="type">Int</span>)<span class="type">LazyList</span>[<span class="type">Int</span>]</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> natures = from(<span class="number">0</span>) <span class="comment">// 自然数</span></span><br><span class="line">natures: <span class="type">LazyList</span>[<span class="type">Int</span>] = <span class="type">LazyList</span>(&lt;not computed&gt;)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> hundreds = natures.filter(_ % <span class="number">100</span> == <span class="number">0</span>)</span><br><span class="line">hundreds: scala.collection.immutable.<span class="type">LazyList</span>[<span class="type">Int</span>] = <span class="type">LazyList</span>(&lt;not computed&gt;)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> fourHundred = hundreds(<span class="number">4</span>) <span class="comment">// 计算</span></span><br><span class="line">fourHundred: <span class="type">Int</span> = <span class="number">400</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>埃拉托斯特尼筛法</strong></p>
+<blockquote>
+<p>埃拉托斯特尼筛法是列出所有小素数最有效的方法之一，其名字来自于古希腊数学家埃拉托斯特尼，并且被描述在另一位古希腊数学家尼科马库斯所著的《算术入门》中。-<a href="https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>用 LazyList 实现会非常简单，</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">from</span></span>(n: <span class="type">Int</span>): <span class="type">LazyList</span>[<span class="type">Int</span>] = &#123;</span><br><span class="line">  n #:: from(n + <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sieve</span></span>(s: <span class="type">LazyList</span>[<span class="type">Int</span>]): <span class="type">LazyList</span>[<span class="type">Int</span>] = &#123;</span><br><span class="line">  s.head #:: sieve(s.tail.filter(_ % s.head != <span class="number">0</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">primeNumber</span></span>(n: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    sieve(from(<span class="number">2</span>))(n)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> n = sieve(from(<span class="number">2</span>))(<span class="number">100</span>) <span class="comment">// 输出 547</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="题目：倒水问题"><a href="#题目：倒水问题" class="headerlink" title="题目：倒水问题"></a>题目：倒水问题</h3><p>给几个知道容量，但是没有刻度的杯子，有个可以取之不尽的水源用来给杯子装满水和将杯子的水全部倒出。我们需要做的就是盛出给定容量的水。我们能做的操作有三个</p>
+<ul>
+<li>empty 清空</li>
+<li>fill 放满水</li>
+<li>pour(a, b) 把 a 的水全部往 b 倒直至 b 杯满了或者 a 杯没水了</li>
+</ul>
+<p>现在需要找到取得容量为 N 的水时，需要的操作。</p>
+<p>附：1. <a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/WaterPouring.scala" target="_blank" rel="noopener">Scala 完整代码</a> 2. <a href="https://www.youtube.com/watch?v=q6M_pco_5Vo" target="_blank" rel="noopener">python 解法</a></p>
+<h2 id="W3"><a href="#W3" class="headerlink" title="W3"></a>W3</h2><blockquote>
+<p>下面会用 Scala 进行加法器模拟。对于计算机中，两个数如何相加，可以提前阅读 <a href="https://zh.wikipedia.org/wiki/%E5%8A%A0%E6%B3%95%E5%99%A8" target="_blank" rel="noopener">维基百科-加法器</a>，最好能够做一下 <a href="/2019/11/11/add-by-bit/">位运算实现加法</a>。</p>
+</blockquote>
+<p>通过以上内容，我们需要知道的最重要的点在于：两个一位二进制数相加，将会产生两个输出，其中一个是当前位相加的值 S，另一个是相加后的进位信息 C。其中 S 可以用<em>异或门</em>，进位可以用<em>与门</em>。两个半加器用<em>或</em>门组合为一个全加器。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg" alt="异或的操作通过三种门的组合实现" title>
+                </div>
+                <div class="image-caption">异或的操作通过三种门的组合实现</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg" alt="两个用与门组合的半加器构成一个全加器" title>
+                </div>
+                <div class="image-caption">两个用与门组合的半加器构成一个全加器</div>
+            </figure>
+
+<p>根据上图，我们至少需要实现的是</p>
+<ul>
+<li><p>电线：用来传导信号，信号可以用 boolean 类型表示 0 和 1</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wire</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> sigVal = <span class="literal">false</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getSignal</span></span>: <span class="type">Boolean</span> = sigVal</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">setSignal</span></span>(s: <span class="type">Boolean</span>): <span class="type">Unit</span> =</span><br><span class="line">    <span class="keyword">if</span> (s != sigVal) &#123;</span><br><span class="line">        sigVal = s</span><br><span class="line">        actions foreach(_())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>与门：输入两个电信号，输出 &amp; 对应的信号</p>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">andGate</span></span>(in1: <span class="type">Wire</span>, in2: <span class="type">Wire</span>, output: <span class="type">Wire</span>): <span class="type">Unit</span> = ???</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>或门：输入两个电信号，输出 | 对应的信号</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">orGate</span></span>(in1: <span class="type">Wire</span>, in2: <span class="type">Wire</span>, output: <span class="type">Wire</span>): <span class="type">Unit</span> = ???</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>逆变器：输入电信号，输出 ! 对应的信号</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inverter</span></span>(in: <span class="type">Wire</span>, output: <span class="type">Wire</span>): <span class="type">Unit</span> = ???</span><br></pre></td></tr></table></figure>
+
+<p>在此基础上，实现出半加器和全加器</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">halfAdder</span></span>(a: <span class="type">Wire</span>, b: <span class="type">Wire</span>, s: <span class="type">Wire</span>, c: <span class="type">Wire</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> d = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  <span class="keyword">val</span> e = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  orGate(a, b, d)</span><br><span class="line">  andGate(a, b, c)</span><br><span class="line">  inverter(c, e)</span><br><span class="line">  andGate(d, e, s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fullAdder</span></span>(a: <span class="type">Wire</span>, b: <span class="type">Wire</span>, cin: <span class="type">Wire</span>, sum: <span class="type">Wire</span>, cout: <span class="type">Wire</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> s = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  <span class="keyword">val</span> c1 = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  <span class="keyword">val</span> c2 = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  halfAdder(b, cin, s, c1)</span><br><span class="line">  halfAdder(a, s, sum, c2)</span><br><span class="line">  orGate(c1, c2, cout)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现了全加器后。加入模拟信号的输入输出即可，完整代码 <a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala" target="_blank" rel="noopener">模拟加法器</a></p>
+<h2 id="W4"><a href="#W4" class="headerlink" title="W4"></a>W4</h2><h3 id="Functional-Reactive-Programming-FRP"><a href="#Functional-Reactive-Programming-FRP" class="headerlink" title="Functional Reactive Programming (FRP)"></a>Functional Reactive Programming (FRP)</h3><p>在 MVC 模型中，FRP 可以让 model 在产生变化的同时 view 自动变化。这样的模型一般也就是 pub-sub 模型或者叫观察者模型 (observers)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Subscriber1   subscribe     ___________</span><br><span class="line">Subscriber2  ------------&gt; |          |</span><br><span class="line">Subscriber3                |Publisher |</span><br><span class="line">Subscriber4  &lt;------------ |          |</span><br><span class="line">Subscriber5    publish     |__________|</span><br></pre></td></tr></table></figure>
+
+<p>通用的说比如 <code>a = f(b)</code> 里面。当 b 在发生变化的时候 a 也会跟着变。实现这一点，<br>可以把「变化」归化为「event」，而自动检查这些「event」的东西叫做 Signal。在 Scala 里面通常把这样的 Signal 实现为一个类型，通过 apply() 给其赋值。比如</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s = <span class="type">Signal</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> v = s() <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>同时，为了给 Signal 再次赋值，可以扩展新增一个 update 方法。比如 <code>s.update(5)</code>，顺带可以写成 <code>s() = 5</code>。这样的话，实现一个扩展了 Signal 名为 <code>Var</code> 的类型，让其拥有 <code>update</code> 方法。</p>
+<p>在这样的条件下，</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (1)</span></span><br><span class="line"><span class="keyword">val</span> num = <span class="type">Var</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> twice = <span class="type">Signal</span>(num() * <span class="number">2</span>)</span><br><span class="line">num() = <span class="number">2</span></span><br><span class="line"><span class="comment">// (2)</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="type">Var</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> twice = <span class="type">Signal</span>(num() * <span class="number">2</span>)</span><br><span class="line">num = <span class="type">Var</span>(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>(1) 里面的 twice 变为 4，（2）里面的 twice 还是 2。上述体现的 FRP 里面，num 是 <em>publisher</em>，twice 是 <em>subscriber</em>。num 产生了 event，twice 接受这样的 event。并且所有的变量本身都是 <em>immutable</em>。</p>
+<h3 id="实现-FRP"><a href="#实现-FRP" class="headerlink" title="实现 FRP"></a>实现 FRP</h3><h4 id="Var-和-Signal"><a href="#Var-和-Signal" class="headerlink" title="Var 和 Signal"></a>Var 和 Signal</h4><p>我们知道 Signal 和 Var 应该是这样</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// signal</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Signal</span>[<span class="type">T</span>](<span class="params">expr: =&gt; <span class="type">T</span></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(): <span class="type">T</span> = ???</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Signal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>[<span class="type">T</span>](expr: =&gt; <span class="type">T</span>) = <span class="keyword">new</span> <span class="type">Signal</span>(expr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// var</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Var</span>[<span class="type">T</span>](<span class="params">expr: =&gt; <span class="type">T</span></span>) <span class="keyword">extends</span> <span class="title">Signal</span>[<span class="type">T</span>](<span class="params">expr</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span></span>(expr: =&gt; <span class="type">T</span>): <span class="type">Unit</span> = ???</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Var</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>[<span class="type">T</span>](expr: =&gt; <span class="type">T</span>) = <span class="keyword">new</span> <span class="type">Var</span>(expr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="维护订阅关系"><a href="#维护订阅关系" class="headerlink" title="维护订阅关系"></a>维护订阅关系</h3><p>有了这些方法，就可以做到赋值和再次赋值。还需要的是，当一个 publisher 产生了 event 的时候，如何自动通知到对应的 subscriber，并且让其重新计算（re-evaluate）。</p>
+<p>例如，s 是 Var 类型，并且进入到了表达式 expr 里，形如 <code>expr s</code>，那么当表达式 <code>expr s</code>，作为参数传递给了某个 Signal 形如 <code>val t = Signal(expr s)</code> 的时候。就需要给 s 维护一个 subscriber。同理，当有多个 subscribers 的时候就给 s 维护一个 subscriber 的集合。比如</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// val set = Set()</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="type">Var</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发的条件就是 class Var 的 apply 方法。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发：set += Signal(num() * 2)</span></span><br><span class="line"><span class="keyword">val</span> double = <span class="type">Signal</span>(num() * <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发：set += Signal(num() * 3)</span></span><br><span class="line"><span class="keyword">val</span> tiple = <span class="type">Signal</span>(num() * <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>触发的条件达到了，可是如何把 <code>Signal(num() * 3)</code> 这样的对象传递给 num 的 set ？</p>
+<p>这个时候就需要在 Object Signal 里面新增一块用于维护方法调用的数据结构，没做就是 stack</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Signal</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> caller = <span class="keyword">new</span> <span class="type">StackableVariable</span>[<span class="type">Signal</span>[_]](<span class="type">NoSignal</span>)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>[<span class="type">T</span>](expr: =&gt; <span class="type">T</span>) = <span class="keyword">new</span> <span class="type">Signal</span>(expr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StackableVariable 在当前的上下文中多个 Signal/Object 会共享。当调用 class Signal 的 apply() 方法的时候就去这里面找到当前的调用方。</p>
+<h3 id="维护调用栈"><a href="#维护调用栈" class="headerlink" title="维护调用栈"></a>维护调用栈</h3><p>调用栈里面存放有序的 Signal。例如，有下面测试代码</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="string">"multi subscribers"</span>) &#123;</span><br><span class="line">  <span class="keyword">val</span> publisher = <span class="type">Var</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">val</span> subscriber1 = <span class="type">Signal</span>(publisher() * <span class="number">20</span>) <span class="comment">// 注意 scala 的 call-by-name 和 call-by-value。这里传递的是表达式</span></span><br><span class="line">  <span class="keyword">val</span> subscriber2 = <span class="type">Signal</span>(publisher() * <span class="number">30</span>)</span><br><span class="line">  <span class="keyword">val</span> subscriber3 = <span class="type">Signal</span>(publisher() * <span class="number">40</span>)</span><br><span class="line">  assert(subscriber1() == <span class="number">20</span>)</span><br><span class="line">  assert(subscriber2() == <span class="number">30</span>)</span><br><span class="line">  assert(subscriber3() == <span class="number">40</span>)</span><br><span class="line">  publisher() = <span class="number">2</span></span><br><span class="line">  assert(subscriber1() == <span class="number">40</span>)</span><br><span class="line">  assert(subscriber2() == <span class="number">60</span>)</span><br><span class="line">  assert(subscriber3() == <span class="number">80</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三行开始，包含表达式的 Signal 进入调用栈，并不断被带入 subscriber 的集合。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackableVariable</span>[<span class="type">T</span>](<span class="params">init: <span class="type">T</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> values: <span class="type">List</span>[<span class="type">T</span>] = <span class="type">List</span>(init)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">value</span></span>: <span class="type">T</span> = values.head</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">withValue</span></span>[<span class="type">R</span>](newValue: <span class="type">T</span>)(op: =&gt; <span class="type">R</span>): <span class="type">R</span> = &#123;</span><br><span class="line">    values = newValue :: values</span><br><span class="line">    <span class="keyword">try</span> op <span class="keyword">finally</span> values = values.tail</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/SubPub.scala" target="_blank" rel="noopener">完整代码</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-28T13:02:10.018Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+</span><br>
+
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2020/02/20/functional-program-design-in-scala/" target="_blank" rel="external">https://razertory.me/2020/02/20/functional-program-design-in-scala/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&title=《Scala 函数式编程设计》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&title=《Scala 函数式编程设计》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/02/20/functional-program-design-in-scala/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scala 函数式编程设计》 — Razertory 的技术博客&url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/11/linux-kernel-process/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">「Linux 内核」进程管理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/16/lru-cache/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LRU 缓存</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&title=《Scala 函数式编程设计》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&title=《Scala 函数式编程设计》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/02/20/functional-program-design-in-scala/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scala 函数式编程设计》 — Razertory 的技术博客&url=https://razertory.me/2020/02/20/functional-program-design-in-scala/&via=https://razertory.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/02/20/functional-program-design-in-scala/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2020/02/20/functional-program-design-in-scala/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
