@@ -38,7 +38,7 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Razertory 的技术博客">
 <meta property="og:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2020-04-12T06:46:48.234Z">
+<meta property="og:updated_time" content="2020-04-12T08:06:28.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Linux 内核」」代码分析 select, poll, epoll">
 <meta name="twitter:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
@@ -121,7 +121,7 @@ ga('send', 'pageview');
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -210,7 +210,7 @@ ga('send', 'pageview');
 <li><code>epoll_wait()</code> 只返回就绪的 fds</li>
 </ul>
 <p>由于没有无效的遍历，epoll 的理论时间复杂度是 O(1)。 select 和 poll 的复杂度是 O(n)。</p>
-<p><a href="https://github.com/razertory/c-code-lab/blob/master/async_io/README.md" target="_blank" rel="noopener">https://github.com/razertory/c-code-lab/blob/master/async_io/README.md</a></p>
+<p><a href="https://github.com/razertory/c-code-lab" target="_blank" rel="noopener">源码</a></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XNOXutMzYQE" target="_blank" rel="noopener">https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XNOXutMzYQE</a></p>
 <p><a href="https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/" target="_blank" rel="noopener">https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/</a></p>
 <p><a href="https://book.douban.com/subject/25809330/" target="_blank" rel="noopener">《Linux/Unix 系统编程手册》</a></p>
@@ -222,7 +222,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-12T06:46:48.234Z" itemprop="dateUpdated">2020-04-12 14:46:48</time>
+    最后更新时间：<time datetime="2020-04-12T08:06:28.183Z" itemprop="dateUpdated">2020-04-12 16:06:28</time>
 </span><br>
 
 
@@ -381,7 +381,7 @@ ga('send', 'pageview');
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
