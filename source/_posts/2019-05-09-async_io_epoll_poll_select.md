@@ -59,8 +59,7 @@ epoll 包含了多个方法，使用起来实际上会分成几个步骤
 
 由于没有无效的遍历，epoll 的理论时间复杂度是 O(1)。 select 和 poll 的复杂度是 O(n)。
 
-[https://github.com/razertory/c-code-lab/blob/master/async_io/README.md](https://github.com/razertory/c-code-lab/blob/master/async_io/README.md)
-
+[源码](https://github.com/razertory/c-code-lab)
 
 #### 参考
 https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XNOXutMzYQE
