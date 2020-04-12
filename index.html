@@ -154,6 +154,52 @@ ga('send', 'pageview');
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-linux-kernel-system-call"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-04-12 13:50:04" datetime="2020-04-12T05:50:04.000Z"  itemprop="datePublished">2020-04-12</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/04/12/linux-kernel-system-call/">「Linux 内核」系统调用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        内核内存空间在操作系统中是受保护的。通常情况下，一个普通程序执行在用户空间。当需要与内核通信的时候，比如写文件到磁盘，就需要进行系统调用。
+有趣的是，内核原生提供的系统调用很少(参考List of Linux/i386 system calls)。当我们需要系统调用的时候，实际上是在调用调用的上一层 API。这一层 API 封装了各种系统调用（通常就是操作系统内置的 C 库）。现阶段，这一层...
+    
+
+        <a href="/2020/04/12/linux-kernel-system-call/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-linux-kernel-process"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -549,48 +595,6 @@ W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/思考/">思考</a></li></ul>
 
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-sorted-arr-to-bst"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-12-12 21:41:57" datetime="2019-12-12T13:41:57.000Z"  itemprop="datePublished">2019-12-12</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/12/12/sorted-arr-to-bst/">有序数组转化为平衡二叉搜索树（BST）</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。
-1TreeNode convertToBST(ArrayList&lt;Integer&gt; arr)
-
-根据 BST 的定义 二叉排序树的查找过程和次优二叉树类似，通常采取二叉链表作为二叉排序树的存储结构。中序遍历二叉排序树可得到一个关键字的有序序列，一个无...
-    
-
-        <a href="/2019/12/12/sorted-arr-to-bst/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
     </div>
     
 </article>

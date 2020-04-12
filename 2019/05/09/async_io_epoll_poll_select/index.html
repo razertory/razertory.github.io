@@ -23,7 +23,7 @@ ga('send', 'pageview');
     
     
     
-    <title>select, poll, epoll | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <title>「Linux 内核」」代码分析 select, poll, epoll | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -33,14 +33,14 @@ ga('send', 'pageview');
     <meta name="description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="select, poll, epoll">
+<meta property="og:title" content="「Linux 内核」」代码分析 select, poll, epoll">
 <meta property="og:url" content="https://razertory.me/2019/05/09/async_io_epoll_poll_select/index.html">
 <meta property="og:site_name" content="Razertory 的技术博客">
 <meta property="og:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2020-03-28T13:02:10.003Z">
+<meta property="og:updated_time" content="2020-04-12T06:46:48.234Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="select, poll, epoll">
+<meta name="twitter:title" content="「Linux 内核」」代码分析 select, poll, epoll">
 <meta name="twitter:description" content="现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。 首先，他们分别来自于 &amp;lt;sys/select.h&amp;gt;，&amp;lt;sys/poll.h&amp;gt;，&amp;lt;sys/epoll.h&amp;gt;。如果是 Mac OS，是没有第三个的，其中前两个都在 /usr/include/sys。 当一个客户端请求服务端的时候，服务端会调用 accept() 产生一个 socket">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
@@ -115,7 +115,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">select, poll, epoll</div>
+        <div class="flex-col header-title ellipsis">「Linux 内核」」代码分析 select, poll, epoll</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -137,7 +137,7 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">select, poll, epoll</h1>
+        <h1 class="title">「Linux 内核」」代码分析 select, poll, epoll</h1>
         <h5 class="subtitle">
             
                 <time datetime="2019-05-09T13:28:23.000Z" itemprop="datePublished" class="page-time">
@@ -169,7 +169,7 @@ ga('send', 'pageview');
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">select, poll, epoll</h1>
+        <h1 class="post-card-title">「Linux 内核」」代码分析 select, poll, epoll</h1>
         <div class="post-meta">
             <time class="post-time" title="2019-05-09 21:28:23" datetime="2019-05-09T13:28:23.000Z"  itemprop="datePublished">2019-05-09</time>
 
@@ -222,7 +222,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-03-28T13:02:10.003Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
+    Last updated: <time datetime="2020-04-12T06:46:48.234Z" itemprop="dateUpdated">2020-04-12 14:46:48</time>
 </span><br>
 
 
@@ -254,7 +254,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -264,7 +264,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -274,7 +274,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -403,7 +403,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -413,7 +413,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&title=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -423,7 +423,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」」代码分析 select, poll, epoll》 — Razertory 的技术博客&url=https://razertory.me/2019/05/09/async_io_epoll_poll_select/&via=https://razertory.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

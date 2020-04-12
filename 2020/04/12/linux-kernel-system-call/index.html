@@ -23,27 +23,25 @@ ga('send', 'pageview');
     
     
     
-    <title>「Linux 内核」进程管理 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <title>「Linux 内核」系统调用 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="操作系统">
-    <meta name="description" content="概览进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct task_struct的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。 状态 TASK_RUNNING:">
+    <meta name="description" content="内核内存空间在操作系统中是受保护的。通常情况下，一个普通程序执行在用户空间。当需要与内核通信的时候，比如写文件到磁盘，就需要进行系统调用。 有趣的是，内核原生提供的系统调用很少(参考List of Linux/i386 system calls)。当我们需要系统调用的时候，实际上是在调用调用的上一层 API。这一层 API 封装了各种系统调用（通常就是操作系统内置的 C 库）。现阶段，这一层 AP">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「Linux 内核」进程管理">
-<meta property="og:url" content="https://razertory.me/2020/04/11/linux-kernel-process/index.html">
+<meta property="og:title" content="「Linux 内核」系统调用">
+<meta property="og:url" content="https://razertory.me/2020/04/12/linux-kernel-system-call/index.html">
 <meta property="og:site_name" content="Razertory 的技术博客">
-<meta property="og:description" content="概览进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct task_struct的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。 状态 TASK_RUNNING:">
+<meta property="og:description" content="内核内存空间在操作系统中是受保护的。通常情况下，一个普通程序执行在用户空间。当需要与内核通信的时候，比如写文件到磁盘，就需要进行系统调用。 有趣的是，内核原生提供的系统调用很少(参考List of Linux/i386 system calls)。当我们需要系统调用的时候，实际上是在调用调用的上一层 API。这一层 API 封装了各种系统调用（通常就是操作系统内置的 C 库）。现阶段，这一层 AP">
 <meta property="og:locale" content="cn">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gdq0dnlo0cg20fw09b0sw.gif">
-<meta property="og:updated_time" content="2020-04-11T11:54:05.665Z">
+<meta property="og:updated_time" content="2020-04-12T06:41:32.247Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「Linux 内核」进程管理">
-<meta name="twitter:description" content="概览进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct task_struct的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。 状态 TASK_RUNNING:">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gdq0dnlo0cg20fw09b0sw.gif">
+<meta name="twitter:title" content="「Linux 内核」系统调用">
+<meta name="twitter:description" content="内核内存空间在操作系统中是受保护的。通常情况下，一个普通程序执行在用户空间。当需要与内核通信的时候，比如写文件到磁盘，就需要进行系统调用。 有趣的是，内核原生提供的系统调用很少(参考List of Linux/i386 system calls)。当我们需要系统调用的时候，实际上是在调用调用的上一层 API。这一层 API 封装了各种系统调用（通常就是操作系统内置的 C 库）。现阶段，这一层 AP">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
     
@@ -117,7 +115,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">「Linux 内核」进程管理</div>
+        <div class="flex-col header-title ellipsis">「Linux 内核」系统调用</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -139,11 +137,11 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">「Linux 内核」进程管理</h1>
+        <h1 class="title">「Linux 内核」系统调用</h1>
         <h5 class="subtitle">
             
-                <time datetime="2020-04-11T10:15:42.000Z" itemprop="datePublished" class="page-time">
-  2020-04-11
+                <time datetime="2020-04-12T05:50:04.000Z" itemprop="datePublished" class="page-time">
+  2020-04-12
 </time>
 
 
@@ -159,21 +157,14 @@ ga('send', 'pageview');
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#状态"><span class="post-toc-number">2.</span> <span class="post-toc-text">状态</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#生命周期"><span class="post-toc-number">3.</span> <span class="post-toc-text">生命周期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#线程"><span class="post-toc-number">4.</span> <span class="post-toc-text">线程</span></a></li></ol>
-        </nav>
-    </aside>
 
-
-<article id="post-linux-kernel-process"
+<article id="post-linux-kernel-system-call"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">「Linux 内核」进程管理</h1>
+        <h1 class="post-card-title">「Linux 内核」系统调用</h1>
         <div class="post-meta">
-            <time class="post-time" title="2020-04-11 18:15:42" datetime="2020-04-11T10:15:42.000Z"  itemprop="datePublished">2020-04-11</time>
+            <time class="post-time" title="2020-04-12 13:50:04" datetime="2020-04-12T05:50:04.000Z"  itemprop="datePublished">2020-04-12</time>
 
             
 
@@ -182,28 +173,17 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p>进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct <a href="https://github.com/torvalds/linux/blob/master/include/linux/sched.h#L632" target="_blank" rel="noopener">task_struct</a>的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。</p>
-<h4 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h4><ul>
-<li>TASK_RUNNING: 可执行的；等待执行的</li>
-<li>TASK_INTERRUPTIBLE: 可中断的; 比如被阻塞、或者在 sleep</li>
-<li>TASK_UNINTERRUPTIBLE: 不可中断的; 对外界的信号不做出响应</li>
-<li>EXIT_ZOMBIE: 主动退出；还没有完全释放资源</li>
+            <p>内核内存空间在操作系统中是受保护的。通常情况下，一个普通程序执行在用户空间。当需要与内核通信的时候，比如写文件到磁盘，就需要进行<strong>系统调用</strong>。</p>
+<p>有趣的是，内核原生提供的系统调用很少(参考<a href="http://asm.sourceforge.net/syscall.html" target="_blank" rel="noopener">List of Linux/i386 system calls</a>)。当我们需要系统调用的时候，实际上是在调用调用的上一层 API。这一层 API 封装了各种系统调用（通常就是操作系统内置的 C 库）。现阶段，这一层 API 的标准来自于 IEEE ，名为 POSIX（Portable Operating System Interface）。这么做的原因是 unix 倡导的 <em>提供机制，而不是提供策略</em>。意思是提供有限的，但可以很好组合的工具、方法，在此基础上实现各种功能。</p>
+<p>例如，</p>
+<p><code>get_pid()</code> 在内核中的被定义为 <code>sys_getpid()</code><br><code>bar()</code> 在内核中被定义为 <code>sys_bar()</code></p>
+<p>一个用户空间的程序，要做系统调用，具体的过程为</p>
+<ul>
+<li>陷入内核</li>
+<li>传递系统调用编号和参数</li>
+<li>执行系统调用</li>
+<li>将系统调用的返回值带给用户空间</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fgy1gdq0dnlo0cg20fw09b0sw.gif" alt="进程状态图" title>
-                </div>
-                <div class="image-caption">进程状态图</div>
-            </figure>
-
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>在进程被 fork 出来之后 task_struct 会有自己的 pid 和父进程的 pid。但一些必要的系统资源并不会拷贝过来，而是当需要写入的时候再做(copy-on-write)。进程调用 exit() 结束, 部分资源会释放，同时调用 exit_notify() 向父进程发信号。若父进程及时响应，此时释放所有的资源；否则认为此时的这个进程是僵尸进程。同理，如果父进程先于子进程退出，子进程就会成为孤儿进程。内核会将这类进程归给 pid 为 1 的进程。</p>
-<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>线程是一种特殊的进程（强调只是 linux）同一个进程的 N 个线程只是 N 个共享同一块资源的<br>task_struct。比如进程创建的时候会依赖 clone 方法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clone(SIGCHLD, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>而线程的创建就是传递来一些参数来指明被共享的资源，这个设计现在看起来也是非常优雅的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clone(CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
 
         </div>
 
@@ -212,12 +192,12 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-11T11:54:05.665Z" itemprop="dateUpdated">2020-04-11 19:54:05</time>
+    Last updated: <time datetime="2020-04-12T06:41:32.247Z" itemprop="dateUpdated">2020-04-12 14:41:32</time>
 </span><br>
 
 
         
-        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2020/04/11/linux-kernel-process/" target="_blank" rel="external">https://razertory.me/2020/04/11/linux-kernel-process/</a>
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2020/04/12/linux-kernel-system-call/" target="_blank" rel="external">https://razertory.me/2020/04/12/linux-kernel-system-call/</a>
         
     </div>
     
@@ -244,7 +224,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/04/11/linux-kernel-process/&title=《「Linux 内核」进程管理》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/04/12/linux-kernel-system-call/&title=《「Linux 内核」系统调用》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -254,22 +234,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/04/11/linux-kernel-process/&title=《「Linux 内核」进程管理》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/04/12/linux-kernel-system-call/&title=《「Linux 内核」系统调用》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/04/11/linux-kernel-process/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/04/12/linux-kernel-system-call/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」进程管理》 — Razertory 的技术博客&url=https://razertory.me/2020/04/11/linux-kernel-process/&via=https://razertory.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」系统调用》 — Razertory 的技术博客&url=https://razertory.me/2020/04/12/linux-kernel-system-call/&via=https://razertory.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/04/11/linux-kernel-process/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/04/12/linux-kernel-system-call/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -289,21 +269,14 @@ ga('send', 'pageview');
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/04/12/linux-kernel-system-call/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">「Linux 内核」系统调用</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2020/02/20/functional-program-design-in-scala/" id="post-next" class="post-nav-link">
+      <a href="/2020/04/11/linux-kernel-process/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Scala 函数式编程设计</h4>
+        <h4 class="title">「Linux 内核」进程管理</h4>
       </a>
     </div>
   
@@ -393,7 +366,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/04/11/linux-kernel-process/&title=《「Linux 内核」进程管理》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2020/04/12/linux-kernel-system-call/&title=《「Linux 内核」系统调用》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -403,22 +376,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/04/11/linux-kernel-process/&title=《「Linux 内核」进程管理》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2020/04/12/linux-kernel-system-call/&title=《「Linux 内核」系统调用》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/04/11/linux-kernel-process/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2020/04/12/linux-kernel-system-call/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」进程管理》 — Razertory 的技术博客&url=https://razertory.me/2020/04/11/linux-kernel-process/&via=https://razertory.me" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《「Linux 内核」系统调用》 — Razertory 的技术博客&url=https://razertory.me/2020/04/12/linux-kernel-system-call/&via=https://razertory.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/04/11/linux-kernel-process/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2020/04/12/linux-kernel-system-call/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -429,7 +402,7 @@ ga('send', 'pageview');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2020/04/11/linux-kernel-process/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2020/04/12/linux-kernel-system-call/" alt="微信分享二维码">
 </div>
 
 
