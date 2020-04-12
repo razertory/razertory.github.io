@@ -1,8 +1,8 @@
 ---
 layout: post
-tags: 操作系统
 date: 2019-05-09 21:28:23 +0800
-title: select, poll, epoll
+title: 「Linux 内核」」代码分析 select, poll, epoll
+tags: 操作系统
 ---
 
 现在有很多讲这三个 system call 的文章，这里我从代码层面去分析和理解。
