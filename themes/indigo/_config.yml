@@ -9,14 +9,14 @@
 #    target: _blank    是否跳出，省略则在当前页面打开
 menu:
   tags:
-    text: 所有标签
-    url: /tags
+    text: 归档
+    url: /archives
   code:
     text: 算法题解
     url: /algo-solution
-  book:
-    text: 算法 wiki
-    url: /algo-wiki
+  # book:
+  #   text: 算法 wiki
+  #   url: /algo-wiki
 
   # tasks:
   #   text: MIT 6.824
@@ -49,14 +49,14 @@ categories_title: 目录
 excerpt_render: false
 excerpt_length: 200
 excerpt_link: 阅读全文...
-mathjax: false
+mathjax: true
 archive_yearly: true
 
 # 是否显示文章最后更新时间
-show_last_updated: true
+show_last_updated: false
 
 # 是否开启分享
-share: true
+share: false
 
 # 是否开启打赏，关闭 reward: false
 # reward:
@@ -68,12 +68,12 @@ share: true
 search: true
 
 # 是否大屏幕下文章页隐藏导航
-hideMenu: false
+hideMenu: true
 
 # 是否开启toc
 # toc: false
-toc:
-  list_number: true  # 是否显示数字排序
+# toc:
+#   list_number: true  # 是否显示数字排序
 
 # 文章页留言内容，hexo中所有变量及辅助函数等均可调用，具体请查阅 hexo.io
 postMessage: 本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="<%- url_for(page.path).replace(/index\.html$/, '') %>" target="_blank" rel="external"><%- page.permalink.replace(/index\.html$/, '') %></a>
