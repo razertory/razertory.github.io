@@ -57,7 +57,7 @@ ga('send', 'pageview');
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -77,9 +77,9 @@ ga('send', 'pageview');
       <ul class="nav">
         
             <li class="waves-block waves-effect">
-              <a href="/tags"  >
+              <a href="/archives"  >
                 <i class="icon icon-lg icon-tags"></i>
-                所有标签
+                归档
               </a>
             </li>
         
@@ -87,13 +87,6 @@ ga('send', 'pageview');
               <a href="/algo-solution"  >
                 <i class="icon icon-lg icon-code"></i>
                 算法题解
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/algo-wiki"  >
-                <i class="icon icon-lg icon-book"></i>
-                算法 wiki
               </a>
             </li>
         
@@ -121,16 +114,12 @@ ga('send', 'pageview');
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
         
     </div>
 </header>
@@ -157,13 +146,6 @@ ga('send', 'pageview');
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#📚正文"><span class="post-toc-number">1.</span> <span class="post-toc-text">📚正文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么情况下你需要拆分了？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么情况下你需要拆分了？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么会使用微服务方式拆分项目？"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">为什么会使用微服务方式拆分项目？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ruby-on-Rails-项目拆分成为微服务架构的必要前置条件"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Ruby on Rails 项目拆分成为微服务架构的必要前置条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何把你的-Rails-项目拆掉呢？"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">如何把你的 Rails 项目拆掉呢？</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-
 
 <article id="post-把rails项目拆分为微服务"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -248,10 +230,6 @@ ga('send', 'pageview');
     
     <div class="content">
         
-<span class="post-time">
-    最后更新时间：<time datetime="2020-03-28T13:02:10.001Z" itemprop="dateUpdated">2020-03-28 21:02:10</time>
-</span><br>
-
 
         
         本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2018/03/07/把rails项目拆分为微服务/" target="_blank" rel="external">https://razertory.me/2018/03/07/把rails项目拆分为微服务/</a>
@@ -275,51 +253,6 @@ ga('send', 'pageview');
 
 
             
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&title=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&title=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/03/07/把rails项目拆分为微服务/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&via=https://razertory.me" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
 
 
         </div>
@@ -408,7 +341,7 @@ ga('send', 'pageview');
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -426,55 +359,9 @@ ga('send', 'pageview');
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&title=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&pic=https://razertory.me/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&title=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&source=Maker, Coder, Puzzle Solver" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://razertory.me/2018/03/07/把rails项目拆分为微服务/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《将 Rails 项目拆分成微服务架构》 — Razertory 的技术博客&url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/&via=https://razertory.me" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://razertory.me/2018/03/07/把rails项目拆分为微服务/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://razertory.me/2018/03/07/把rails项目拆分为微服务/" alt="微信分享二维码">
-</div>
-
-
-
-
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
 
 
 </script>
@@ -502,6 +389,27 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
