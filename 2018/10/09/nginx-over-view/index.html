@@ -30,19 +30,19 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="基础组件">
-    <meta name="description" content="正文  原文作者：Andrew Alexeev 译文出自：掘金翻译计划 本文永久链接：https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md 译者：razertory 校对者：yqian1991   开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor">
+    <meta name="description" content="正文开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自 2004 年发布以来，nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：负载均衡、缓存和流量控制以及高效集成在 Web 服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器">
 <meta name="keywords" content="基础组件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开源项目之 Nginx">
 <meta property="og:url" content="https://razertory.me/2018/10/09/nginx-over-view/index.html">
 <meta property="og:site_name" content="Razertory 的技术博客">
-<meta property="og:description" content="正文  原文作者：Andrew Alexeev 译文出自：掘金翻译计划 本文永久链接：https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md 译者：razertory 校对者：yqian1991   开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor">
+<meta property="og:description" content="正文开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自 2004 年发布以来，nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：负载均衡、缓存和流量控制以及高效集成在 Web 服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器">
 <meta property="og:locale" content="cn">
 <meta property="og:image" content="http://aosabook.org/images/nginx/architecture.png">
-<meta property="og:updated_time" content="2020-03-28T13:02:10.002Z">
+<meta property="og:updated_time" content="2020-05-04T07:14:43.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源项目之 Nginx">
-<meta name="twitter:description" content="正文  原文作者：Andrew Alexeev 译文出自：掘金翻译计划 本文永久链接：https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md 译者：razertory 校对者：yqian1991   开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor">
+<meta name="twitter:description" content="正文开源项目之 Nginxnginx（读作 “engine x”）是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自 2004 年发布以来，nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：负载均衡、缓存和流量控制以及高效集成在 Web 服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器">
 <meta name="twitter:image" content="http://aosabook.org/images/nginx/architecture.png">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
@@ -89,6 +89,20 @@ ga('send', 'pageview');
               <a href="/algo-solution"  >
                 <i class="icon icon-lg icon-code"></i>
                 算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
               </a>
             </li>
         
@@ -164,16 +178,7 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote>
-<ul>
-<li>原文作者：<a href="http://aosabook.org/en/intro2.html#alexeev-andrew" target="_blank" rel="noopener">Andrew Alexeev</a></li>
-<li>译文出自：<a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a></li>
-<li>本文永久链接：<a href="https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md" target="_blank" rel="noopener">https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md</a></li>
-<li>译者：<a href="https://github.com/razertory" target="_blank" rel="noopener">razertory</a></li>
-<li>校对者：<a href="https://github.com/yqian1991" target="_blank" rel="noopener">yqian1991</a></li>
-</ul>
-</blockquote>
-<h1 id="开源项目之-Nginx"><a href="#开源项目之-Nginx" class="headerlink" title="开源项目之 Nginx"></a>开源项目之 Nginx</h1><p>nginx（读作 “engine x”）是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自 2004 年发布以来，nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：负载均衡、缓存和流量控制以及高效集成在 Web 服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器。</p>
+            <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h1 id="开源项目之-Nginx"><a href="#开源项目之-Nginx" class="headerlink" title="开源项目之 Nginx"></a>开源项目之 Nginx</h1><p>nginx（读作 “engine x”）是一位名叫 Igor Sysoev 的俄罗斯软件工程师开发的。自 2004 年发布以来，nginx 就一直专注于实现高性能，高并发和低内存占用。nginx 的额外功能，比如：负载均衡、缓存和流量控制以及高效集成在 Web 服务上的能力，使得它成为了当今网站架构的必选。如今，nginx 已经成为互联网中第二受欢迎的开源 Web 服务器。</p>
 <h2 id="14-1-高并发为何如此重要？"><a href="#14-1-高并发为何如此重要？" class="headerlink" title="14.1 高并发为何如此重要？"></a>14.1 高并发为何如此重要？</h2><p>如今，互联网早已无处不在，我们已经很难想象十年前没有互联网的样子。现在的互联网发生了翻天覆地的变化，从基于 NSCA 的可以点击 HTML 页面和基于 Apache 的 Web 服务，到如今能够实现超过 20 亿人实时的沟通。随着 PC、手机和平板的的蔓延，互联网已经将全球经济数字化。面向信息和娱乐的在线服务变得更加优质。线上商业活动的安全方面也发生了明显变化。因此，网站也比以前更加的复杂并且需要大量的工程投入来确保鲁棒性和可扩展性。</p>
 <p>并发性成为了网站架构设计的最大挑战之一。自从 web 服务开始的时候，并发性的等级就在持续上升。对于一个热门网站来说，支持几百甚至是几百万用户同时访问来说也不是什么稀罕事情。20 年前，产生并发的原因主要还是客户端的 ADSL 或者拨号（dial-up）连接。如今，并发的产生来源于手机端和以及新型的应用架构，这些架构主要可以支持长连接来提供新闻、信息流发布和朋友间的 feed 流等等。另一方面，导致高并发还由于现代浏览器的工作发生变化，通常是为了提高网页加载速度同时打开 4 到 6 个连接。</p>
 <p>为了表述清楚缓慢这种问题，设想一下，一个基于 Apache 的，可以提供 100KB 大小带有文字或者图片的简单 web 服务器。生成或者重新产生这个网页只需要极少不到一秒的时间。但是在带宽只有 80kps 的情况下（下载速度 10kb/s），传输数据到客户端却会花掉 10s。本质上，服务器产生 100kb 数据的速度是相对较快的，随后在传输数据到客户端直至释放连接的过程却是相对较慢的。现在设想，你同时有 1,000 个独立的客户端连到你的服务器并且请求同样的内容。如果对于每个独立的连接，都会占用额外的 1MB 内存，那么对于 1,000 个连接来说就对导致多占用 1000 MB（1G）的内存，而这些仅仅是为了给 1000 个客户端提供 100kb 的内容。实际上，一个典型的 Apache 服务器通常会为了一个连接占用超过 1MB 的内存，遗憾的是几十 k 的带宽足够让手机之间高效通讯。尽管从某种程度而言，发送数据给客户端是慢的，提高操作系统内核的 socket 缓冲大小是可以的，这个不是一个通常的解决方法，并且会有不良影响。</p>

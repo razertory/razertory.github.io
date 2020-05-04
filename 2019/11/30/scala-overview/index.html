@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Scala 总览 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="Why Scala JVM 生态 简洁 类型推断 函数式 多范式 Actor   下面的所有操作都在 Scala REPL 中进行  表达式12scala&amp;gt; 1 + 1res0: Int = 2  res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。 12scala&amp;gt; res0 + 1res1: Int = 3">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 总览">
+<meta property="og:url" content="https://razertory.me/2019/11/30/scala-overview/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="Why Scala JVM 生态 简洁 类型推断 函数式 多范式 Actor   下面的所有操作都在 Scala REPL 中进行  表达式12scala&amp;gt; 1 + 1res0: Int = 2  res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。 12scala&amp;gt; res0 + 1res1: Int = 3">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-05-04T07:02:57.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala 总览">
+<meta name="twitter:description" content="Why Scala JVM 生态 简洁 类型推断 函数式 多范式 Actor   下面的所有操作都在 Scala REPL 中进行  表达式12scala&amp;gt; 1 + 1res0: Int = 2  res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。 12scala&amp;gt; res0 + 1res1: Int = 3">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-tags"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Scala 总览</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Scala 总览</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-30T13:26:36.000Z" itemprop="datePublished" class="page-time">
+  2019-11-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-scala-overview"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Scala 总览</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-30 21:26:36" datetime="2019-11-30T13:26:36.000Z"  itemprop="datePublished">2019-11-30</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Why-Scala"><a href="#Why-Scala" class="headerlink" title="Why Scala"></a>Why Scala</h3><ul>
+<li>JVM 生态</li>
+<li>简洁</li>
+<li>类型推断</li>
+<li>函数式</li>
+<li>多范式</li>
+<li>Actor</li>
+</ul>
+<blockquote>
+<p>下面的所有操作都在 Scala REPL 中进行</p>
+</blockquote>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="number">1</span> + <span class="number">1</span></span><br><span class="line">res0: <span class="type">Int</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; res0 + <span class="number">1</span></span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>Scala 中（几乎）一切都是表达式。</p>
+<h3 id="值-val-和变量-var"><a href="#值-val-和变量-var" class="headerlink" title="值 (val) 和变量 (var)"></a>值 (val) 和变量 (var)</h3><p>你可以给一个表达式的结果起个名字赋成一个不变量（val）。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> two = <span class="number">1</span> + <span class="number">1</span></span><br><span class="line">two: <span class="type">Int</span> = <span class="number">2</span></span><br><span class="line">scala&gt; two = <span class="number">3</span></span><br><span class="line">           ^</span><br><span class="line">       error: reassignment to <span class="keyword">val</span></span><br></pre></td></tr></table></figure>
+
+<p>你不能改变这个不变量的值，但如果是 var 声明的就可以改变。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><strong>你可以使用 <code>def</code> 创建函数。</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">addOne</span></span>(m: <span class="type">Int</span>): <span class="type">Int</span> = m + <span class="number">1</span></span><br><span class="line">addOne: (m: <span class="type">Int</span>)<span class="type">Int</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>你可以创建匿名函数。</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; (x: <span class="type">Int</span>) =&gt; x + <span class="number">1</span></span><br><span class="line">res2: (<span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function1&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>你可以把匿名函数赋值给 val。</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> addOne = (x: <span class="type">Int</span>) =&gt; x + <span class="number">1</span></span><br><span class="line">addOne: (<span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; addOne(<span class="number">1</span>)</span><br><span class="line">res4: <span class="type">Int</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>你可以部分应用一个函数</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">adder</span></span>(m: <span class="type">Int</span>, n: <span class="type">Int</span>) = m + n</span><br><span class="line">adder: (m: <span class="type">Int</span>,n: <span class="type">Int</span>)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 你可以「部分应用」参数列表中的任意参数，而不仅仅是最后一个。</span></span><br><span class="line">scala&gt; <span class="keyword">val</span> add2 = adder(<span class="number">2</span>, _:<span class="type">Int</span>) </span><br><span class="line">add2: (<span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; add2(<span class="number">3</span>)</span><br><span class="line">res50: <span class="type">Int</span> = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>你可以柯里化函数 (Currying Function)</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">multiply</span></span>(m: <span class="type">Int</span>)(n: <span class="type">Int</span>): <span class="type">Int</span> = m * n</span><br><span class="line">multiply: (m: <span class="type">Int</span>)(n: <span class="type">Int</span>)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//你可以直接传入两个参数。</span></span><br><span class="line">scala&gt; multiply(<span class="number">2</span>)(<span class="number">3</span>)</span><br><span class="line">res0: <span class="type">Int</span> = <span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//你可以填上第一个参数并且部分应用第二个参数。</span></span><br><span class="line">scala&gt; <span class="keyword">val</span> timesTwo = multiply(<span class="number">2</span>) _</span><br><span class="line">timesTwo: (<span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; timesTwo(<span class="number">3</span>)</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 你可以对任何多参数函数执行柯里化 (`.curried`)</span></span><br><span class="line">scala&gt; (adder _).curried</span><br><span class="line">res1: (<span class="type">Int</span>) =&gt; (<span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function1&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>你可以参数可变参数函数</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">capitalizeAll</span></span>(args: <span class="type">String</span>*) = &#123;</span><br><span class="line">  args.map &#123; arg =&gt;</span><br><span class="line">    arg.capitalize</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">scala&gt; capitalizeAll(<span class="string">"rarity"</span>, <span class="string">"applejack"</span>)</span><br><span class="line">res2: <span class="type">Seq</span>[<span class="type">String</span>] = <span class="type">ArrayBuffer</span>(<span class="type">Rarity</span>, <span class="type">Applejack</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h3><p>类、继承和 Java 比较类似。额外的 Scala 还引入了</p>
+<ul>
+<li>trait。实现类似于 Ruby、Python 这样的动态语言的 mix-in</li>
+<li>object 关键字 和 apply() 方法。方便实现 single instance</li>
+<li>case class。为方便存放值和模式匹配引入了 </li>
+</ul>
+<p><strong>Trait</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// trait 是一些字段和行为的集合，可以扩展或混入（`mixin`）你的类中。</span></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> brand: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Shiny</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> shineRefraction: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BMW</span> <span class="keyword">extends</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> brand = <span class="string">"BMW"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 with 关键字，一个类可以扩展多个 trait：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BMW</span> <span class="keyword">extends</span> <span class="title">Car</span> <span class="keyword">with</span> <span class="title">Shiny</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> brand = <span class="string">"BMW"</span></span><br><span class="line">  <span class="keyword">val</span> shineRefraction = <span class="number">12</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>object</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// object 实现 single instance</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Timer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">currentCount</span></span>(): <span class="type">Long</span> = &#123;</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    count</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不必再用 new 关键字</span></span><br><span class="line">scala&gt; <span class="type">Timer</span>.currentCount()</span><br><span class="line">res0: <span class="type">Long</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Companion Objec 伴生对象，用来给 object 初始化值</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span>(<span class="params">foo: <span class="type">String</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(foo: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">Bar</span>(foo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>case class</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span>(<span class="params">brand: <span class="type">String</span>, model: <span class="type">String</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">def</span> <span class="title">calcType</span>(<span class="params">calc: <span class="type">Calculator</span></span>) </span>= calc <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20B"</span>) =&gt; <span class="string">"financial"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"48G"</span>) =&gt; <span class="string">"scientific"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"30B"</span>) =&gt; <span class="string">"business"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(_, _) =&gt; <span class="string">"Calculator: %s %s is of unknown type"</span>.format(ourBrand, ourModel)</span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"Not a calculator"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/11/30/scala-overview/" target="_blank" rel="external">https://razertory.me/2019/11/30/scala-overview/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/30/scala-school-bascis2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Scala 课堂 - 基础（续）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/28/binary-search/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">完美的二分搜索</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

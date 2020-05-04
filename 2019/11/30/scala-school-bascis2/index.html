@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Scala 课堂 - 基础（续） | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="apply 方法当类或对象有一个主要用途的时候，apply 方法为你提供了一个很好的语法糖。 12345678910scala&amp;gt; class Foo &amp;#123;&amp;#125;defined class Fooscala&amp;gt; object FooMaker &amp;#123;     |   def apply() = new Foo     | &amp;#125;defined module Foo">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 课堂 - 基础（续）">
+<meta property="og:url" content="https://razertory.me/2019/11/30/scala-school-bascis2/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="apply 方法当类或对象有一个主要用途的时候，apply 方法为你提供了一个很好的语法糖。 12345678910scala&amp;gt; class Foo &amp;#123;&amp;#125;defined class Fooscala&amp;gt; object FooMaker &amp;#123;     |   def apply() = new Foo     | &amp;#125;defined module Foo">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-05-04T07:02:32.099Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala 课堂 - 基础（续）">
+<meta name="twitter:description" content="apply 方法当类或对象有一个主要用途的时候，apply 方法为你提供了一个很好的语法糖。 12345678910scala&amp;gt; class Foo &amp;#123;&amp;#125;defined class Fooscala&amp;gt; object FooMaker &amp;#123;     |   def apply() = new Foo     | &amp;#125;defined module Foo">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-tags"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Scala 课堂 - 基础（续）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Scala 课堂 - 基础（续）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-30T14:20:10.000Z" itemprop="datePublished" class="page-time">
+  2019-11-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-scala-school-bascis2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Scala 课堂 - 基础（续）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-30 22:20:10" datetime="2019-11-30T14:20:10.000Z"  itemprop="datePublished">2019-11-30</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="apply-方法"><a href="#apply-方法" class="headerlink" title="apply 方法"></a>apply 方法</h3><p>当类或对象有一个主要用途的时候，<code>apply</code> 方法为你提供了一个很好的语法糖。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;&#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">object</span> <span class="title">FooMaker</span> </span>&#123;</span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>() = <span class="keyword">new</span> <span class="type">Foo</span></span><br><span class="line">     | &#125;</span><br><span class="line">defined module <span class="type">FooMaker</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> newFoo = <span class="type">FooMaker</span>()</span><br><span class="line">newFoo: <span class="type">Foo</span> = <span class="type">Foo</span>@<span class="number">5</span>b83f762</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>() = <span class="number">0</span></span><br><span class="line">     | &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Bar</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">bar</span> </span>= <span class="keyword">new</span> <span class="type">Bar</span></span><br><span class="line">bar: <span class="type">Bar</span> = <span class="type">Bar</span>@<span class="number">47711479</span></span><br><span class="line"></span><br><span class="line">scala&gt; bar()</span><br><span class="line">res8: <span class="type">Int</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们实例化对象看起来像是在调用一个方法。以后会有更多介绍！</p>
+<h3 id="单例对象-object"><a href="#单例对象-object" class="headerlink" title="单例对象 (object)"></a>单例对象 (object)</h3><p>单例对象用于持有一个类的唯一实例。通常用于 <a href="https://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="noopener">工厂模式</a>。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Timer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">currentCount</span></span>(): <span class="type">Long</span> = &#123;</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    count</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以这样使用：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="type">Timer</span>.currentCount()</span><br><span class="line">res0: <span class="type">Long</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>单例对象可以和类具有相同的名称，此时该对象也被称为<code>伴生对象</code>。我们通常将伴生对象作为工厂使用。</p>
+<p>下面是一个简单的例子，可以不需要使用 <code>new</code> 来创建一个实例了。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span>(<span class="params">foo: <span class="type">String</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(foo: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">Bar</span>(foo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数即对象"><a href="#函数即对象" class="headerlink" title="函数即对象"></a>函数即对象</h3><p> Scala 中，我们经常谈论对象的函数式编程。这是什么意思？到底什么是函数呢？</p>
+<p>函数是一些特质的集合。具体来说，具有一个参数的函数是 Function1 trait 的一个实例。这个 trait 定义了 <code>apply</code> 语法糖，让你调用一个对象时就像你在调用一个函数。（关于 Function1 trait 在 Scala API doc 中有详细介绍  <a href="https://www.scala-lang.org/api/2.7.5/scala/Function1.html" target="_blank" rel="noopener">https://www.scala-lang.org/api/2.7.5/scala/Function1.html</a> )</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">object</span> <span class="title">addOne</span> <span class="keyword">extends</span> <span class="title">Function1</span>[<span class="type">Int</span>, <span class="type">Int</span>] </span>&#123;</span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(m: <span class="type">Int</span>): <span class="type">Int</span> = m + <span class="number">1</span></span><br><span class="line">     | &#125;</span><br><span class="line">defined module addOne</span><br><span class="line"></span><br><span class="line">scala&gt; addOne(<span class="number">1</span>)</span><br><span class="line">res2: <span class="type">Int</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>这个 Function trait 集合下标从 0 开始一直到 22。为什么是 22？这是一个主观的魔幻数字 (magic number)。我从来没有使用过多于 22 个参数的函数，所以这个数字似乎是合理的。（在 Scala )</p>
+<p><code>apply</code> 语法糖有助于统一对象和函数式编程的二重性。你可以传递类，并把它们当做函数使用，而函数本质上是类的实例。</p>
+<p>这是否意味着，当你在类中定义一个方法时，得到的实际上是一个 Function *的实例？不是的，在类中定义的方法是方法而不是函数。在 repl 中独立定义的方法是 Function *的实例。</p>
+<p>类也可以扩展 Function，这些类的实例可以使用 <code>()</code> 调用。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">AddOne</span> <span class="keyword">extends</span> <span class="title">Function1</span>[<span class="type">Int</span>, <span class="type">Int</span>] </span>&#123;</span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(m: <span class="type">Int</span>): <span class="type">Int</span> = m + <span class="number">1</span></span><br><span class="line">     | &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">AddOne</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">plusOne</span> </span>= <span class="keyword">new</span> <span class="type">AddOne</span>()</span><br><span class="line">plusOne: <span class="type">AddOne</span> = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; plusOne(<span class="number">1</span>)</span><br><span class="line">res0: <span class="type">Int</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用更直观快捷的 <code>extends (Int =&gt; Int)</code> 代替 extends Function1[Int, Int]</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddOne</span> <span class="keyword">extends</span> (<span class="params"><span class="type">Int</span> =&gt; <span class="type">Int</span></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(m: <span class="type">Int</span>): <span class="type">Int</span> = m + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="包-package"><a href="#包-package" class="headerlink" title="包 (package)"></a>包 (package)</h3><p>你可以将代码组织在包里。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.twitter.example</span><br></pre></td></tr></table></figure>
+
+<p>在文件头部定义包，会将文件中所有的代码声明在那个包中。</p>
+<p>值和函数不能在类或单例对象之外定义。单例对象是组织静态函数 <code>static function</code> 的有效工具。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.twitter.example</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">colorHolder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> <span class="type">BLUE</span> = <span class="string">"Blue"</span></span><br><span class="line">  <span class="keyword">val</span> <span class="type">RED</span> = <span class="string">"Red"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在你可以直接访问这些成员</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">"the color is: "</span> + com.twitter.example.colorHolder.<span class="type">BLUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意在你定义这个对象时 Scala 解释器的返回：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">object</span> <span class="title">colorHolder</span> </span>&#123;</span><br><span class="line">     |   <span class="keyword">val</span> <span class="type">Blue</span> = <span class="string">"Blue"</span></span><br><span class="line">     |   <span class="keyword">val</span> <span class="type">Red</span> = <span class="string">"Red"</span></span><br><span class="line">     | &#125;</span><br><span class="line">defined module colorHolder</span><br></pre></td></tr></table></figure>
+
+<p>这暗示了 Scala 的设计者是把对象作为 Scala 的<a href="https://www.scala-lang.org/docu/files/skeb-slides.pdf" target="_blank" rel="noopener">模块系统</a>的一部分进行设计的。</p>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><p>这是 Scala 中最有用的部分之一。</p>
+<p>匹配值</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> times = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">times <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="string">"one"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span> =&gt; <span class="string">"two"</span></span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"some other number"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用守卫进行匹配</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">times <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> i <span class="keyword">if</span> i == <span class="number">1</span> =&gt; <span class="string">"one"</span></span><br><span class="line">  <span class="keyword">case</span> i <span class="keyword">if</span> i == <span class="number">2</span> =&gt; <span class="string">"two"</span></span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"some other number"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意我们是怎样获取变量 <code>i</code> 的值的。</p>
+<p>在最后一行指令中的<code>_</code>是一个通配符；它保证了我们可以处理所有的情况。 (注意第一章提到的 <code>_</code> 在不同上下文中有不同含义)<br>否则当传进一个不能被匹配的数字的时候，你将获得一个运行时错误。我们以后会继续讨论这个话题的。</p>
+<p>参考 Effective Scala 对<a href="https://twitter.github.com/effectivescala/#Functional%20programming-Pattern%20matching" target="_blank" rel="noopener">什么时候使用模式匹配</a>和<a href="https://twitter.github.com/effectivescala/#Formatting-Pattern%20matching" target="_blank" rel="noopener">模式匹配格式化的建议</a>。A Tour of Scala 也描述了<a href="https://www.scala-lang.org/node/120" target="_blank" rel="noopener">模式匹配</a></p>
+<h3 id="匹配类型"><a href="#匹配类型" class="headerlink" title="匹配类型"></a>匹配类型</h3><p>你可以使用 <code>match</code> 来分别处理不同类型的值。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bigger</span></span>(o: <span class="type">Any</span>): <span class="type">Any</span> = &#123;</span><br><span class="line">  o <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> i: <span class="type">Int</span> <span class="keyword">if</span> i &lt; <span class="number">0</span> =&gt; i - <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> i: <span class="type">Int</span> =&gt; i + <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> d: <span class="type">Double</span> <span class="keyword">if</span> d &lt; <span class="number">0.0</span> =&gt; d - <span class="number">0.1</span></span><br><span class="line">    <span class="keyword">case</span> d: <span class="type">Double</span> =&gt; d + <span class="number">0.1</span></span><br><span class="line">    <span class="keyword">case</span> text: <span class="type">String</span> =&gt; text + <span class="string">"s"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="匹配类成员"><a href="#匹配类成员" class="headerlink" title="匹配类成员"></a>匹配类成员</h3><p>还记得我们之前的计算器吗。</p>
+<p>让我们通过类型对它们进行分类。</p>
+<p>一开始会很痛苦。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcType</span></span>(calc: <span class="type">Calculator</span>) = calc <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> _ <span class="keyword">if</span> calc.brand == <span class="string">"HP"</span> &amp;&amp; calc.model == <span class="string">"20B"</span> =&gt; <span class="string">"financial"</span></span><br><span class="line">  <span class="keyword">case</span> _ <span class="keyword">if</span> calc.brand == <span class="string">"HP"</span> &amp;&amp; calc.model == <span class="string">"48G"</span> =&gt; <span class="string">"scientific"</span></span><br><span class="line">  <span class="keyword">case</span> _ <span class="keyword">if</span> calc.brand == <span class="string">"HP"</span> &amp;&amp; calc.model == <span class="string">"30B"</span> =&gt; <span class="string">"business"</span></span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"unknown"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(⊙o⊙) 哦，太痛苦了。幸好 Scala 提供了一些应对这种情况的有效工具。</p>
+<p><strong>样本类 (Case Classes)</strong><br>使用样本类可以方便提前准备好需要进行匹配类内容，并且不用 new 关键字就可以创建它们。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span>(<span class="params">brand: <span class="type">String</span>, model: <span class="type">String</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">defined</span> <span class="title">class</span> <span class="title">Calculator</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">hp20b</span> </span>= <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20b"</span>)</span><br><span class="line">hp20b: <span class="type">Calculator</span> = <span class="type">Calculator</span>(hp,<span class="number">20</span>b)</span><br></pre></td></tr></table></figure>
+
+<p>样本类基于构造函数的参数，自动地实现了相等性和易读的 toString 方法。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> hp20b = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20b"</span>)</span><br><span class="line">hp20b: <span class="type">Calculator</span> = <span class="type">Calculator</span>(hp,<span class="number">20</span>b)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> hp20B = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20b"</span>)</span><br><span class="line">hp20B: <span class="type">Calculator</span> = <span class="type">Calculator</span>(hp,<span class="number">20</span>b)</span><br><span class="line"></span><br><span class="line">scala&gt; hp20b == hp20B</span><br><span class="line">res6: <span class="type">Boolean</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>样本类也可以像普通类那样拥有方法。</p>
+<p>使用样本类进行模式匹配<br>样本类就是被设计用在模式匹配中的。让我们简化之前的计算器分类器的例子。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> hp20b = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20B"</span>)</span><br><span class="line"><span class="keyword">val</span> hp30b = <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"30B"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcType</span></span>(calc: <span class="type">Calculator</span>) = calc <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"20B"</span>) =&gt; <span class="string">"financial"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"48G"</span>) =&gt; <span class="string">"scientific"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(<span class="string">"HP"</span>, <span class="string">"30B"</span>) =&gt; <span class="string">"business"</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Calculator</span>(ourBrand, ourModel) =&gt; <span class="string">"Calculator: %s %s is of unknown type"</span>.format(ourBrand, ourModel)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一句也可以这样写</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="type">Calculator</span>(_, _) =&gt; <span class="string">"Calculator of unknown type"</span></span><br></pre></td></tr></table></figure>
+
+<p>或者我们完全可以不将匹配对象指定为 Calculator 类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> _ =&gt; <span class="string">"Calculator of unknown type"</span></span><br></pre></td></tr></table></figure>
+
+<p>或者我们也可以将匹配的值重新命名。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> c<span class="meta">@Calculator</span>(_, _) =&gt; <span class="string">"Calculator: %s of unknown type"</span>.format(c)</span><br></pre></td></tr></table></figure>
+
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>Scala 中的异常可以在 <code>try-catch-finally</code> 语法中通过模式匹配使用。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  remoteCalculatorService.add(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> e: <span class="type">ServerIsDownException</span> =&gt; log.error(e, <span class="string">"the remote calculator service is unavailable. should have kept your trusty HP."</span>)</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  remoteCalculatorService.close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try 也是面向表达式的</span></span><br><span class="line"><span class="keyword">val</span> result: <span class="type">Int</span> = <span class="keyword">try</span> &#123;</span><br><span class="line">  remoteCalculatorService.add(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> e: <span class="type">ServerIsDownException</span> =&gt; &#123;</span><br><span class="line">    log.error(e, <span class="string">"the remote calculator service is unavailable. should have kept your trusty HP."</span>)</span><br><span class="line">    <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  remoteCalculatorService.close()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这并不是一个完美编程风格的展示，而只是一个例子，用来说明 <code>try-catch-finally</code> 和 Scala 中其他大部分事物一样是表达式。</p>
+<p>当一个异常被捕获处理了，<code>finally</code> 块将被调用；它不是表达式的一部分。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/11/30/scala-school-bascis2/" target="_blank" rel="external">https://razertory.me/2019/11/30/scala-school-bascis2/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/01/scala-school-collections/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Scala 课堂 - 集合</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/30/scala-overview/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Scala 总览</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

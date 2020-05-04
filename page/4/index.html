@@ -90,6 +90,20 @@ ga('send', 'pageview');
             </li>
         
             <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
               <a href="/links"  >
                 <i class="icon icon-lg icon-external-link-square"></i>
                 关于本博客
@@ -141,6 +155,258 @@ ga('send', 'pageview');
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-is-post-order"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-27 15:58:38" datetime="2019-10-27T07:58:38.000Z"  itemprop="datePublished">2019-10-27</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/27/is-post-order/">是否是二叉搜索树的序遍历</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
+1boolean VerifySquenceOfBST(int [] sequence)
+
+BST的后序序列的合法序列是，对于一个序列S，最后一个元素是x （也就是根），如果去掉最后一个元素的序列为T，那么T满足：T可以分成两段，前一段（左子树）小于x，...
+    
+
+        <a href="/2019/10/27/is-post-order/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-is-subtree"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-27 15:49:47" datetime="2019-10-27T07:49:47.000Z"  itemprop="datePublished">2019-10-27</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/27/is-subtree/">判断是否是子树</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+1boolean HasSubtree(TreeNode root1,TreeNode root2)
+
+首先在 A 中找到一个节点，满足这个节点是 B 的 root 节点，在此基础上按照 B 的结构遍历 A，B。
+12345678910111213141516171819202122boolean H...
+    
+
+        <a href="/2019/10/27/is-subtree/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-swap-nodes-in-pairs"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-26 14:47:13" datetime="2019-10-26T06:47:13.000Z"  itemprop="datePublished">2019-10-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/26/swap-nodes-in-pairs/">链表中交换节点</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Given a linked list, swap every two adjacent nodes and return its head.You may not modify the values in the list’s nodes, only nodes itself may be changed.
+1ListNode swapPairs(ListNode head)
+
+由于要交换...
+    
+
+        <a href="/2019/10/26/swap-nodes-in-pairs/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-add-two-numbers"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-26 14:38:48" datetime="2019-10-26T06:38:48.000Z"  itemprop="datePublished">2019-10-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/26/add-two-numbers/">链表相加</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and retur...
+    
+
+        <a href="/2019/10/26/add-two-numbers/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-delete-duplication"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-26 14:32:58" datetime="2019-10-26T06:32:58.000Z"  itemprop="datePublished">2019-10-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/26/delete-duplication/">有序链表去重</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5 处理后为 1-&gt;2-&gt;5
+传送门
+
+定义一个 dummy 节点，pre，cur 节点。比较 pre.next 和 cur。如果相同让 pre = pre.next 做删除操作
+12345678910...
+    
+
+        <a href="/2019/10/26/delete-duplication/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-entry-node-of-loop"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-26 14:28:43" datetime="2019-10-26T06:28:43.000Z"  itemprop="datePublished">2019-10-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/26/entry-node-of-loop/">链表环的入口</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+传送门
+
+定义一个慢和一个快指针，当两个指针相遇的时候。快指针速度和慢指针一致，等再次相遇的时候这个点就是环入口。
+1234567891011121314151617ListNode EntryNodeOfLoop(ListNode pHead) &#123;    if (pHead == null || pHea...
+    
+
+        <a href="/2019/10/26/entry-node-of-loop/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-first-common-node"
@@ -305,268 +571,6 @@ ga('send', 'pageview');
     
 
         <a href="/2019/10/26/merge-sort/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-heap-sort"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-20 14:20:42" datetime="2019-10-20T06:20:42.000Z"  itemprop="datePublished">2019-10-20</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/20/heap-sort/">堆排序</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        堆是一种能方便解决 top 问题的树形数据结构，利用这个性质也可以用来解决排序问题。首先生成最大堆，然后逆序遍历该数组，过程中通过比较堆的最大值。如果小于，就放到数组的最后一个，并且调整堆。所以在堆排序中，如何构建堆和调整堆成为了问题的关键。最简单，有效的做法就是用一个一位数组来表示堆。比如一颗二叉树可以用数组来表示：
-123456[9, 4, 7, 3, 1, 2]     9    / ...
-    
-
-        <a href="/2019/10/20/heap-sort/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-quick-sort"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-19 16:52:23" datetime="2019-10-19T08:52:23.000Z"  itemprop="datePublished">2019-10-19</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/19/quick-sort/">快速排序</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        首先挑选基准值；然后分割数组，把小于基准值的元素放到基准值前面，大于基准值的元素放到基准值后面；最后递归地对小于基准值的子序列和大于基准值的子序列进行排序。如果用函数定义快速排序 f()，那么首先给这个函数签名为 f(arr, low, high)。其中，arr 表示传入的数组对象，low 表示需要排序的开始下标，high 表示需要排序的结束下标，那么这个函数可以完整地表示为。
-12345f...
-    
-
-        <a href="/2019/10/19/quick-sort/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-how-to-reduce-bug"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-09-22 15:41:36" datetime="2019-09-22T07:41:36.000Z"  itemprop="datePublished">2019-09-22</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/09/22/how-to-reduce-bug/">所以怎么减少 bug 呢？</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        从软件工程诞生之初，「减少 bug」成了所有开发团队的共同目标。要减少 bug 就要知道 bug 是怎么来的:
-原因
-产品设计。产品逻辑存在漏洞，或者悖论。表现出来的症状是用户使用成本高，以及在非常规的操作情况下，产生了非常意外的结果。例如服务器报错，客户端闪退，严重的比如支付相关的系统带来巨大的隐患。
-
-业务理解。对业务不熟悉，写出的代码一定程度上和业务相背。
-
-细节把控。没有处理好代码中...
-    
-
-        <a href="/2019/09/22/how-to-reduce-bug/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/思考/">思考</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-reactive-design-pattern"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-08-04 10:23:27" datetime="2019-08-04T02:23:27.000Z"  itemprop="datePublished">2019-08-04</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/08/04/reactive-design-pattern/">「读书」反应式设计模式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-一直以来我都没有刻意去学设计模式这一块，因为认为语言本身的设计会需要人附带出一些设计模式，特别是以 Java 为主导的 OOP 语言，而这些设计模式出现其实就是让人为了接受这样的语言构造而又不得不学的东西。我认为「设计模式」应该是语言无关的，是 design-pattern 而不是 coding-pattern。
-
-Part 1反应式宣言 于 2014 年发布，是移动互联网发展最迅猛的时间...
-    
-
-        <a href="/2019/08/04/reactive-design-pattern/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-rebuild-tree"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-07-20 20:29:49" datetime="2019-07-20T12:29:49.000Z"  itemprop="datePublished">2019-07-20</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/07/20/rebuild-tree/">重建二叉树</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        用前序和中序遍历序列构建输入 12pre: [1,2,4,7,3,5,6,8]in: [4,7,2,1,5,3,8,6]
- 由 pre 得知 root 节点是 1，从而在 in 中找到 1，那么此时这棵树的 root 就是 1。并得出这个二叉树左子树由 [4, 7, 2] 构成，右子树由 [5, 3, 8, 6] 构成。从而确定左子树的 pre 是 [2, 4, 7], in 是 [4, 7...
-    
-
-        <a href="/2019/07/20/rebuild-tree/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-bit-operation"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-07-18 21:47:13" datetime="2019-07-18T13:47:13.000Z"  itemprop="datePublished">2019-07-18</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/07/18/bit-operation/">位运算实际问题</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-一切要从一瓶有毒的水和一群可怜的老鼠说起
-
-有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？(hint: 有毒的无论怎么稀释都有毒哦)
-首先给瓶子编号，默认 1 - 1000，考虑到老鼠喝了水之后就是死或者不死的状态。因为老鼠的个数是有限的，所以肯定是...
-    
-
-        <a href="/2019/07/18/bit-operation/" class="post-more waves-effect waves-button">
             続きを読む…
         </a>
     </div>

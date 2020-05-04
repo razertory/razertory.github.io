@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>模式匹配与函数组合 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="函数组合让我们创建两个函数： 12scala&amp;gt; def f(s: String) = &quot;f(&quot; + s + &quot;)&quot;f: (String)java.lang.String  12scala&amp;gt; def g(s: String) = &quot;g(&quot; + s + &quot;)&quot;g: (String)java.lang.String  composecompose 组合其他函数形成一个新的函数 f(g(x))">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模式匹配与函数组合">
+<meta property="og:url" content="https://razertory.me/2019/12/01/scala-school-pattern-matching-and-functional-composition/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="函数组合让我们创建两个函数： 12scala&amp;gt; def f(s: String) = &quot;f(&quot; + s + &quot;)&quot;f: (String)java.lang.String  12scala&amp;gt; def g(s: String) = &quot;g(&quot; + s + &quot;)&quot;g: (String)java.lang.String  composecompose 组合其他函数形成一个新的函数 f(g(x))">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-05-04T07:03:11.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模式匹配与函数组合">
+<meta name="twitter:description" content="函数组合让我们创建两个函数： 12scala&amp;gt; def f(s: String) = &quot;f(&quot; + s + &quot;)&quot;f: (String)java.lang.String  12scala&amp;gt; def g(s: String) = &quot;g(&quot; + s + &quot;)&quot;g: (String)java.lang.String  composecompose 组合其他函数形成一个新的函数 f(g(x))">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-tags"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">模式匹配与函数组合</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">模式匹配与函数组合</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-01T02:28:36.000Z" itemprop="datePublished" class="page-time">
+  2019-12-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-scala-school-pattern-matching-and-functional-composition"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">模式匹配与函数组合</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-01 10:28:36" datetime="2019-12-01T02:28:36.000Z"  itemprop="datePublished">2019-12-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="函数组合"><a href="#函数组合" class="headerlink" title="函数组合"></a>函数组合</h3><p>让我们创建两个函数：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(s: <span class="type">String</span>) = <span class="string">"f("</span> + s + <span class="string">")"</span></span><br><span class="line">f: (<span class="type">String</span>)java.lang.<span class="type">String</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">g</span></span>(s: <span class="type">String</span>) = <span class="string">"g("</span> + s + <span class="string">")"</span></span><br><span class="line">g: (<span class="type">String</span>)java.lang.<span class="type">String</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h4><p><code>compose</code> 组合其他函数形成一个新的函数 <code>f(g(x))</code></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> fComposeG = f _ compose g _</span><br><span class="line">fComposeG: (<span class="type">String</span>) =&gt; java.lang.<span class="type">String</span> = &lt;function&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; fComposeG(<span class="string">"yay"</span>)</span><br><span class="line">res0: java.lang.<span class="type">String</span> = f(g(yay))</span><br></pre></td></tr></table></figure>
+
+<h4 id="andThen"><a href="#andThen" class="headerlink" title="andThen"></a>andThen</h4><p><code>andThen</code> 和 <code>compose</code> 很像，但是调用顺序是先调用第一个函数，然后调用第二个，即 <code>g(f(x))</code></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> fAndThenG = f _ andThen g _</span><br><span class="line">fAndThenG: (<span class="type">String</span>) =&gt; java.lang.<span class="type">String</span> = &lt;function&gt;</span><br><span class="line">scala&gt; fAndThenG(<span class="string">"yay"</span>)</span><br><span class="line">res1: java.lang.<span class="type">String</span> = g(f(yay))</span><br></pre></td></tr></table></figure>
+
+<h3 id="柯里化-Curried-vs-部分应用-Partial-Application"><a href="#柯里化-Curried-vs-部分应用-Partial-Application" class="headerlink" title="柯里化(Curried) vs 部分应用(Partial Application)"></a>柯里化(Curried) vs 部分应用(Partial Application)</h3><h4 id="case-语句"><a href="#case-语句" class="headerlink" title="case 语句"></a>case 语句</h4><ul>
+<li><p>那么究竟什么是 case 语句？ 这是一个名为 <code>PartialFunction</code> 的函数的子类。</p>
+</li>
+<li><p>多个 case 语句的集合是什么？ 他们是共同组合在一起的多个 <code>PartialFunction</code>。</p>
+</li>
+</ul>
+<blockquote>
+<p>ps: PartialFunction 详见 <a href="https://www.scala-lang.org/api/2.12.9/scala/PartialFunction.html" target="_blank" rel="noopener">https://www.scala-lang.org/api/2.12.9/scala/PartialFunction.html</a></p>
+</blockquote>
+<h4 id="函数-vs-偏函数-PartialFunction"><a href="#函数-vs-偏函数-PartialFunction" class="headerlink" title="函数 vs 偏函数 (PartialFunction)"></a>函数 vs 偏函数 (PartialFunction)</h4><p><strong>函数</strong>: 对给定的输入参数类型，函数可接受该类型的任何值。换句话说，一个 (Int) =&gt; String 的函数可以接收任意 Int 值，并返回一个字符串。</p>
+<p><strong>偏函数</strong>: 对给定的输入参数类型，<code>偏函数</code>只能接受该类型的某些特定的值。一个定义为 (Int) =&gt; String 的<code>偏函数</code>可能不能接受所有 Int 值为输入。<code>isDefinedAt</code> 是偏函数的一个方法，用来确定是否能接受一个给定的参数。注意偏函数和我们前面提到的<code>部分应用</code>函数是无关的。</p>
+<p>参考 Effective Scala 对 <a href="https://twitter.github.com/effectivescala/#Functional%20programming-Partial%20functions" target="_blank" rel="noopener">PartialFunction</a> 的意见。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> one: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123; <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="string">"one"</span> &#125;</span><br><span class="line">one: <span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">String</span>] = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `isDefinedAt` 是`偏函数`的一个方法，用来确定是否能接受一个给定的参数</span></span><br><span class="line">scala&gt; one.isDefinedAt(<span class="number">1</span>)</span><br><span class="line">res0: <span class="type">Boolean</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">scala&gt; one.isDefinedAt(<span class="number">2</span>)</span><br><span class="line">res1: <span class="type">Boolean</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>您可以调用一个偏函数。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; one(<span class="number">1</span>)</span><br><span class="line">res2: <span class="type">String</span> = one</span><br></pre></td></tr></table></figure>
+
+<p>偏函数可以使用 <code>orElse</code> 组成新的函数，得到的偏函数反映了是否对给定参数进行了定义。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> two: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123; <span class="keyword">case</span> <span class="number">2</span> =&gt; <span class="string">"two"</span> &#125;</span><br><span class="line">two: <span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">String</span>] = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> three: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123; <span class="keyword">case</span> <span class="number">3</span> =&gt; <span class="string">"three"</span> &#125;</span><br><span class="line">three: <span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">String</span>] = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> wildcard: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123; <span class="keyword">case</span> _ =&gt; <span class="string">"something else"</span> &#125;</span><br><span class="line">wildcard: <span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">String</span>] = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> partial = one orElse two orElse three orElse wildcard</span><br><span class="line">partial: <span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">String</span>] = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; partial(<span class="number">5</span>)</span><br><span class="line">res24: <span class="type">String</span> = something <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">scala&gt; partial(<span class="number">3</span>)</span><br><span class="line">res25: <span class="type">String</span> = three</span><br><span class="line"></span><br><span class="line">scala&gt; partial(<span class="number">2</span>)</span><br><span class="line">res26: <span class="type">String</span> = two</span><br><span class="line"></span><br><span class="line">scala&gt; partial(<span class="number">1</span>)</span><br><span class="line">res27: <span class="type">String</span> = one</span><br><span class="line"></span><br><span class="line">scala&gt; partial(<span class="number">0</span>)</span><br><span class="line">res28: <span class="type">String</span> = something <span class="keyword">else</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="case-之谜"><a href="#case-之谜" class="headerlink" title="case 之谜"></a>case 之谜</h4><p><a href="/2019/12/01/scala-school-collections/#drop-amp-dropWhile">上一篇</a> 我们看到一些新奇的东西。我们在通常应该使用函数的地方看到了一个 case 语句。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneExt</span>(<span class="params">name: <span class="type">String</span>, ext: <span class="type">Int</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">defined</span> <span class="title">class</span> <span class="title">PhoneExt</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">extensions</span> </span>= <span class="type">List</span>(<span class="type">PhoneExt</span>(<span class="string">"steve"</span>, <span class="number">100</span>), <span class="type">PhoneExt</span>(<span class="string">"robey"</span>, <span class="number">200</span>))</span><br><span class="line">extensions: <span class="type">List</span>[<span class="type">PhoneExt</span>] = <span class="type">List</span>(<span class="type">PhoneExt</span>(steve,<span class="number">100</span>), <span class="type">PhoneExt</span>(robey,<span class="number">200</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; extensions.filter &#123; <span class="keyword">case</span> <span class="type">PhoneExt</span>(name, extension) =&gt; extension &lt; <span class="number">200</span> &#125;</span><br><span class="line">res0: <span class="type">List</span>[<span class="type">PhoneExt</span>] = <span class="type">List</span>(<span class="type">PhoneExt</span>(steve,<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<p>为什么这段代码可以工作？</p>
+<p>filter 使用一个函数。在这个例子中是一个<code>谓词函数</code>(PhoneExt) =&gt; Boolean。(返回一个布尔值的函数通常被称为<code>谓词函数</code>)</p>
+<p>偏函数 PartialFunction 是 Function 的<code>子类型</code>，所以 filter 也可以使用 PartialFunction。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/12/01/scala-school-pattern-matching-and-functional-composition/" target="_blank" rel="external">https://razertory.me/2019/12/01/scala-school-pattern-matching-and-functional-composition/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/01/scala-school-type-basics/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">类型和多态基础</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/01/scala-school-collections/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Scala 课堂 - 集合</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

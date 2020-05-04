@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>高级类型 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="视界（View Bound “类型类”）有时候，你并不需要指定一个类型是等/子/超于另一个类，你可以通过转换这个类来伪装这种关联关系。一个视界指定一个类型可以被“看作是”另一个类型。这对对象的只读操作是很有用的。 隐式 (implicit) 函数允许类型自动转换。更确切地说，如果隐式函数有助于满足类型推断时，隐式函数可以按需地应用。例如： 1234567891011scala&amp;gt; implic">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级类型">
+<meta property="og:url" content="https://razertory.me/2019/12/01/scala-school-advanced-types/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="视界（View Bound “类型类”）有时候，你并不需要指定一个类型是等/子/超于另一个类，你可以通过转换这个类来伪装这种关联关系。一个视界指定一个类型可以被“看作是”另一个类型。这对对象的只读操作是很有用的。 隐式 (implicit) 函数允许类型自动转换。更确切地说，如果隐式函数有助于满足类型推断时，隐式函数可以按需地应用。例如： 1234567891011scala&amp;gt; implic">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-05-04T07:02:15.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级类型">
+<meta name="twitter:description" content="视界（View Bound “类型类”）有时候，你并不需要指定一个类型是等/子/超于另一个类，你可以通过转换这个类来伪装这种关联关系。一个视界指定一个类型可以被“看作是”另一个类型。这对对象的只读操作是很有用的。 隐式 (implicit) 函数允许类型自动转换。更确切地说，如果隐式函数有助于满足类型推断时，隐式函数可以按需地应用。例如： 1234567891011scala&amp;gt; implic">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-tags"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">高级类型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">高级类型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-01T03:20:54.000Z" itemprop="datePublished" class="page-time">
+  2019-12-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-scala-school-advanced-types"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">高级类型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-01 11:20:54" datetime="2019-12-01T03:20:54.000Z"  itemprop="datePublished">2019-12-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="视界（View-Bound-“类型类”）"><a href="#视界（View-Bound-“类型类”）" class="headerlink" title="视界（View Bound “类型类”）"></a>视界（View Bound “类型类”）</h3><p>有时候，你并不需要指定一个类型是等/子/超于另一个类，你可以通过转换这个类来伪装这种关联关系。一个视界指定一个类型可以被“看作是”另一个类型。这对对象的只读操作是很有用的。</p>
+<p>隐式 (<code>implicit</code>) 函数允许类型自动转换。更确切地说，如果隐式函数有助于满足类型推断时，隐式函数可以按需地应用。例如：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">strToInt</span></span>(x: <span class="type">String</span>) = x.toInt</span><br><span class="line">strToInt: (x: <span class="type">String</span>)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="string">"123"</span></span><br><span class="line">res0: java.lang.<span class="type">String</span> = <span class="number">123</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> y: <span class="type">Int</span> = <span class="string">"123"</span></span><br><span class="line">y: <span class="type">Int</span> = <span class="number">123</span></span><br><span class="line"></span><br><span class="line">scala&gt; math.max(<span class="string">"123"</span>, <span class="number">111</span>)</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>视界，就像类型边界，要求存在一个能够将某类型转换为指定类型的函数。你可以使用 <code>&lt;%</code> 指定类型限制，例如：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Container</span>[<span class="type">A</span> &lt;% <span class="type">Int</span>] </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">addIt</span></span>(x: <span class="type">A</span>) = <span class="number">123</span> + x &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Container</span></span></span><br><span class="line"><span class="class"><span class="title">这是说</span> <span class="title">A</span> <span class="title">必须“可被视作”</span> <span class="title">Int</span> <span class="title">。让我们试试。</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> (<span class="params">new <span class="type">Container</span>[<span class="type">String</span>]</span>).<span class="title">addIt</span>(<span class="params">"123"</span>)</span></span><br><span class="line"><span class="class"><span class="title">res11</span></span>: <span class="type">Int</span> = <span class="number">246</span></span><br><span class="line"></span><br><span class="line">scala&gt; (<span class="keyword">new</span> <span class="type">Container</span>[<span class="type">Int</span>]).addIt(<span class="number">123</span>) </span><br><span class="line">res12: <span class="type">Int</span> = <span class="number">246</span></span><br><span class="line"></span><br><span class="line">scala&gt; (<span class="keyword">new</span> <span class="type">Container</span>[<span class="type">Float</span>]).addIt(<span class="number">123.2</span>F)</span><br><span class="line">&lt;console&gt;:<span class="number">8</span>: error: could not find <span class="keyword">implicit</span> value <span class="keyword">for</span> evidence parameter of <span class="class"><span class="keyword">type</span> (<span class="params"><span class="type">Float</span></span>) <span class="title">=&gt;</span> <span class="title">Int</span></span></span><br><span class="line"><span class="class">       (<span class="params">new <span class="type">Container</span>[<span class="type">Float</span>]</span>).<span class="title">addIt</span>(<span class="params">123.2</span>)</span></span><br><span class="line"><span class="class">        <span class="title">^</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，新版本的 Scala 可能会提示：  view bounds are deprecated; use an implicit parameter instead.</p>
+</blockquote>
+<h3 id="其他类型限制"><a href="#其他类型限制" class="headerlink" title="其他类型限制"></a>其他类型限制</h3><p>方法可以通过隐式参数执行更复杂的类型限制。例如，List 支持对数字内容执行 sum，但对其他内容却不行。可是 Scala 的数字类型并不都共享一个超类，所以我们不能使用 <code>T &lt;: Number</code>。相反，要使之能工作，Scala 的 math 库对适当的类型 T 定义了一个隐含的 <code>Numeric[T]</code>。 然后在 List 定义中使用它：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum[<span class="type">B</span> &gt;: <span class="type">A</span>](<span class="keyword">implicit</span> num: <span class="type">Numeric</span>[<span class="type">B</span>]): <span class="type">B</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你调用 List(1,2).sum()，你并不需要传入一个 num 参数；它是隐式设置的。但如果你调用 List(“whoop”).sum()，它会抱怨无法设置 num。</p>
+<p>在没有设定陌生的对象为 Numeric 的时候，方法可能会要求某种特定类型的“证据”。这时可以使用以下<code>类型-关系运算符</code>：</p>
+<ul>
+<li>A <code>=:=</code> B    A 必须和 B 相等</li>
+<li>A <code>&lt;:&lt;</code> B    A 必须是 B 的子类</li>
+<li>A <code>&lt;%&lt;</code> B    A 必须可以被看做是 B</li>
+</ul>
+<p>（如果你在尝试使用 <code>&lt;:&lt;</code> 或者 <code>&lt;%&lt;</code> 的时候出错了，那请注意这些符号在 Scala 2.10 中被移除了。Scala School 里的例子仅能在 Scala 2.9.x 下正常工作。你可以使用新版本的 Scala，但可能会遇到错误。）</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Container</span>[<span class="type">A</span>](<span class="params">value: <span class="type">A</span></span>) </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">addIt</span></span>(<span class="keyword">implicit</span> evidence: <span class="type">A</span> =:= <span class="type">Int</span>) = <span class="number">123</span> + value &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Container</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> (<span class="params">new <span class="type">Container</span>(123</span>)).<span class="title">addIt</span></span></span><br><span class="line"><span class="class"><span class="title">res11</span></span>: <span class="type">Int</span> = <span class="number">246</span></span><br><span class="line"></span><br><span class="line">scala&gt; (<span class="keyword">new</span> <span class="type">Container</span>(<span class="string">"123"</span>)).addIt</span><br><span class="line">&lt;console&gt;:<span class="number">10</span>: error: could not find <span class="keyword">implicit</span> value <span class="keyword">for</span> parameter evidence: =:=[java.lang.<span class="type">String</span>,<span class="type">Int</span>]</span><br></pre></td></tr></table></figure>
+
+<p>类似地，根据之前的隐式转换，我们可以将约束放松为可视性：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Container</span>[<span class="type">A</span>](<span class="params">value: <span class="type">A</span></span>) </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">addIt</span></span>(<span class="keyword">implicit</span> evidence: <span class="type">A</span> &lt;%&lt; <span class="type">Int</span>) = <span class="number">123</span> + value &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Container</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> (<span class="params">new <span class="type">Container</span>("123"</span>)).<span class="title">addIt</span></span></span><br><span class="line"><span class="class"><span class="title">res15</span></span>: <span class="type">Int</span> = <span class="number">246</span></span><br></pre></td></tr></table></figure>
+
+<p>使用视图 (View) 进行泛型编程<br>在 Scala 标准库中，视图主要用于实现集合的通用函数。例如 <code>min</code> 函数（在 <code>Seq[]</code> 上）就使用了这种技术：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">min</span></span>[<span class="type">B</span> &gt;: <span class="type">A</span>](<span class="keyword">implicit</span> cmp: <span class="type">Ordering</span>[<span class="type">B</span>]): <span class="type">A</span> = &#123;</span><br><span class="line">  <span class="keyword">if</span> (isEmpty)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">UnsupportedOperationException</span>(<span class="string">"empty.min"</span>)</span><br><span class="line"></span><br><span class="line">  reduceLeft((x, y) =&gt; <span class="keyword">if</span> (cmp.lteq(x, y)) x <span class="keyword">else</span> y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其主要优点是：</p>
+<p>集合中的元素不必实现 Ordered trait，但 Ordered 的使用仍然可以执行静态类型检查。<br>无需任何额外的库支持，你也可以定义自己的排序：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>).min</span><br><span class="line">res0: <span class="type">Int</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>).min(<span class="keyword">new</span> <span class="type">Ordering</span>[<span class="type">Int</span>] &#123; <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) = b compare a &#125;)</span><br><span class="line">res3: <span class="type">Int</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>作为旁注，标准库中有视图来将 Ordered 转换为 <code>Ordering</code>（反之亦然）。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">LowPriorityOrderingImplicits</span> </span>&#123;</span><br><span class="line">  <span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">ordered</span></span>[<span class="type">A</span> &lt;: <span class="type">Ordered</span>[<span class="type">A</span>]]: <span class="type">Ordering</span>[<span class="type">A</span>] = <span class="keyword">new</span> <span class="type">Ordering</span>[<span class="type">A</span>] &#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(x: <span class="type">A</span>, y: <span class="type">A</span>) = x.compare(y)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="上下文边界和-implicitly"><a href="#上下文边界和-implicitly" class="headerlink" title="上下文边界和 implicitly[]"></a>上下文边界和 implicitly[]</h3><p>Scala 2.8 引入了一种串联和访问隐式参数的简单记法。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">foo</span></span>[<span class="type">A</span>](<span class="keyword">implicit</span> x: <span class="type">Ordered</span>[<span class="type">A</span>]) &#123;&#125;</span><br><span class="line">foo: [<span class="type">A</span>](<span class="keyword">implicit</span> x: <span class="type">Ordered</span>[<span class="type">A</span>])<span class="type">Unit</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">foo</span></span>[<span class="type">A</span> : <span class="type">Ordered</span>] &#123;&#125;                        </span><br><span class="line">foo: [<span class="type">A</span>](<span class="keyword">implicit</span> evidence$<span class="number">1</span>: <span class="type">Ordered</span>[<span class="type">A</span>])<span class="type">Unit</span></span><br></pre></td></tr></table></figure>
+
+<p>隐式值可以通过 <code>implicitly</code> 被访问</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; implicitly[<span class="type">Ordering</span>[<span class="type">Int</span>]]</span><br><span class="line">res37: <span class="type">Ordering</span>[<span class="type">Int</span>] = scala.math.<span class="type">Ordering</span>$<span class="type">Int</span>$@<span class="number">3</span>a9291cf</span><br></pre></td></tr></table></figure>
+
+<p>相结合后往往会使用更少的代码，尤其是串联视图的时候。</p>
+<h3 id="高阶多态性类型和特设多态性"><a href="#高阶多态性类型和特设多态性" class="headerlink" title="高阶多态性类型和特设多态性"></a>高阶多态性类型和特设多态性</h3><p>Scala 可以对“高阶”的类型进行抽象。例如，假设你需要用几种类型的容器处理几种类型的数据。你可能定义了一个 Container 的接口，它可以被实现为几种类型的容器：Option、List 等。你要定义可以使用这些容器里的值的接口，但不想确定值的类型。</p>
+<p>这类似于函数柯里化。例如，尽管“一元类型”有类似 List[A] 的构造器，这意味着我们必须满足一个“级别”的类型变量来产生一个具体的类型（就像一个没有柯里化的函数需要只提供一个参数列表来被调用），更高阶的类型需要更多。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">trait</span> <span class="title">Container</span>[<span class="type">M</span>[_]] </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">put</span></span>[<span class="type">A</span>](x: <span class="type">A</span>): <span class="type">M</span>[<span class="type">A</span>]; <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>[<span class="type">A</span>](m: <span class="type">M</span>[<span class="type">A</span>]): <span class="type">A</span> &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> container = <span class="keyword">new</span> <span class="type">Container</span>[<span class="type">List</span>] &#123; <span class="function"><span class="keyword">def</span> <span class="title">put</span></span>[<span class="type">A</span>](x: <span class="type">A</span>) = <span class="type">List</span>(x); <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>[<span class="type">A</span>](m: <span class="type">List</span>[<span class="type">A</span>]) = m.head &#125;</span><br><span class="line">container: java.lang.<span class="type">Object</span> <span class="keyword">with</span> <span class="type">Container</span>[<span class="type">List</span>] = $anon$<span class="number">1</span>@<span class="number">7</span>c8e3f75</span><br><span class="line"></span><br><span class="line">scala&gt; container.put(<span class="string">"hey"</span>)</span><br><span class="line">res24: <span class="type">List</span>[java.lang.<span class="type">String</span>] = <span class="type">List</span>(hey)</span><br><span class="line"></span><br><span class="line">scala&gt; container.put(<span class="number">123</span>)</span><br><span class="line">res25: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意：<em>Container</em> 是参数化类型的多态（“容器类型”）。</p>
+<p>如果我们结合隐式转换 implicits 使用容器，我们会得到“特设的”多态性：即对容器写泛型函数的能力。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">trait</span> <span class="title">Container</span>[<span class="type">M</span>[_]] </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">put</span></span>[<span class="type">A</span>](x: <span class="type">A</span>): <span class="type">M</span>[<span class="type">A</span>]; <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>[<span class="type">A</span>](m: <span class="type">M</span>[<span class="type">A</span>]): <span class="type">A</span> &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">implicit</span> <span class="keyword">val</span> listContainer = <span class="keyword">new</span> <span class="type">Container</span>[<span class="type">List</span>] &#123; <span class="function"><span class="keyword">def</span> <span class="title">put</span></span>[<span class="type">A</span>](x: <span class="type">A</span>) = <span class="type">List</span>(x); <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>[<span class="type">A</span>](m: <span class="type">List</span>[<span class="type">A</span>]) = m.head &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">implicit</span> <span class="keyword">val</span> optionContainer = <span class="keyword">new</span> <span class="type">Container</span>[<span class="type">Some</span>] &#123; <span class="function"><span class="keyword">def</span> <span class="title">put</span></span>[<span class="type">A</span>](x: <span class="type">A</span>) = <span class="type">Some</span>(x); <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>[<span class="type">A</span>](m: <span class="type">Some</span>[<span class="type">A</span>]) = m.get &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">tupleize</span></span>[<span class="type">M</span>[_]: <span class="type">Container</span>, <span class="type">A</span>, <span class="type">B</span>](fst: <span class="type">M</span>[<span class="type">A</span>], snd: <span class="type">M</span>[<span class="type">B</span>]) = &#123;</span><br><span class="line">     | <span class="keyword">val</span> c = implicitly[<span class="type">Container</span>[<span class="type">M</span>]]                             </span><br><span class="line">     | c.put(c.get(fst), c.get(snd))</span><br><span class="line">     | &#125;</span><br><span class="line">tupleize: [<span class="type">M</span>[_],<span class="type">A</span>,<span class="type">B</span>](fst: <span class="type">M</span>[<span class="type">A</span>],snd: <span class="type">M</span>[<span class="type">B</span>])(<span class="keyword">implicit</span> evidence$<span class="number">1</span>: <span class="type">Container</span>[<span class="type">M</span>])<span class="type">M</span>[(<span class="type">A</span>, <span class="type">B</span>)]</span><br><span class="line"></span><br><span class="line">scala&gt; tupleize(<span class="type">Some</span>(<span class="number">1</span>), <span class="type">Some</span>(<span class="number">2</span>))</span><br><span class="line">res33: <span class="type">Some</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">Some</span>((<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; tupleize(<span class="type">List</span>(<span class="number">1</span>), <span class="type">List</span>(<span class="number">2</span>))</span><br><span class="line">res34: <span class="type">List</span>[(<span class="type">Int</span>, <span class="type">Int</span>)] = <span class="type">List</span>((<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="F-界多态性"><a href="#F-界多态性" class="headerlink" title="F-界多态性"></a>F-界多态性</h3><p>通常有必要来访问一个泛型 trait 的具体子类。例如，想象你有一些泛型 trait，但需要可以与它的某一子类进行比较。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Container</span> <span class="keyword">extends</span> <span class="title">Ordered</span>[<span class="type">Container</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>现在子类必须实现 <code>compare</code> 方法</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">Container</span>): <span class="type">Int</span></span><br></pre></td></tr></table></figure>
+
+<p>但我们不能访问具体子类型，例如：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyContainer</span> <span class="keyword">extends</span> <span class="title">Container</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">MyContainer</span>): <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译失败，因为我们对 Container 指定了 Ordered 特质，而不是对特定子类型指定的。</p>
+<p>一个可选的解决方案是将 Container 参数化，以便我们能在子类中访问其子类型。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Container</span>[<span class="type">A</span>] <span class="keyword">extends</span> <span class="title">Ordered</span>[<span class="type">A</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>现在子类可以这样做：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyContainer</span> <span class="keyword">extends</span> <span class="title">Container</span>[<span class="type">MyContainer</span>] </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">MyContainer</span>): <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但问题在于 A 类型没有被任何东西约束，这导致你可能会做类似这样的事情：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyContainer</span> <span class="keyword">extends</span> <span class="title">Container</span>[<span class="type">String</span>] </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">String</span>): <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了调和这一点，我们改用 F-界的多态性。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Container</span>[<span class="type">A</span> &lt;: <span class="type">Container</span>[<span class="type">A</span>]] <span class="keyword">extends</span> <span class="title">Ordered</span>[<span class="type">A</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>奇怪的类型！但注意现在如何用 A 作为 Ordered 的类型参数，而 A 本身就是 Container[A]</p>
+<p>所以，现在</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyContainer</span> <span class="keyword">extends</span> <span class="title">Container</span>[<span class="type">MyContainer</span>] </span>&#123; </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">MyContainer</span>) = <span class="number">0</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>他们是有序的了：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="type">List</span>(<span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>)</span><br><span class="line">res3: <span class="type">List</span>[<span class="type">MyContainer</span>] = <span class="type">List</span>(<span class="type">MyContainer</span>@<span class="number">30</span>f02a6d, <span class="type">MyContainer</span>@<span class="number">67717334</span>, <span class="type">MyContainer</span>@<span class="number">49428</span>ffa)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="type">List</span>(<span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>).min</span><br><span class="line">res4: <span class="type">MyContainer</span> = <span class="type">MyContainer</span>@<span class="number">33</span>dfeb30</span><br></pre></td></tr></table></figure>
+
+<p>鉴于他们都是 Container[_] 的子类型，我们可以定义另一个子类并创建 Container[_] 的一个混合列表：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">YourContainer</span> <span class="keyword">extends</span> <span class="title">Container</span>[<span class="type">YourContainer</span>] </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">compare</span></span>(that: <span class="type">YourContainer</span>) = <span class="number">0</span> &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">YourContainer</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">List</span>(<span class="params">new <span class="type">MyContainer</span>, new <span class="type">MyContainer</span>, new <span class="type">MyContainer</span>, new <span class="type">YourContainer</span></span>)                   </span></span><br><span class="line"><span class="class"><span class="title">res2</span></span>: <span class="type">List</span>[<span class="type">Container</span>[_ &gt;: <span class="type">YourContainer</span> <span class="keyword">with</span> <span class="type">MyContainer</span> &lt;: <span class="type">Container</span>[_ &gt;: <span class="type">YourContainer</span> <span class="keyword">with</span> <span class="type">MyContainer</span> &lt;: <span class="type">ScalaObject</span>]]] </span><br><span class="line">  = <span class="type">List</span>(<span class="type">MyContainer</span>@<span class="number">3</span>be5d207, <span class="type">MyContainer</span>@<span class="number">6</span>d3fe849, <span class="type">MyContainer</span>@<span class="number">7</span>eab48a7, <span class="type">YourContainer</span>@<span class="number">1</span>f2f0ce9)</span><br></pre></td></tr></table></figure>
+
+<p>注意现在结果类型是由 YourContainer with MyContainer 类型确定的下界。这是类型推断器的工作。有趣的是，这种类型甚至不需要是有意义的，它仅仅对列表的统一类型提供了一个逻辑上最优的下界。如果现在我们尝试使用 Ordered 会发生什么？</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">MyContainer</span>, <span class="keyword">new</span> <span class="type">YourContainer</span>).min</span><br><span class="line">&lt;console&gt;:<span class="number">9</span>: error: could not find <span class="keyword">implicit</span> value <span class="keyword">for</span> parameter cmp:</span><br><span class="line">  <span class="type">Ordering</span>[<span class="type">Container</span>[_ &gt;: <span class="type">YourContainer</span> <span class="keyword">with</span> <span class="type">MyContainer</span> &lt;: <span class="type">Container</span>[_ &gt;: <span class="type">YourContainer</span> <span class="keyword">with</span> <span class="type">MyContainer</span> &lt;: <span class="type">ScalaObject</span>]]]</span><br></pre></td></tr></table></figure>
+
+<p>对统一的类型 Ordered[] 不存在了。太糟糕了。</p>
+<h3 id="结构类型"><a href="#结构类型" class="headerlink" title="结构类型"></a>结构类型</h3><p>Scala 支持结构类型（<code>structural types</code>） — 类型需求由接口结构表示，而不是由具体的类型表示。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">foo</span></span>(x: &#123; <span class="function"><span class="keyword">def</span> <span class="title">get</span></span>: <span class="type">Int</span> &#125;) = <span class="number">123</span> + x.get</span><br><span class="line">foo: (x: <span class="type">AnyRef</span>&#123;<span class="function"><span class="keyword">def</span> <span class="title">get</span></span>: <span class="type">Int</span>&#125;)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">scala&gt; foo(<span class="keyword">new</span> &#123; <span class="function"><span class="keyword">def</span> <span class="title">get</span> </span>= <span class="number">10</span> &#125;)                 </span><br><span class="line">res0: <span class="type">Int</span> = <span class="number">133</span></span><br></pre></td></tr></table></figure>
+
+<p>这可能在很多场景都是相当不错的，但这个实现中使用了反射，所以要<code>注意性能</code>！</p>
+<h3 id="抽象类型成员"><a href="#抽象类型成员" class="headerlink" title="抽象类型成员"></a>抽象类型成员</h3><p>在特质中，你可以让类型成员保持抽象。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">trait</span> <span class="title">Foo</span> </span>&#123; <span class="class"><span class="keyword">type</span> <span class="title">A</span></span>; <span class="keyword">val</span> x: <span class="type">A</span>; <span class="function"><span class="keyword">def</span> <span class="title">getX</span></span>: <span class="type">A</span> = x &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">trait</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> (<span class="params">new <span class="type">Foo</span> &#123; type <span class="type">A</span> = <span class="type">Int</span>; val x = 123 &#125;</span>).<span class="title">getX</span>   </span></span><br><span class="line"><span class="class"><span class="title">res3</span></span>: <span class="type">Int</span> = <span class="number">123</span></span><br><span class="line"></span><br><span class="line">scala&gt; (<span class="keyword">new</span> <span class="type">Foo</span> &#123; <span class="class"><span class="keyword">type</span> <span class="title">A</span> </span>= <span class="type">String</span>; <span class="keyword">val</span> x = <span class="string">"hey"</span> &#125;).getX</span><br><span class="line">res4: java.lang.<span class="type">String</span> = hey</span><br></pre></td></tr></table></figure>
+
+<p>在做<code>依赖注入</code>等情况下，这往往是一个有用的技巧。</p>
+<p>你可以使用 hash 操作符来引用一个抽象类型的变量：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">trait</span> <span class="title">Foo</span>[<span class="type">M</span>[_]] </span>&#123; <span class="class"><span class="keyword">type</span> <span class="title">t</span>[<span class="type">A</span>] </span>= <span class="type">M</span>[<span class="type">A</span>] &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">trait</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">x</span></span>: <span class="type">Foo</span>[<span class="type">List</span>]#t[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>)</span><br><span class="line">x: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型擦除和清单"><a href="#类型擦除和清单" class="headerlink" title="类型擦除和清单"></a>类型擦除和清单</h3><p>正如我们所知道的，类型信息在编译的时候会因为擦除而丢失。 Scala 提供了清单（<code>Manifests</code>）功能，使我们能够选择性地恢复类型信息。清单作为一个隐式的值被提供，它由编译器根据需要生成。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">MakeFoo</span>[<span class="type">A</span>](<span class="params">implicit manifest: <span class="type">Manifest</span>[<span class="type">A</span>]</span>) </span>&#123; <span class="function"><span class="keyword">def</span> <span class="title">make</span></span>: <span class="type">A</span> = manifest.erasure.newInstance.asInstanceOf[<span class="type">A</span>] &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; (<span class="keyword">new</span> <span class="type">MakeFoo</span>[<span class="type">String</span>]).make</span><br><span class="line">res10: <span class="type">String</span> = <span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="案例分析：Finagle"><a href="#案例分析：Finagle" class="headerlink" title="案例分析：Finagle"></a>案例分析：Finagle</h3><p>参见：<a href="https://github.com/twitter/finagle" target="_blank" rel="noopener">https://github.com/twitter/finagle</a></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Service</span>[-<span class="type">Req</span>, +<span class="type">Rep</span>] <span class="keyword">extends</span> (<span class="params"><span class="type">Req</span> =&gt; <span class="type">Future</span>[<span class="type">Rep</span>]</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">trait</span> <span class="title">Filter</span>[-<span class="type">ReqIn</span>, +<span class="type">RepOut</span>, +<span class="type">ReqOut</span>, -<span class="type">RepIn</span>]</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> (<span class="params">(<span class="type">ReqIn</span>, <span class="type">Service</span>[<span class="type">ReqOut</span>, <span class="type">RepIn</span>]</span>) <span class="title">=&gt;</span> <span class="title">Future</span>[<span class="type">RepOut</span>])</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">andThen</span></span>[<span class="type">Req2</span>, <span class="type">Rep2</span>](next: <span class="type">Filter</span>[<span class="type">ReqOut</span>, <span class="type">RepIn</span>, <span class="type">Req2</span>, <span class="type">Rep2</span>]) =</span><br><span class="line">    <span class="keyword">new</span> <span class="type">Filter</span>[<span class="type">ReqIn</span>, <span class="type">RepOut</span>, <span class="type">Req2</span>, <span class="type">Rep2</span>] &#123;</span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(request: <span class="type">ReqIn</span>, service: <span class="type">Service</span>[<span class="type">Req2</span>, <span class="type">Rep2</span>]) = &#123;</span><br><span class="line">        <span class="type">Filter</span>.<span class="keyword">this</span>.apply(request, <span class="keyword">new</span> <span class="type">Service</span>[<span class="type">ReqOut</span>, <span class="type">RepIn</span>] &#123;</span><br><span class="line">          <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(request: <span class="type">ReqOut</span>): <span class="type">Future</span>[<span class="type">RepIn</span>] = next(request, service)</span><br><span class="line">          <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">release</span></span>() = service.release()</span><br><span class="line">          <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">isAvailable</span> </span>= service.isAvailable</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">andThen</span></span>(service: <span class="type">Service</span>[<span class="type">ReqOut</span>, <span class="type">RepIn</span>]) = <span class="keyword">new</span> <span class="type">Service</span>[<span class="type">ReqIn</span>, <span class="type">RepOut</span>] &#123;</span><br><span class="line">    <span class="keyword">private</span>[<span class="keyword">this</span>] <span class="keyword">val</span> refcounted = <span class="keyword">new</span> <span class="type">RefcountedService</span>(service)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(request: <span class="type">ReqIn</span>) = <span class="type">Filter</span>.<span class="keyword">this</span>.apply(request, refcounted)</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">release</span></span>() = refcounted.release()</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">isAvailable</span> </span>= refcounted.isAvailable</span><br><span class="line">  &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个服务可以通过过滤器对请求进行身份验证。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">RequestWithCredentials</span> <span class="keyword">extends</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">credentials</span></span>: <span class="type">Credentials</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CredentialsFilter</span>(<span class="params">credentialsParser: <span class="type">CredentialsParser</span></span>)</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> <span class="title">Filter</span>[<span class="type">Request</span>, <span class="type">Response</span>, <span class="type">RequestWithCredentials</span>, <span class="type">Response</span>]</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(request: <span class="type">Request</span>, service: <span class="type">Service</span>[<span class="type">RequestWithCredentials</span>, <span class="type">Response</span>]): <span class="type">Future</span>[<span class="type">Response</span>] = &#123;</span><br><span class="line">    <span class="keyword">val</span> requestWithCredentials = <span class="keyword">new</span> <span class="type">RequestWrapper</span> <span class="keyword">with</span> <span class="type">RequestWithCredentials</span> &#123;</span><br><span class="line">      <span class="keyword">val</span> underlying = request</span><br><span class="line">      <span class="keyword">val</span> credentials = credentialsParser(request) getOrElse <span class="type">NullCredentials</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    service(requestWithCredentials)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意底层服务是如何需要对请求进行身份验证的，而且还是静态验证。因此，过滤器可以被看作是服务转换器。</p>
+<p>许多过滤器可以被组合在一起：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> upFilter =</span><br><span class="line">  logTransaction     andThen</span><br><span class="line">  handleExceptions   andThen</span><br><span class="line">  extractCredentials andThen</span><br><span class="line">  homeUser           andThen</span><br><span class="line">  authenticate       andThen</span><br><span class="line">  route</span><br></pre></td></tr></table></figure>
+
+<p>享用安全的类型吧！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/12/01/scala-school-advanced-types/" target="_blank" rel="external">https://razertory.me/2019/12/01/scala-school-advanced-types/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/12/sorted-arr-to-bst/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">有序数组转化为平衡二叉搜索树（BST）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/01/scala-school-type-basics/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">类型和多态基础</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

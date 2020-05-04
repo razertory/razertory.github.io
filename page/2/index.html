@@ -90,6 +90,20 @@ ga('send', 'pageview');
             </li>
         
             <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
               <a href="/links"  >
                 <i class="icon icon-lg icon-external-link-square"></i>
                 关于本博客
@@ -234,6 +248,270 @@ ga('send', 'pageview');
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-scala-school-advanced-types"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-01 11:20:54" datetime="2019-12-01T03:20:54.000Z"  itemprop="datePublished">2019-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/01/scala-school-advanced-types/">高级类型</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        视界（View Bound “类型类”）有时候，你并不需要指定一个类型是等/子/超于另一个类，你可以通过转换这个类来伪装这种关联关系。一个视界指定一个类型可以被“看作是”另一个类型。这对对象的只读操作是很有用的。
+隐式 (implicit) 函数允许类型自动转换。更确切地说，如果隐式函数有助于满足类型推断时，隐式函数可以按需地应用。例如：
+1234567891011scala&gt; imp...
+    
+
+        <a href="/2019/12/01/scala-school-advanced-types/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-school-type-basics"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-01 10:47:32" datetime="2019-12-01T02:47:32.000Z"  itemprop="datePublished">2019-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/01/scala-school-type-basics/">类型和多态基础</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        什么是静态类型？它们为什么有用？
+按 Pierce 的话讲：“类型系统是一个语法方法，它们根据程序计算的值的种类对程序短语进行分类，通过分类结果错误行为进行自动检查。” 另外，笔者推荐阅读 编程语言的类型系统为何如此重要？
+
+类型允许你表示函数的定义域和值域。例如，从数学角度看这个定义：
+f: R -&gt; N // 它告诉我们函数 f 是从实数集到自然数集的映射。
+抽象地说，这就是具体类...
+    
+
+        <a href="/2019/12/01/scala-school-type-basics/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-school-pattern-matching-and-functional-composition"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-01 10:28:36" datetime="2019-12-01T02:28:36.000Z"  itemprop="datePublished">2019-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/01/scala-school-pattern-matching-and-functional-composition/">模式匹配与函数组合</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        函数组合让我们创建两个函数：
+12scala&gt; def f(s: String) = "f(" + s + ")"f: (String)java.lang.String
+
+12scala&gt; def g(s: String) = "g(" + s + ")"g: (String)java.lang.String
+
+composecompose 组合其他函数形成一个新的函数 f(g(...
+    
+
+        <a href="/2019/12/01/scala-school-pattern-matching-and-functional-composition/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-school-collections"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-01 09:10:36" datetime="2019-12-01T01:10:36.000Z"  itemprop="datePublished">2019-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/01/scala-school-collections/">Scala 课堂 - 集合</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        基本数据结构Scala 提供了一些不错的集合。
+参考 Effective Scala 对怎样使用集合的观点。
+数组 (Array)数组是有序的，可以包含重复项，并且可变。
+123456scala&gt; val numbers = Array(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)numbers: Array[Int] = Array(1, 2, 3, 4, 5, 1, ...
+    
+
+        <a href="/2019/12/01/scala-school-collections/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-school-bascis2"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-30 22:20:10" datetime="2019-11-30T14:20:10.000Z"  itemprop="datePublished">2019-11-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/30/scala-school-bascis2/">Scala 课堂 - 基础（续）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        apply 方法当类或对象有一个主要用途的时候，apply 方法为你提供了一个很好的语法糖。
+12345678910scala&gt; class Foo &#123;&#125;defined class Fooscala&gt; object FooMaker &#123;     |   def apply() = new Foo     | &#125;defined module ...
+    
+
+        <a href="/2019/11/30/scala-school-bascis2/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-overview"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-30 21:26:36" datetime="2019-11-30T13:26:36.000Z"  itemprop="datePublished">2019-11-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/30/scala-overview/">Scala 总览</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Why Scala
+JVM 生态
+简洁
+类型推断
+函数式
+多范式
+Actor
+
+
+下面的所有操作都在 Scala REPL 中进行
+
+表达式12scala&gt; 1 + 1res0: Int = 2
+
+res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。
+12scala&gt; res0 + 1res1: Int = ...
+    
+
+        <a href="/2019/11/30/scala-overview/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-binary-search"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -310,257 +588,6 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/17/hamming-distance/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-single-number"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-17 10:31:09" datetime="2019-11-17T02:31:09.000Z"  itemprop="datePublished">2019-11-17</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/17/single-number/">只出现一次的数</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
-1int singleNumber(int[] nums)
-
-计算机科学中，异或满足四大定律
-12341.恒定律：A ^ 0 = A2.归零率：A ^ A = 03.交换律：A ^ B = B ^ A4.结合律：(A ^ B) ^ C = A ^ (B ^ C)
-
-假如给定的数组是 [1,...
-    
-
-        <a href="/2019/11/17/single-number/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-major-element"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-16 20:08:11" datetime="2019-11-16T12:08:11.000Z"  itemprop="datePublished">2019-11-16</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/16/major-element/">个数多于一半的数</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        给定一个大小为 n 的数组，找出其中在数组中出现次数大于 ⌊ n/2 ⌋ 的元素（众数）。
-1int majorityElement(int[] nums)
-
-理解这个问题，首先可以把数组分为两个部分：所有的众数和非众数。把众数和非众数进行两两抵消，那么最后一定还剩下众数。实际上这个也就是摩尔投票法。在遍历数组的时候不断确认当前的众数，如果没有，则认为下一个就是。维护一个计数器，在遇到相同的...
-    
-
-        <a href="/2019/11/16/major-element/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-count-of-one"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-14 09:42:44" datetime="2019-11-14T01:42:44.000Z"  itemprop="datePublished">2019-11-14</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/14/count-of-one/">二进制中 1 的个数</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        对于任意整数，求转换成二进制数之后，1 的个数。比如 5 转换成二进制是 101，其中 1 的个数是 2。
-1int count (int num)
-
-要判断一个二进制数的最低位是否是 1，只需要和 1 进行 &amp; 运算即可。那么具体的做法就一边移位一边统计。
-12345678int count (int num) &#123;    int count = 0;    while(n...
-    
-
-        <a href="/2019/11/14/count-of-one/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-add-by-bit"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-11 22:56:31" datetime="2019-11-11T14:56:31.000Z"  itemprop="datePublished">2019-11-11</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/11/add-by-bit/">位运算实现加法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        计算机科学中，基础运算运算都来自于二进制中的位运算。其中不免提到加法器，维基百科是这么定义的
-
-在电子学中，加法器（英语：adder）是一种用于执行加法运算的数字电路部件，是构成电子计算机核心微处理器中算术逻辑单元的基础。在这些电子系统中，加法器主要负责计算地址、索引等数据。除此之外，加法器也是其他一些硬件，例如二进制数的乘法器的重要组成部分。尽管可以为不同计数系统设计专门的加法器，但是由于...
-    
-
-        <a href="/2019/11/11/add-by-bit/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-valid-brackets"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-10 09:55:10" datetime="2019-11-10T01:55:10.000Z"  itemprop="datePublished">2019-11-10</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/10/valid-brackets/">括号的合法序列</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        给你一个括号序列，里面包含小括号，中括号和大括号。你要判断这个括号序列是否有效。有效的括号序列要求，每个左括号都必须有一个同类的右括号与它正确配对。另外，空字符串认为是有效的括号序列。
-1234567891011比如说，给你的序列是：()[]&#123;&#125;小括号/中括号/大括号的左右括号都能正确配对，因此这是一个有效的括号序列。再比如说给你的序列是：([)]这里面虽然正好有一对小括...
-    
-
-        <a href="/2019/11/10/valid-brackets/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-queue-by-stack"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-10 09:45:31" datetime="2019-11-10T01:45:31.000Z"  itemprop="datePublished">2019-11-10</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/10/queue-by-stack/">栈实现队列</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        维护一个 in，out 栈表示进出顺序，实现一个从 in 到 out 的转移方法。
-1234567891011121314151617181920212223242526272829303132333435class MyQueue &#123;    private Stack&lt;Integer&gt; in, out;    MyQueue() &#123;        in = ...
-    
-
-        <a href="/2019/11/10/queue-by-stack/" class="post-more waves-effect waves-button">
             続きを読む…
         </a>
     </div>

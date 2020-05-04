@@ -90,6 +90,20 @@ ga('send', 'pageview');
             </li>
         
             <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
               <a href="/links"  >
                 <i class="icon icon-lg icon-external-link-square"></i>
                 关于本博客
@@ -143,51 +157,6 @@ ga('send', 'pageview');
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-linux-kernel-interrupt"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2020-04-12 13:50:04" datetime="2020-04-12T05:50:04.000Z"  itemprop="datePublished">2020-04-12</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2020/04/12/linux-kernel-interrupt/">「Linux 内核」中断</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        中断信号中断机制，简单说就是键盘、鼠标、磁盘之类的硬件，在需要的时候向内核发信号的一种机制。比如我此刻正在用键盘打字，其实就是在发出电信号给一个名叫「中断控制器」的物理芯片中，再通过一个和处理器直连的管线给处理器。处理器接收到之后，监测到了是中断信号，就会中断当前的工作处理该信号进而告诉操作系统，让操作系统处理这个信号。不同的中断信号，有的着唯一的 IRQ 编号。比如时钟 IRQ 0，键盘 ...
-    
-
-        <a href="/2020/04/12/linux-kernel-interrupt/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-linux-kernel-system-call"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -219,6 +188,51 @@ ga('send', 'pageview');
     
 
         <a href="/2020/04/12/linux-kernel-system-call/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-linux-kernel-interrupt"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-04-12 13:50:04" datetime="2020-04-12T05:50:04.000Z"  itemprop="datePublished">2020-04-12</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/04/12/linux-kernel-interrupt/">「Linux 内核」中断</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        中断信号中断机制，简单说就是键盘、鼠标、磁盘之类的硬件，在需要的时候向内核发信号的一种机制。比如我此刻正在用键盘打字，其实就是在发出电信号给一个名叫「中断控制器」的物理芯片中，再通过一个和处理器直连的管线给处理器。处理器接收到之后，监测到了是中断信号，就会中断当前的工作处理该信号进而告诉操作系统，让操作系统处理这个信号。不同的中断信号，有的着唯一的 IRQ 编号。比如时钟 IRQ 0，键盘 ...
+    
+
+        <a href="/2020/04/12/linux-kernel-interrupt/" class="post-more waves-effect waves-button">
             続きを読む…
         </a>
     </div>

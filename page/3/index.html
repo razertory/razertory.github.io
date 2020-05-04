@@ -90,6 +90,20 @@ ga('send', 'pageview');
             </li>
         
             <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
               <a href="/links"  >
                 <i class="icon icon-lg icon-external-link-square"></i>
                 关于本博客
@@ -141,6 +155,257 @@ ga('send', 'pageview');
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-single-number"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-17 10:31:09" datetime="2019-11-17T02:31:09.000Z"  itemprop="datePublished">2019-11-17</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/17/single-number/">只出现一次的数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+1int singleNumber(int[] nums)
+
+计算机科学中，异或满足四大定律
+12341.恒定律：A ^ 0 = A2.归零率：A ^ A = 03.交换律：A ^ B = B ^ A4.结合律：(A ^ B) ^ C = A ^ (B ^ C)
+
+假如给定的数组是 [1,...
+    
+
+        <a href="/2019/11/17/single-number/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-major-element"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-16 20:08:11" datetime="2019-11-16T12:08:11.000Z"  itemprop="datePublished">2019-11-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/16/major-element/">个数多于一半的数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        给定一个大小为 n 的数组，找出其中在数组中出现次数大于 ⌊ n/2 ⌋ 的元素（众数）。
+1int majorityElement(int[] nums)
+
+理解这个问题，首先可以把数组分为两个部分：所有的众数和非众数。把众数和非众数进行两两抵消，那么最后一定还剩下众数。实际上这个也就是摩尔投票法。在遍历数组的时候不断确认当前的众数，如果没有，则认为下一个就是。维护一个计数器，在遇到相同的...
+    
+
+        <a href="/2019/11/16/major-element/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-count-of-one"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-14 09:42:44" datetime="2019-11-14T01:42:44.000Z"  itemprop="datePublished">2019-11-14</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/14/count-of-one/">二进制中 1 的个数</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        对于任意整数，求转换成二进制数之后，1 的个数。比如 5 转换成二进制是 101，其中 1 的个数是 2。
+1int count (int num)
+
+要判断一个二进制数的最低位是否是 1，只需要和 1 进行 &amp; 运算即可。那么具体的做法就一边移位一边统计。
+12345678int count (int num) &#123;    int count = 0;    while(n...
+    
+
+        <a href="/2019/11/14/count-of-one/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-add-by-bit"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-11 22:56:31" datetime="2019-11-11T14:56:31.000Z"  itemprop="datePublished">2019-11-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/11/add-by-bit/">位运算实现加法</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        计算机科学中，基础运算运算都来自于二进制中的位运算。其中不免提到加法器，维基百科是这么定义的
+
+在电子学中，加法器（英语：adder）是一种用于执行加法运算的数字电路部件，是构成电子计算机核心微处理器中算术逻辑单元的基础。在这些电子系统中，加法器主要负责计算地址、索引等数据。除此之外，加法器也是其他一些硬件，例如二进制数的乘法器的重要组成部分。尽管可以为不同计数系统设计专门的加法器，但是由于...
+    
+
+        <a href="/2019/11/11/add-by-bit/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-valid-brackets"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-10 09:55:10" datetime="2019-11-10T01:55:10.000Z"  itemprop="datePublished">2019-11-10</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/10/valid-brackets/">括号的合法序列</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        给你一个括号序列，里面包含小括号，中括号和大括号。你要判断这个括号序列是否有效。有效的括号序列要求，每个左括号都必须有一个同类的右括号与它正确配对。另外，空字符串认为是有效的括号序列。
+1234567891011比如说，给你的序列是：()[]&#123;&#125;小括号/中括号/大括号的左右括号都能正确配对，因此这是一个有效的括号序列。再比如说给你的序列是：([)]这里面虽然正好有一对小括...
+    
+
+        <a href="/2019/11/10/valid-brackets/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-queue-by-stack"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-10 09:45:31" datetime="2019-11-10T01:45:31.000Z"  itemprop="datePublished">2019-11-10</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/10/queue-by-stack/">栈实现队列</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        维护一个 in，out 栈表示进出顺序，实现一个从 in 到 out 的转移方法。
+1234567891011121314151617181920212223242526272829303132333435class MyQueue &#123;    private Stack&lt;Integer&gt; in, out;    MyQueue() &#123;        in = ...
+    
+
+        <a href="/2019/11/10/queue-by-stack/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-uber-go-guide-cn"
@@ -311,258 +576,6 @@ Uber Go 语言编码规范 Uber 是一家美国硅谷的科技公司，也是 Go
     
 
         <a href="/2019/11/04/sum-path/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-is-post-order"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-27 15:58:38" datetime="2019-10-27T07:58:38.000Z"  itemprop="datePublished">2019-10-27</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/27/is-post-order/">是否是二叉搜索树的序遍历</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
-1boolean VerifySquenceOfBST(int [] sequence)
-
-BST的后序序列的合法序列是，对于一个序列S，最后一个元素是x （也就是根），如果去掉最后一个元素的序列为T，那么T满足：T可以分成两段，前一段（左子树）小于x，...
-    
-
-        <a href="/2019/10/27/is-post-order/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-is-subtree"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-27 15:49:47" datetime="2019-10-27T07:49:47.000Z"  itemprop="datePublished">2019-10-27</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/27/is-subtree/">判断是否是子树</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
-1boolean HasSubtree(TreeNode root1,TreeNode root2)
-
-首先在 A 中找到一个节点，满足这个节点是 B 的 root 节点，在此基础上按照 B 的结构遍历 A，B。
-12345678910111213141516171819202122boolean H...
-    
-
-        <a href="/2019/10/27/is-subtree/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-swap-nodes-in-pairs"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 14:47:13" datetime="2019-10-26T06:47:13.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/swap-nodes-in-pairs/">链表中交换节点</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Given a linked list, swap every two adjacent nodes and return its head.You may not modify the values in the list’s nodes, only nodes itself may be changed.
-1ListNode swapPairs(ListNode head)
-
-由于要交换...
-    
-
-        <a href="/2019/10/26/swap-nodes-in-pairs/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-add-two-numbers"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 14:38:48" datetime="2019-10-26T06:38:48.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/add-two-numbers/">链表相加</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and retur...
-    
-
-        <a href="/2019/10/26/add-two-numbers/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-delete-duplication"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 14:32:58" datetime="2019-10-26T06:32:58.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/delete-duplication/">有序链表去重</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5 处理后为 1-&gt;2-&gt;5
-传送门
-
-定义一个 dummy 节点，pre，cur 节点。比较 pre.next 和 cur。如果相同让 pre = pre.next 做删除操作
-12345678910...
-    
-
-        <a href="/2019/10/26/delete-duplication/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-entry-node-of-loop"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 14:28:43" datetime="2019-10-26T06:28:43.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/entry-node-of-loop/">链表环的入口</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
-传送门
-
-定义一个慢和一个快指针，当两个指针相遇的时候。快指针速度和慢指针一致，等再次相遇的时候这个点就是环入口。
-1234567891011121314151617ListNode EntryNodeOfLoop(ListNode pHead) &#123;    if (pHead == null || pHea...
-    
-
-        <a href="/2019/10/26/entry-node-of-loop/" class="post-more waves-effect waves-button">
             続きを読む…
         </a>
     </div>

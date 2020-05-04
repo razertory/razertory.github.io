@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-131782721-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>类型和多态基础 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="什么是静态类型？它们为什么有用？ 按 Pierce 的话讲：“类型系统是一个语法方法，它们根据程序计算的值的种类对程序短语进行分类，通过分类结果错误行为进行自动检查。” 另外，笔者推荐阅读 编程语言的类型系统为何如此重要？  类型允许你表示函数的定义域和值域。例如，从数学角度看这个定义： f: R -&amp;gt; N // 它告诉我们函数 f 是从实数集到自然数集的映射。 抽象地说，这就是具体类型的准">
+<meta name="keywords" content="Razertory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类型和多态基础">
+<meta property="og:url" content="https://razertory.me/2019/12/01/scala-school-type-basics/index.html">
+<meta property="og:site_name" content="Razertory 的技术博客">
+<meta property="og:description" content="什么是静态类型？它们为什么有用？ 按 Pierce 的话讲：“类型系统是一个语法方法，它们根据程序计算的值的种类对程序短语进行分类，通过分类结果错误行为进行自动检查。” 另外，笔者推荐阅读 编程语言的类型系统为何如此重要？  类型允许你表示函数的定义域和值域。例如，从数学角度看这个定义： f: R -&amp;gt; N // 它告诉我们函数 f 是从实数集到自然数集的映射。 抽象地说，这就是具体类型的准">
+<meta property="og:locale" content="cn">
+<meta property="og:updated_time" content="2020-05-04T07:03:04.626Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类型和多态基础">
+<meta name="twitter:description" content="什么是静态类型？它们为什么有用？ 按 Pierce 的话讲：“类型系统是一个语法方法，它们根据程序计算的值的种类对程序短语进行分类，通过分类结果错误行为进行自动检查。” 另外，笔者推荐阅读 编程语言的类型系统为何如此重要？  类型允许你表示函数的定义域和值域。例如，从数学角度看这个定义： f: R -&amp;gt; N // 它告诉我们函数 f 是从实数集到自然数集的映射。 抽象地说，这就是具体类型的准">
+    
+        <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Razertory</h5>
+          <a href="mailto:razer.spring@gmail.com" title="razer.spring@gmail.com" class="mail">razer.spring@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-tags"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/algo-solution"  >
+                <i class="icon icon-lg icon-code"></i>
+                算法题解
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cs"  >
+                <i class="icon icon-lg icon-rocket"></i>
+                计算机系统
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links"  >
+                <i class="icon icon-lg icon-external-link-square"></i>
+                关于本博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">类型和多态基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">类型和多态基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-01T02:47:32.000Z" itemprop="datePublished" class="page-time">
+  2019-12-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-scala-school-type-basics"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">类型和多态基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-01 10:47:32" datetime="2019-12-01T02:47:32.000Z"  itemprop="datePublished">2019-12-01</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="什么是静态类型？它们为什么有用？"><a href="#什么是静态类型？它们为什么有用？" class="headerlink" title="什么是静态类型？它们为什么有用？"></a>什么是静态类型？它们为什么有用？</h4><blockquote>
+<p>按 Pierce 的话讲：“类型系统是一个语法方法，它们根据程序计算的值的种类对程序短语进行分类，通过分类结果错误行为进行自动检查。” 另外，笔者推荐阅读 <a href="https://www.zhihu.com/question/23434097" target="_blank" rel="noopener">编程语言的类型系统为何如此重要？</a></p>
+</blockquote>
+<p>类型允许你表示函数的定义域和值域。例如，从数学角度看这个定义：</p>
+<p><code>f: R -&gt; N</code> // 它告诉我们函数 f 是从实数集到自然数集的映射。</p>
+<p>抽象地说，这就是<em>具体</em>类型的准确定义。类型系统给我们提供了一些更强大的方式来表达这些集合。鉴于这些注释，编译器可以<em>静态地</em>（在编译时）验证程序是<em>合理</em>的。也就是说，如果值（在运行时）不符合程序规定的约束，编译将失败。一般说来，类型检查只能保证<em>不合理</em>的程序不能编译通过。它不能保证每一个合理的程序都<em>可以</em>编译通过。</p>
+<p>随着类型系统表达能力的提高，我们可以生产更可靠的代码，因为它能够在我们运行程序之前验证程序的不变性（当然是发现类型本身的模型 bug！）。学术界一直很努力地提高类型系统的表现力，包括值依赖（value-dependent）类型！</p>
+<p>需要注意的是，所有的类型信息会在编译时被删去，因为它已不再需要。这就是所谓的<code>类型擦除</code>。</p>
+<h4 id="Scala-中的类型"><a href="#Scala-中的类型" class="headerlink" title="Scala 中的类型"></a>Scala 中的类型</h4><p>Scala 强大的类型系统拥有非常丰富的表现力。其主要特性有：</p>
+<ul>
+<li><strong>参数化多态性 (parametric polymorphism )</strong>，粗略地说，就是泛型编程</li>
+<li><strong>局部类型推断</strong>，粗略地说，就是为什么你不需要这样写代码 val i: Int = 12: Int</li>
+<li>*<em>存在量化 (existential quantification) *</em>粗略地说，为一些没有名称的类型进行定义</li>
+<li>*<em>视图 (views) *</em>粗略地说，就是将一种类型的值“强制转换”为另一种类型</li>
+</ul>
+<h4 id="参数化多态性"><a href="#参数化多态性" class="headerlink" title="参数化多态性"></a>参数化多态性</h4><p>多态性是在不影响静态类型丰富性的前提下，用来（给不同类型的值）编写通用代码的。</p>
+<p>例如，如果没有参数化多态性，一个通用的列表数据结构总是看起来像这样（事实上，它看起来很像使用泛型前的 Java）：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="number">2</span> :: <span class="number">1</span> :: <span class="string">"bar"</span> :: <span class="string">"foo"</span> :: <span class="type">Nil</span></span><br><span class="line">res5: <span class="type">List</span>[<span class="type">Any</span>] = <span class="type">List</span>(<span class="number">2</span>, <span class="number">1</span>, bar, foo)</span><br></pre></td></tr></table></figure>
+
+<p>现在我们无法恢复其中成员的任何类型信息。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; res5.head</span><br><span class="line">res6: <span class="type">Any</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>所以我们的应用程序将会退化为一系列类型转换（“asInstanceOf[]”），并且会缺乏类型安全的保障（因为这些都是动态的）。</p>
+<p>多态性是通过指定<em>类型变量</em>实现的。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">drop1</span></span>[<span class="type">A</span>](l: <span class="type">List</span>[<span class="type">A</span>]) = l.tail</span><br><span class="line">drop1: [<span class="type">A</span>](l: <span class="type">List</span>[<span class="type">A</span>])<span class="type">List</span>[<span class="type">A</span>]</span><br><span class="line"></span><br><span class="line">scala&gt; drop1(<span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">res1: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Scala-有-rank-1-多态性-rank-1-polymorphism"><a href="#Scala-有-rank-1-多态性-rank-1-polymorphism" class="headerlink" title="Scala 有 rank-1 多态性 (rank-1 polymorphism)"></a>Scala 有 rank-1 多态性 (rank-1 polymorphism)</h4><p>粗略地说，这意味着在 Scala 中，有一些你想表达的类型概念“过于泛化”（泛化的层级大于 1) 以至于编译器无法理解。假设你有一个函数</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toList</span></span>[<span class="type">A</span>](a: <span class="type">A</span>) = <span class="type">List</span>(a)</span><br></pre></td></tr></table></figure>
+
+<p>你希望继续泛型地使用它：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span></span>[<span class="type">A</span>, <span class="type">B</span>](f: <span class="type">A</span> =&gt; <span class="type">List</span>[<span class="type">A</span>], b: <span class="type">B</span>) = f(b)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码不能编译，因为所有的类型变量只有在调用上下文中才被固定。即使你“钉住”了类型 B：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span></span>[<span class="type">A</span>](f: <span class="type">A</span> =&gt; <span class="type">List</span>[<span class="type">A</span>], i: <span class="type">Int</span>) = f(i)</span><br></pre></td></tr></table></figure>
+
+<p>你也会得到一个类型不匹配的错误。</p>
+<h4 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h4><p>静态类型的一个传统反对意见是，它有大量的语法开销。Scala 通过<em>类型推断</em>来缓解这个问题。</p>
+<p>在函数式编程语言中，类型推断的经典方法是 Hindley Milner 算法，它最早是实现在 ML 中的。</p>
+<p>Scala 类型推断系统的实现稍有不同，但本质类似：<code>推断约束</code>，并试图统一类型。</p>
+<p>例如，在 Scala 中你无法这样做：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; &#123; x =&gt; x &#125;</span><br><span class="line">&lt;console&gt;:<span class="number">7</span>: error: missing parameter <span class="class"><span class="keyword">type</span></span></span><br><span class="line"><span class="class">       </span>&#123; x =&gt; x &#125;</span><br></pre></td></tr></table></figure>
+
+<p>而在 OCaml 中你可以：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">fun</span> x -&gt; x;;</span><br><span class="line">- : <span class="symbol">'a</span> -&gt; <span class="symbol">'a</span> = &lt;<span class="keyword">fun</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 Scala 中所有类型推断是<code>局部的</code>。Scala 一次分析一个表达式。例如：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">id</span></span>[<span class="type">T</span>](x: <span class="type">T</span>) = x</span><br><span class="line">id: [<span class="type">T</span>](x: <span class="type">T</span>)<span class="type">T</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> x = id(<span class="number">322</span>)</span><br><span class="line">x: <span class="type">Int</span> = <span class="number">322</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> x = id(<span class="string">"hey"</span>)</span><br><span class="line">x: java.lang.<span class="type">String</span> = hey</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> x = id(<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">x: <span class="type">Array</span>[<span class="type">Int</span>] = <span class="type">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>类型信息都保存完好，Scala 编译器为我们进行了类型推断。请注意我们并不需要明确指定返回类型。</p>
+<h4 id="变性-Variance"><a href="#变性-Variance" class="headerlink" title="变性 (Variance)"></a>变性 (Variance)</h4><p>Scala 的类型系统必须同时解释类层次和多态性。类层次结构可以表达子类关系。在混合 OO 和多态性时，一个核心问题是：如果 T’是 T 一个子类，Container[T’] 应该被看做是 Container[T] 的子类吗？变性（Variance）注解允许你表达类层次结构和多态类型之间的关系。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>含义</th>
+<th>Scala 标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>协变 (covariant)</td>
+<td>C[T’] 是 C[T] 的子类</td>
+<td>[+T]</td>
+</tr>
+<tr>
+<td>逆变 (contravariant)</td>
+<td>C[T] 是 C[T’] 的子类</td>
+<td>[-T]</td>
+</tr>
+<tr>
+<td>不变 (invariant)</td>
+<td>C[T] 和 C[T’] 无关</td>
+<td>[T]</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>逆变协变更多信息参考<a href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E5%8F%98%E4%B8%8E%E9%80%86%E5%8F%98" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>子类型关系的真正含义：对一个给定的类型 T，如果 T’是其子类型，你能替换它吗？</p>
+<h5 id="协变"><a href="#协变" class="headerlink" title="协变"></a>协变</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Covariant</span>[+<span class="type">A</span>]</span></span><br><span class="line"><span class="class"><span class="title">defined</span> <span class="title">class</span> <span class="title">Covariant</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">cv</span></span>: <span class="type">Covariant</span>[<span class="type">AnyRef</span>] = <span class="keyword">new</span> <span class="type">Covariant</span>[<span class="type">String</span>]</span><br><span class="line">cv: <span class="type">Covariant</span>[<span class="type">AnyRef</span>] = <span class="type">Covariant</span>@<span class="number">4035</span>acf6</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> cv: <span class="type">Covariant</span>[<span class="type">String</span>] = <span class="keyword">new</span> <span class="type">Covariant</span>[<span class="type">AnyRef</span>]</span><br><span class="line">&lt;console&gt;:<span class="number">6</span>: error: <span class="class"><span class="keyword">type</span> <span class="title">mismatch</span></span>;</span><br><span class="line"> found   : <span class="type">Covariant</span>[<span class="type">AnyRef</span>]</span><br><span class="line"> required: <span class="type">Covariant</span>[<span class="type">String</span>]</span><br><span class="line">       <span class="keyword">val</span> cv: <span class="type">Covariant</span>[<span class="type">String</span>] = <span class="keyword">new</span> <span class="type">Covariant</span>[<span class="type">AnyRef</span>]</span><br><span class="line">                                   ^</span><br></pre></td></tr></table></figure>
+
+<h5 id="逆变"><a href="#逆变" class="headerlink" title="逆变"></a>逆变</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Contravariant</span>[-<span class="type">A</span>]</span></span><br><span class="line"><span class="class"><span class="title">defined</span> <span class="title">class</span> <span class="title">Contravariant</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">val</span> <span class="title">cv</span></span>: <span class="type">Contravariant</span>[<span class="type">String</span>] = <span class="keyword">new</span> <span class="type">Contravariant</span>[<span class="type">AnyRef</span>]</span><br><span class="line">cv: <span class="type">Contravariant</span>[<span class="type">AnyRef</span>] = <span class="type">Contravariant</span>@<span class="number">49</span>fa7ba</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> fail: <span class="type">Contravariant</span>[<span class="type">AnyRef</span>] = <span class="keyword">new</span> <span class="type">Contravariant</span>[<span class="type">String</span>]</span><br><span class="line">&lt;console&gt;:<span class="number">6</span>: error: <span class="class"><span class="keyword">type</span> <span class="title">mismatch</span></span>;</span><br><span class="line"> found   : <span class="type">Contravariant</span>[<span class="type">String</span>]</span><br><span class="line"> required: <span class="type">Contravariant</span>[<span class="type">AnyRef</span>]</span><br><span class="line">       <span class="keyword">val</span> fail: <span class="type">Contravariant</span>[<span class="type">AnyRef</span>] = <span class="keyword">new</span> <span class="type">Contravariant</span>[<span class="type">String</span>]</span><br><span class="line">                                     ^</span><br></pre></td></tr></table></figure>
+
+<p>逆变似乎很奇怪。什么时候才会用到它呢？令人惊讶的是，函数特质的定义就使用了它！</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Function1</span> [-<span class="type">T1</span>, +<span class="type">R</span>] <span class="keyword">extends</span> <span class="title">AnyRef</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果你仔细从替换的角度思考一下，会发现它是非常合理的。让我们先定义一个简单的类层次结构：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123; <span class="keyword">val</span> sound = <span class="string">"rustle"</span> &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">class</span> <span class="title">Bird</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123; <span class="keyword">override</span> <span class="keyword">val</span> sound = <span class="string">"call"</span> &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Bird</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">scala&gt;</span> <span class="title">class</span> <span class="title">Chicken</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123; <span class="keyword">override</span> <span class="keyword">val</span> sound = <span class="string">"cluck"</span> &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Chicken</span></span></span><br></pre></td></tr></table></figure>
+
+<p>假设你需要一个以 Bird 为参数的函数：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> getTweet: (<span class="type">Bird</span> =&gt; <span class="type">String</span>) = <span class="comment">// TODO</span></span><br></pre></td></tr></table></figure>
+
+<p>标准动物库有一个函数满足了你的需求，但它的参数是 Animal。在大多数情况下，如果你说“我需要一个<strong><em>，我有一个</em></strong>的子类”是可以的。但是，在函数参数这里是<code>逆变</code>的。如果你需要一个接受参数类型 Bird 的函数变量，但却将这个变量指向了接受参数类型为 Chicken 的函数，那么给它传入一个 Duck 时就会出错。然而，如果将该变量指向一个接受参数类型为 Animal 的函数就不会有这种问题：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> getTweet: (<span class="type">Bird</span> =&gt; <span class="type">String</span>) = ((a: <span class="type">Animal</span>) =&gt; a.sound )</span><br><span class="line">getTweet: <span class="type">Bird</span> =&gt; <span class="type">String</span> = &lt;function1&gt;</span><br></pre></td></tr></table></figure>
+
+<p>函数的返回值类型是协变的。如果你需要一个返回 Bird 的函数，但指向的函数返回类型是 Chicken，这当然是可以的。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> hatch: (() =&gt; <span class="type">Bird</span>) = (() =&gt; <span class="keyword">new</span> <span class="type">Chicken</span> )</span><br><span class="line">hatch: () =&gt; <span class="type">Bird</span> = &lt;function0&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>所以对于 Scala 中的函数而言，在入参逆变，返回值协变的基础上一切都会变得灵活而严谨。</p>
+</blockquote>
+<h4 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h4><p>Scala 允许你通过<code>边界</code>来限制多态变量。这些边界表达了子类型关系。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">cacophony</span></span>[<span class="type">T</span>](things: <span class="type">Seq</span>[<span class="type">T</span>]) = things map (_.sound)</span><br><span class="line">&lt;console&gt;:<span class="number">7</span>: error: value sound is not a member of <span class="class"><span class="keyword">type</span> <span class="title">parameter</span> <span class="title">T</span></span></span><br><span class="line"><span class="class">       <span class="title">def</span> <span class="title">cacophony</span>[<span class="type">T</span>](<span class="params">things: <span class="type">Seq</span>[<span class="type">T</span>]</span>) </span>= things map (_.sound)</span><br><span class="line">                                                        ^</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">biophony</span></span>[<span class="type">T</span> &lt;: <span class="type">Animal</span>](things: <span class="type">Seq</span>[<span class="type">T</span>]) = things map (_.sound)</span><br><span class="line">biophony: [<span class="type">T</span> &lt;: <span class="type">Animal</span>](things: <span class="type">Seq</span>[<span class="type">T</span>])<span class="type">Seq</span>[java.lang.<span class="type">String</span>]</span><br><span class="line"></span><br><span class="line">scala&gt; biophony(<span class="type">Seq</span>(<span class="keyword">new</span> <span class="type">Chicken</span>, <span class="keyword">new</span> <span class="type">Bird</span>))</span><br><span class="line">res5: <span class="type">Seq</span>[java.lang.<span class="type">String</span>] = <span class="type">List</span>(cluck, call)</span><br></pre></td></tr></table></figure>
+
+<p>类型下界也是支持的，这让逆变和巧妙协变的引入得心应手。List[+T] 是协变的；一个 Bird 的列表也是 Animal 的列表。List 定义一个操作 <code>::</code> (elem T) 返回一个加入了 elem 的新的 List。新的 List 和原来的列表具有相同的类型：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> flock = <span class="type">List</span>(<span class="keyword">new</span> <span class="type">Bird</span>, <span class="keyword">new</span> <span class="type">Bird</span>)</span><br><span class="line">flock: <span class="type">List</span>[<span class="type">Bird</span>] = <span class="type">List</span>(<span class="type">Bird</span>@<span class="number">7e1</span>ec70e, <span class="type">Bird</span>@<span class="number">169</span>ea8d2)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">new</span> <span class="type">Chicken</span> :: flock</span><br><span class="line">res53: <span class="type">List</span>[<span class="type">Bird</span>] = <span class="type">List</span>(<span class="type">Chicken</span>@<span class="number">56</span>fbda05, <span class="type">Bird</span>@<span class="number">7e1</span>ec70e, <span class="type">Bird</span>@<span class="number">169</span>ea8d2)</span><br></pre></td></tr></table></figure>
+
+<p>List 同样 定义了 <code>::</code> [B &gt;: T](x: B) 来返回一个 List[B]。请注意 B &gt;: T，这指明了类型 B 为类型 T 的超类。这个方法让我们能够做正确地处理在一个 List[Bird] 前面加一个 Animal 的操作：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">new</span> <span class="type">Animal</span> :: flock</span><br><span class="line">res59: <span class="type">List</span>[<span class="type">Animal</span>] = <span class="type">List</span>(<span class="type">Animal</span>@<span class="number">11</span>f8d3a8, <span class="type">Bird</span>@<span class="number">7e1</span>ec70e, <span class="type">Bird</span>@<span class="number">169</span>ea8d2)</span><br></pre></td></tr></table></figure>
+
+<p>注意返回类型是 Animal。</p>
+<h4 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h4><p>有时候，你并不关心是否能够命名一个类型变量，例如：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">count</span></span>[<span class="type">A</span>](l: <span class="type">List</span>[<span class="type">A</span>]) = l.size</span><br><span class="line">count: [<span class="type">A</span>](<span class="type">List</span>[<span class="type">A</span>])<span class="type">Int</span></span><br></pre></td></tr></table></figure>
+
+<p>这时你可以使用通配符 <code>_</code> 取而代之：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">count</span></span>(l: <span class="type">List</span>[_]) = l.size</span><br><span class="line">count: (<span class="type">List</span>[_])<span class="type">Int</span></span><br></pre></td></tr></table></figure>
+
+<p>这相当于是下面代码的简写：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">count</span></span>(l: <span class="type">List</span>[<span class="type">T</span> <span class="keyword">forSome</span> &#123; <span class="class"><span class="keyword">type</span> <span class="title">T</span> &#125;]) </span>= l.size</span><br><span class="line">count: (<span class="type">List</span>[<span class="type">T</span> <span class="keyword">forSome</span> &#123; <span class="class"><span class="keyword">type</span> <span class="title">T</span> &#125;])<span class="title">Int</span></span></span><br></pre></td></tr></table></figure>
+
+<p>注意量化会的结果会变得非常难以理解：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">drop1</span></span>(l: <span class="type">List</span>[_]) = l.tail</span><br><span class="line">drop1: (<span class="type">List</span>[_])<span class="type">List</span>[<span class="type">Any</span>]</span><br></pre></td></tr></table></figure>
+
+<p>突然，我们失去了类型信息！让我们细化代码看看发生了什么：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">drop1</span></span>(l: <span class="type">List</span>[<span class="type">T</span> <span class="keyword">forSome</span> &#123; <span class="class"><span class="keyword">type</span> <span class="title">T</span> &#125;]) </span>= l.tail</span><br><span class="line">drop1: (<span class="type">List</span>[<span class="type">T</span> <span class="keyword">forSome</span> &#123; <span class="class"><span class="keyword">type</span> <span class="title">T</span> &#125;])<span class="title">List</span>[<span class="type">T</span> forSome &#123; type <span class="type">T</span> &#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>我们不能使用 T 因为类型不允许这样做。</p>
+<p>你也可以为通配符类型变量应用边界：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">hashcodes</span></span>(l: <span class="type">Seq</span>[_ &lt;: <span class="type">AnyRef</span>]) = l map (_.hashCode)</span><br><span class="line">hashcodes: (<span class="type">Seq</span>[_ &lt;: <span class="type">AnyRef</span>])<span class="type">Seq</span>[<span class="type">Int</span>]</span><br><span class="line"></span><br><span class="line">scala&gt; hashcodes(<span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">&lt;console&gt;:<span class="number">7</span>: error: <span class="class"><span class="keyword">type</span> <span class="title">mismatch</span></span>;</span><br><span class="line"> found   : <span class="type">Int</span>(<span class="number">1</span>)</span><br><span class="line"> required: <span class="type">AnyRef</span></span><br><span class="line"><span class="type">Note</span>: primitive types are not implicitly converted to <span class="type">AnyRef</span>.</span><br><span class="line"><span class="type">You</span> can safely force boxing by casting x.asInstanceOf[<span class="type">AnyRef</span>].</span><br><span class="line">       hashcodes(<span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">                     ^</span><br><span class="line"></span><br><span class="line">scala&gt; hashcodes(<span class="type">Seq</span>(<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>))</span><br><span class="line">res1: <span class="type">Seq</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">110182</span>, <span class="number">115276</span>, <span class="number">110339486</span>)</span><br></pre></td></tr></table></figure>
+
+<p>参考 <a href="https://www.drmaciver.com/2008/03/existential-types-in-scala/" target="_blank" rel="noopener">D. R. MacIver 写的 Scala 中的存在类型</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+
+        
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/12/01/scala-school-type-basics/" target="_blank" rel="external">https://razertory.me/2019/12/01/scala-school-type-basics/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://razertory.me">
+            <img src="/img/avatar.jpg" alt="Razertory">
+            Razertory
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/01/scala-school-advanced-types/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">高级类型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/01/scala-school-pattern-matching-and-functional-composition/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">模式匹配与函数组合</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+        //   clientID: '',
+        //   clientSecret: '',
+          accessToken: 'c31444be137a00f482e74d50f295dfb071bd6bc3',
+          repo: 'razertory.github.io',
+          owner: 'razertory',
+          admin: ['razertory'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Razertory &copy; 2018 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '一曲肝肠断，天涯何处觅知音';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Razertory';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
