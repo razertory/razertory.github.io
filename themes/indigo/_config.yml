@@ -14,9 +14,12 @@ menu:
   code:
     text: 算法题解
     url: /algo-solution
-  # book:
-  #   text: 算法 wiki
-  #   url: /algo-wiki
+  rocket:
+    text: 计算机系统
+    url: /cs
+  book:
+    text: 读书
+    url: books
 
   # tasks:
   #   text: MIT 6.824

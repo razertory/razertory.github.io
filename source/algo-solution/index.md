@@ -32,6 +32,3 @@ date: 2019-10-16 21:31:33
 
 **高级数据结构**
 [LRU 缓存](/2020/02/16/lru-cache/)
-
----
-- [Scala 函数式编程设计](/2020/02/20/functional-program-design-in-scala/)

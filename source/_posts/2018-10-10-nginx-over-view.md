@@ -1,16 +1,11 @@
 ---
 layout: post                          # (require) default post layout
-title: "开源项目之 Nginx"                   # (require) a string title
+title: 开源项目之 Nginx                 # (require) a string title
 date: 2018-10-09 19:51:02 +0700       # (require) a post date
 tags: 基础组件
 ---
 
 # 正文
-> * 原文作者：[Andrew Alexeev](http://aosabook.org/en/intro2.html#alexeev-andrew)
-> * 译文出自：[掘金翻译计划](https://github.com/xitu/gold-miner)
-> * 本文永久链接：[https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md](https://github.com/xitu/gold-miner/blob/master/TODO1/the-open-source-project-nginx.md)
-> * 译者：[razertory](https://github.com/razertory)
-> * 校对者：[yqian1991](https://github.com/yqian1991)
 
 # 开源项目之 Nginx
 
