@@ -85,7 +85,7 @@ postMessage: 本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版
 cnzz: false
 
 # 百度统计，如要开启，改为你的 key
-baidu_tongji: false
+baidu_tongji: 62e6e4fa9639be49fa509da74f862dfb
 
 # 腾讯分析，如要开启，输入站点id
 tajs: false
