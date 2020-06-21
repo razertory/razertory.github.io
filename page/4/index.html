@@ -127,7 +127,7 @@ ga('send', 'pageview');
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -155,6 +155,48 @@ ga('send', 'pageview');
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-sum-path"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-04 10:19:06" datetime="2019-11-04T02:19:06.000Z"  itemprop="datePublished">2019-11-04</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/04/sum-path/">和为某个值的二叉树路径</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前)
+1public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root,int target)
+
+维护一个二维数组，...
+    
+
+        <a href="/2019/11/04/sum-path/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-is-post-order"
@@ -190,7 +232,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/27/is-post-order/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -233,7 +275,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/27/is-subtree/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -275,7 +317,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/swap-nodes-in-pairs/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -314,7 +356,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/add-two-numbers/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -357,7 +399,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/delete-duplication/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -400,7 +442,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/entry-node-of-loop/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -443,7 +485,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/first-common-node/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -485,7 +527,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/copy-linked-list/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -530,48 +572,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
     
 
         <a href="/2019/10/26/reverse-list/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-merge-sort"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-26 11:36:12" datetime="2019-10-26T03:36:12.000Z"  itemprop="datePublished">2019-10-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/26/merge-sort/">归并排序</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        归并排序最核心的思想就是 merge 两个有序的数组。假设两个只有一个元素的数组合并，比如 [34], [33]，合并之后就是 [33, 34]。假设这个数组要和 [1, 100] 合并，合并之后就是 [1, 33, 34, 100]。
-可以看出当大小为 n 的有序数组和大小为 m 的有序数组合并之后大小就是 n + m。所以最重要的就是写出高效的合并算法，假设函数的签名是 
-123// a...
-    
-
-        <a href="/2019/10/26/merge-sort/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -599,7 +600,7 @@ BST的后序序列的合法序列是，对于一个序列S，最后一个元素�
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

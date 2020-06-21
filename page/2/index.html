@@ -127,7 +127,7 @@ ga('send', 'pageview');
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -155,6 +155,49 @@ ga('send', 'pageview');
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-max-stock-profit"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-01-09 13:02:03" datetime="2020-01-09T05:02:03.000Z"  itemprop="datePublished">2020-01-09</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/01/09/max-stock-profit/">买卖股票的最大利润</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖 一次 该股票可能获得的利润是多少？
+例如一只股票在某些时间节点的价格为 [9, 11, 8, 5, 7, 12, 16, 14]。
+如果我们能在价格为 5 的时候买入并在价格为 16 时卖出，则能收获最大的利润 11。传送门
+
+股票最大利润，其实就是个从头到尾一直更新最大利润。最大利润 = Math.max(前面的最大利润，当前股票价...
+    
+
+        <a href="/2020/01/09/max-stock-profit/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-happy-new-year-2020"
@@ -191,7 +234,7 @@ ga('send', 'pageview');
     
 
         <a href="/2020/01/01/happy-new-year-2020/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -239,7 +282,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/12/12/sorted-arr-to-bst/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -280,7 +323,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/12/01/scala-school-advanced-types/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -324,7 +367,7 @@ f: R -&gt; N // 它告诉我们函数 f 是从实数集到自然数集的映射�
     
 
         <a href="/2019/12/01/scala-school-type-basics/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -368,7 +411,7 @@ composecompose 组合其他函数形成一个新的函数 f(g(...
     
 
         <a href="/2019/12/01/scala-school-pattern-matching-and-functional-composition/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -410,7 +453,7 @@ composecompose 组合其他函数形成一个新的函数 f(g(...
     
 
         <a href="/2019/12/01/scala-school-collections/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -450,7 +493,7 @@ composecompose 组合其他函数形成一个新的函数 f(g(...
     
 
         <a href="/2019/11/30/scala-school-bascis2/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -503,7 +546,7 @@ res0 是解释器自动创建的变量名称，用来指代表达式的计算结
     
 
         <a href="/2019/11/30/scala-overview/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -545,50 +588,7 @@ res0 是解释器自动创建的变量名称，用来指代表达式的计算结
     
 
         <a href="/2019/11/28/binary-search/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-hamming-distance"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-17 10:46:03" datetime="2019-11-17T02:46:03.000Z"  itemprop="datePublished">2019-11-17</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/17/hamming-distance/">汉明距离</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。给出两个整数 x 和 y，计算它们之间的汉明距离。
-1int hammingDistance(int x, int y)
-
-对于 x, 和 y 先进行异或，然后再计算结果中的 1 的个数即可。（其中 count 算法来自 二进制中 1 的个数）
-1234int hammingDistance(int x, int y) &#...
-    
-
-        <a href="/2019/11/17/hamming-distance/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -616,7 +616,7 @@ res0 是解释器自动创建的变量名称，用来指代表达式的计算结
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
