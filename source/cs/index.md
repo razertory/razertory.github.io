@@ -16,6 +16,11 @@ date: 2019-10-16 21:31:33
 - [Java 伪共享](/2019/07/13/false-share/)
 - [Java 控制 CPU 占用](/2018/10/13/control-cpu-just-by-java-code/)
 
+
+### Go
+- [Uber Go Guide](/2019/11/08/uber-go-guide-cn/)
+- [Go 编码的一些技巧和细节](/2020/07/21/go-coding-skills/)
+
 ### Scala
 - [Scala 总览](/2019/11/30/scala-overview/)
 - [Scala 基础](/2019/11/30/scala-school-bascis2/)
@@ -25,11 +30,9 @@ date: 2019-10-16 21:31:33
 - [Scala 高级类型](/2019/12/01/scala-school-advanced-types/)
 - [Scala 函数式编程设计](/2020/02/20/functional-program-design-in-scala/)
 
-### Go
-- [Uber Go Guide](/2019/11/08/uber-go-guide-cn/)
-
 ### Infra
 - [开源项目之 Nginx](/2018/10/09/nginx-over-view/)
 - [MySQL Top Tips](/2019/05/31/100-tips-of-mysql/)
+- [Redis Top Tips](/2020/07/21/redis-top-tips/)
 
 
