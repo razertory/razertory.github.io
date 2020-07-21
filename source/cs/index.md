@@ -19,20 +19,19 @@ date: 2019-10-16 21:31:33
 
 ### Go
 - [Uber Go Guide](/2019/11/08/uber-go-guide-cn/)
-- [Go 编码的一些技巧和细节](/2020/07/21/go-coding-skills/)
+- [改善你的 Go 代码](/2020/07/21/go-coding-skills/)
 
 ### Scala
 - [Scala 总览](/2019/11/30/scala-overview/)
 - [Scala 基础](/2019/11/30/scala-school-bascis2/)
 - [Scala 集合](/2019/12/01/scala-school-collections/)
 - [模式匹配与函数组合](/2019/12/01/scala-school-pattern-matching-and-functional-composition/)
-- [类型和多态基础](/2019/12/01/scala-school-type-basics/)
+ [类型和多态基础](/2019/12/01/scala-school-type-basics/)
 - [Scala 高级类型](/2019/12/01/scala-school-advanced-types/)
 - [Scala 函数式编程设计](/2020/02/20/functional-program-design-in-scala/)
 
 ### Infra
 - [开源项目之 Nginx](/2018/10/09/nginx-over-view/)
 - [MySQL Top Tips](/2019/05/31/100-tips-of-mysql/)
-- [Redis Top Tips](/2020/07/21/redis-top-tips/)
 
 
