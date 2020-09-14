@@ -14,8 +14,20 @@ date: 2019-10-16 21:01:48
 **友链**
 如果需要添加友链，可以在 telegram 上直接联系我（这样很快），或者发我邮件
 
+*个人*
 [windanchaos](https://blog.windanchaos.tech/)
-
 [oshmkufa](https://oshmkufa2010.github.io/)
-
 [counter2015](https://counter2015.com/)
+
+*团队*
+[Netflix](https://medium.com/netflix-techblog)
+[Dropbox](https://dropbox.tech/)
+[Facebook](https://engineering.fb.com/)
+[Cloudflare](https://blog.cloudflare.com/)
+[PingCAP](https://pingcap.com/blog-cn/)
+[Snowflake](https://www.snowflake.com/blog/)
+[Lightbend](https://www.lightbend.com/blog)
+[Databricks](https://databricks.com/blog)
+[Airbnb](https://medium.com/airbnb-engineering)
+[阿里中间件](http://jm.taobao.org/)
+[小米信息部技术团队](https://xiaomi-info.github.io/)
