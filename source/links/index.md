@@ -18,6 +18,7 @@ date: 2019-10-16 21:01:48
 [windanchaos](https://blog.windanchaos.tech/)
 [oshmkufa](https://oshmkufa2010.github.io/)
 [counter2015](https://counter2015.com/)
+[Atticus](https://atticuslab.com/)
 
 *团队*
 [Netflix](https://medium.com/netflix-techblog)
