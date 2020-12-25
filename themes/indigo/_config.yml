@@ -121,7 +121,7 @@ gitalk:
   repo: razertory.github.io
   # client_id: f75aa11550a1270e6d86
   # client_secret: 4426df84dccd6506dd4c2eff0f233e67e00ae35f
-  access_token: c31444be137a00f482e74d50f295dfb071bd6bc3
+  access_token: 9889a6c72b028068d3eecd084f33b8b2cfff93de
 
 # Valine Comment system. https://valine.js.org
 valine:
