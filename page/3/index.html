@@ -132,7 +132,7 @@ ga('send', 'pageview');
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -160,6 +160,59 @@ ga('send', 'pageview');
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-scala-overview"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-11-30 21:26:36" datetime="2019-11-30T13:26:36.000Z"  itemprop="datePublished">2019-11-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/11/30/scala-overview/">Scala 总览</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Why Scala
+JVM 生态
+简洁
+类型推断
+函数式
+多范式
+Actor
+
+
+下面的所有操作都在 Scala REPL 中进行
+
+表达式12scala&gt; 1 + 1res0: Int = 2
+
+res0 是解释器自动创建的变量名称，用来指代表达式的计算结果。它是 Int 类型，值为 2。意味着你可以继续使用这个变量。
+12scala&gt; res0 + 1res1: Int = ...
+    
+
+        <a href="/2019/11/30/scala-overview/" class="post-more waves-effect waves-button">
+            続きを読む…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-binary-search"
@@ -195,7 +248,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/28/binary-search/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -238,7 +291,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/17/hamming-distance/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -283,7 +336,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/17/single-number/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -325,7 +378,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/16/major-element/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -368,7 +421,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/14/count-of-one/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -409,7 +462,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/11/add-by-bit/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -449,7 +502,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/10/valid-brackets/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -489,7 +542,7 @@ ga('send', 'pageview');
     
 
         <a href="/2019/11/10/queue-by-stack/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -529,7 +582,7 @@ Uber Go 语言编码规范 Uber 是一家美国硅谷的科技公司，也是 Go
     
 
         <a href="/2019/11/08/uber-go-guide-cn/" class="post-more waves-effect waves-button">
-            Continue reading...
+            続きを読む…
         </a>
     </div>
     
@@ -537,46 +590,6 @@ Uber Go 语言编码规范 Uber 是一家美国硅谷的科技公司，也是 Go
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/">Golang</a></li></ul>
 
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-min-stack"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-04 12:58:26" datetime="2019-11-04T04:58:26.000Z"  itemprop="datePublished">2019-11-04</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/04/min-stack/">最小栈</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        实现一个最小栈，有三种操作，min：得到栈中的最小值，push：在栈顶插入一个元素，pop：弹出栈顶元素，使这三种操作的时间复杂度都是O(1)
-1234public class StackWithMin extends Stack&lt;Integer&gt; &#123;	public Integer push(Integer item)	public Integer pop()&#125...
-    
-
-        <a href="/2019/11/04/min-stack/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
     </div>
     
 </article>
@@ -603,7 +616,7 @@ Uber Go 语言编码规范 Uber 是一家美国硅谷的科技公司，也是 Go
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

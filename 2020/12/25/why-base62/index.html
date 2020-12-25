@@ -28,25 +28,25 @@ ga('send', 'pageview');
     
     
     
-    <title>有序数组转化为平衡二叉搜索树（BST） | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
+    <title>为什么使用 base62 | Razertory 的技术博客 | 一曲肝肠断，天涯何处觅知音</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content>
-    <meta name="description" content="给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。 1TreeNode convertToBST(ArrayList&amp;lt;Integer&amp;gt; arr)  根据 BST 的定义 二叉排序树的查找过程和次优二叉树类似，通常采取二叉链表作为二叉排序树的存储结构。中序遍历二叉排序树可得到一个关键字的有序序列，一个无序序列">
+    <meta name="description" content="PathVariable当我们在 Spring Boot 应用中，因为一些强制性的原因，不得不选用 PathVariable 定义的时候，可能会遇到如下问题，假设这个 URI 设计成 api/domain/resource/{name}。  当 name 是形如 “/文件夹/文件夹/资源” 的时候，由于 Spring Boot 会将 / 用作路由分隔符，这里会出现不能预料的问题 name 是自定义">
 <meta name="keywords" content="Razertory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="有序数组转化为平衡二叉搜索树（BST）">
-<meta property="og:url" content="https://razertory.me/2019/12/12/sorted-arr-to-bst/index.html">
+<meta property="og:title" content="为什么使用 base62">
+<meta property="og:url" content="https://razertory.me/2020/12/25/why-base62/index.html">
 <meta property="og:site_name" content="Razertory 的技术博客">
-<meta property="og:description" content="给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。 1TreeNode convertToBST(ArrayList&amp;lt;Integer&amp;gt; arr)  根据 BST 的定义 二叉排序树的查找过程和次优二叉树类似，通常采取二叉链表作为二叉排序树的存储结构。中序遍历二叉排序树可得到一个关键字的有序序列，一个无序序列">
+<meta property="og:description" content="PathVariable当我们在 Spring Boot 应用中，因为一些强制性的原因，不得不选用 PathVariable 定义的时候，可能会遇到如下问题，假设这个 URI 设计成 api/domain/resource/{name}。  当 name 是形如 “/文件夹/文件夹/资源” 的时候，由于 Spring Boot 会将 / 用作路由分隔符，这里会出现不能预料的问题 name 是自定义">
 <meta property="og:locale" content="cn">
-<meta property="og:updated_time" content="2020-03-28T13:02:10.016Z">
+<meta property="og:updated_time" content="2020-12-25T06:10:54.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="有序数组转化为平衡二叉搜索树（BST）">
-<meta name="twitter:description" content="给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。 1TreeNode convertToBST(ArrayList&amp;lt;Integer&amp;gt; arr)  根据 BST 的定义 二叉排序树的查找过程和次优二叉树类似，通常采取二叉链表作为二叉排序树的存储结构。中序遍历二叉排序树可得到一个关键字的有序序列，一个无序序列">
+<meta name="twitter:title" content="为什么使用 base62">
+<meta name="twitter:description" content="PathVariable当我们在 Spring Boot 应用中，因为一些强制性的原因，不得不选用 PathVariable 定义的时候，可能会遇到如下问题，假设这个 URI 设计成 api/domain/resource/{name}。  当 name 是形如 “/文件夹/文件夹/资源” 的时候，由于 Spring Boot 会将 / 用作路由分隔符，这里会出现不能预料的问题 name 是自定义">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
     
@@ -127,7 +127,7 @@ ga('send', 'pageview');
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">有序数组转化为平衡二叉搜索树（BST）</div>
+        <div class="flex-col header-title ellipsis">为什么使用 base62</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -145,11 +145,11 @@ ga('send', 'pageview');
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">有序数组转化为平衡二叉搜索树（BST）</h1>
+        <h1 class="title">为什么使用 base62</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-12-12T13:41:57.000Z" itemprop="datePublished" class="page-time">
-  2019-12-12
+                <time datetime="2020-12-25T06:08:22.000Z" itemprop="datePublished" class="page-time">
+  2020-12-25
 </time>
 
 
@@ -166,13 +166,13 @@ ga('send', 'pageview');
 <div class="container body-wrap">
     
 
-<article id="post-sorted-arr-to-bst"
+<article id="post-why-base62"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">有序数组转化为平衡二叉搜索树（BST）</h1>
+        <h1 class="post-card-title">为什么使用 base62</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-12-12 21:41:57" datetime="2019-12-12T13:41:57.000Z"  itemprop="datePublished">2019-12-12</time>
+            <time class="post-time" title="2020-12-25 14:08:22" datetime="2020-12-25T06:08:22.000Z"  itemprop="datePublished">2020-12-25</time>
 
             
 
@@ -181,11 +181,23 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>给定一个有序数组，数组元素升序排列，试将该数组转换为一棵平衡二叉搜索树（Balanced Binary Search Tree）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode <span class="title">convertToBST</span><span class="params">(ArrayList&lt;Integer&gt; arr)</span></span></span><br></pre></td></tr></table></figure>
+            <h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="PathVariable"></a>PathVariable</h3><p>当我们在 Spring Boot 应用中，因为一些强制性的原因，不得不选用 PathVariable 定义的时候，可能会遇到如下问题，假设这个 URI 设计成 api/domain/resource/{name}。</p>
+<ul>
+<li>当 name 是形如 “/文件夹/文件夹/资源” 的时候，由于 Spring Boot 会将 / 用作路由分隔符，这里会出现不能预料的问题</li>
+<li>name 是自定义编码的内容的时候，会不得不用上特殊字符</li>
+</ul>
+<p>具体原因是 Spring Boot 的路由解析严格按照了 RFC 3986 标准设计，这套标准中只有 a..z 和 A..Z 和 0..9 和 -_.~ 以及部分保留字符 ! * ’ ( ) ; : @ &amp; = + $ , / ? # [ ] 被认可。那么当业务中我们需要在路由里面包含了特殊字符的时候，为了不影响路由解析，最常见的做法就是给特殊字符进行编码。常见的有 URL Encode 和 Base64，这两种编码大多数常用的编程语言自带 encode，decode 库。</p>
+<h3 id="URL-Encode"><a href="#URL-Encode" class="headerlink" title="URL Encode"></a>URL Encode</h3><p>URL 编码是浏览器发送数据给服务器时使用的编码，它通常附加在 URL 的参数部分，例如：</p>
+<p><a href="https://www.baidu.com/s?wd=%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">https://www.baidu.com/s?wd=%E4%B8%AD%E6%96%87</a></p>
+<p>之所以需要 URL 编码，是因为出于兼容性考虑，很多服务器只识别 ASCII 字符。但如果 URL 中包含中文、日文这些非 ASCII 字符怎么办？不要紧，URL 编码有一套规则：</p>
+<p>如果字符是 A<del>Z，a</del>z，0~9 以及-、_、.、*，则保持不变；<br>如果是其他字符，先转换为 UTF-8 编码，然后对每个字节以%XX 表示。<br>例如：字符中的 UTF-8 编码是 0xe4b8ad，因此，它的 URL 编码是%E4%B8%AD。URL 编码总是大写。</p>
+<h3 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h3><p>URL 编码是对字符进行编码，表示成%xx 的形式，而 Base64 编码是对二进制数据进行编码，表示成文本格式。</p>
+<p>Base64 编码可以把任意长度的二进制数据变为纯文本，且只包含 A<del>Z、a</del>z、0~9、+、/、=这些字符。它的原理是把 3 字节的二进制数据按 6bit 一组，用 4 个 int 整数表示，然后查表，把 int 整数用索引对应到字符，得到编码后的字符串。</p>
+<h3 id="面临的问题"><a href="#面临的问题" class="headerlink" title="面临的问题"></a>面临的问题</h3><p>根据背景判断，base64 首先需要排除掉，因为其中包含了 / 字符，这对于 PathVariable 来说是非常危险的。只要被编码了之后包含了 / ，比如 “你说这东西” 被编码之后是 “5L2g6K+06L+Z5Lic6KW/“ 这个时候在 api/domain/resource/{name} 设计的 URI 中，就会变成 api/domain/resource/5L2g6K+06L+Z5Lic6KW/，Spring Boot 会默认截断最后一个 / 符号，导致解码异常。</p>
+<p>另一个场景下，URL Encode 也不适用，这里会有一些自定义的编码解码风格，比如 api/domain/resource/{query}, 这个 query 被设计成 “分类-风格-搜索关键词” 的格式，其中“搜索关键词”是用户自定义输入，比如有个资源名叫 “酷大师-最美模型” ，因此这个路由编码之前是 api/domain/resource/分类-风格-酷大师-最美模型，编码之后是 api/domain/resource/%E5%88%86%E7%B1%BB-%E9%A3%8E%E6%A0%BC-%E9%85%B7%E5%A4%A7%E5%B8%88-%E6%9C%80%E7%BE%8E%E6%A8%A1%E5%9E%8B。由于 URL Encode 会保留 - 字符因此当用户的输入带有了保留的特殊字符的时候，会破坏协议本身的语义。</p>
+<h3 id="Base62"><a href="#Base62" class="headerlink" title="Base62"></a>Base62</h3><p>base62 是一种编码之后只包含了 A<del>Z、a</del>z、0~9 62 种字符的编码方式。这种方式可以避开任何符号字符，让 PathVariable 中的变量更加安全。那么选用哪一种 Base62 是最为合适的？</p>
+<p>首先，Java 和 Js 自身的 lib 并不支持 base62 编码，现成的库有不少，但都有各自的实现。为了让前后端统一，我选用了 Base62x: An alternative approach to Base64 for non-alphanumeric characters 的实现，并在前后端各自配置了一套实现。这套算法的 GitHub 仓库是 <a href="https://github.com/wadelau/Base62x" target="_blank" rel="noopener">https://github.com/wadelau/Base62x</a> ，在线 encode/decode 地址是 <a href="https://ufqi.com/dev/base62x/。" target="_blank" rel="noopener">https://ufqi.com/dev/base62x/。</a></p>
 
-<p>根据 BST 的定义 <em>二叉排序树的查找过程和次优二叉树类似，通常采取二叉链表作为二叉排序树的存储结构。中序遍历二叉排序树可得到一个关键字的有序序列，一个无序序列可以通过构造一棵二叉排序树变成一个有序序列，构造树的过程即为对无序序列进行排序的过程。每次插入的新的结点都是二叉排序树上新的叶子结点，在进行插入操作时，不必移动其它结点，只需改动某个结点的指针，由空变为非空即可。搜索,插入,删除的复杂度等于树高，O(log(n)).</em> 可以对其进行反中序的遍历。也就是 中-左-右 的一个逆向过程</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode <span class="title">convertToBST</span><span class="params">(ArrayList&lt;Integer&gt; arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length == <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> convert(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">TreeNode <span class="title">convert</span><span class="params">(ArrayList&lt;Integer&gt; arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = start + (end - start) / <span class="number">2</span>;</span><br><span class="line">    TreeNode node = <span class="keyword">new</span> TreeNode(arr[mid]);</span><br><span class="line">    node.left = convert(arr, start, mid - <span class="number">1</span>);</span><br><span class="line">    node.right = convert(arr, mid + <span class="number">1</span>, end);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         <blockquote class="post-copyright">
@@ -194,7 +206,7 @@ ga('send', 'pageview');
         
 
         
-        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2019/12/12/sorted-arr-to-bst/" target="_blank" rel="external">https://razertory.me/2019/12/12/sorted-arr-to-bst/</a>
+        本文由 <a href="https://razertory.me"> Razertory's Blog </a> 版权所有。如若发现有误，欢迎指正(https://t.me/razertory)。如若转载，请注明出处。原文地址 <a href="/2020/12/25/why-base62/" target="_blank" rel="external">https://razertory.me/2020/12/25/why-base62/</a>
         
     </div>
     
@@ -219,21 +231,14 @@ ga('send', 'pageview');
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/01/01/happy-new-year-2020/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">2020 新年快乐</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/12/01/scala-school-advanced-types/" id="post-next" class="post-nav-link">
+      <a href="/2020/07/21/go-coding-skills/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">高级类型</h4>
+        <h4 class="title">改善你的 Go 代码</h4>
       </a>
     </div>
   
