@@ -21,7 +21,7 @@ tags:
 
 假设字符串串 word1 和 word2 的最小编辑距离是 `d[i][j]` (i 和 j 代表 word1 和 word2 的长度 - 1)，当我们给 word1 和 word2 都 append 一个相同的字符的时候，这个编辑距离不变。因此可以认为，此时的 `d[i+1][j+1] == d[i][j]`。当 append 的字符不同的的时候。就是找到之前的最小编辑距离 + 1，这个之前的最小编辑距离可能是 `d[i][j]`、`d[i][j+1]`、或者 `d[i+1][j]`。
 
-![Edit-Distance.png](http://ww1.sinaimg.cn/large/a67b702fgy1gasiec3bhgj204q0710sl.jpg)
+![Edit-Distance.png](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-7.jpg)
 
 ```java
 class Solution {

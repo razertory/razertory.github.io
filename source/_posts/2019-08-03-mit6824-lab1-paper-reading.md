@@ -10,7 +10,7 @@ MapReduce 的核心思想是：首先将需要处理的大量数据分片，然�
 
 这个过程，实现起来有很多种方式，需要考虑实际业务场景，硬件资源等。在 Google，通常是某个成百上千庞大的机器集群组成。这些机器在同时且不断地做着 Map 和 Reduce 的工作。
 
-![](http://ww1.sinaimg.cn/large/a67b702fly1g5mcdixbwcj20l80bpdg7.jpg)
+![](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-3.jpg)
 
 
 1. **分片**: 大量的数据首先会被分成小片，大小通常是 16M 到 64M。这个数值涉及到后面提到的数据本地化策略，数据本地化目的是为了节省带宽。（毕竟 03 年的时候带宽比现在差太多）

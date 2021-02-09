@@ -25,13 +25,13 @@ Raft 在 CAP 理论中, 着重强调 C 和 P。
 ### 代码阅读
 作为一套标准的 TDD 作业，从测试代码开始阅读是很好的选择
 
-- [makeConfig()](https://github.com/razertory/MIT6.824/blob/master/src/raft/config.go#L59) 方法会初始化默认 n = 3 个 Raft 节点，利用 golang 自带的 RPC 包进行通信
+- [makeConfig()](https://github.com/razertory/MIT6.824/raw/master/src/raft/config.go#L59) 方法会初始化默认 n = 3 个 Raft 节点，利用 golang 自带的 RPC 包进行通信
 
-- [Make()](https://github.com/razertory/MIT6.824/blob/master/src/raft/raft.go#L249) 方法会启动这个 Raft 节点，需要在方法的后实现 Raft 的入口和调度
+- [Make()](https://github.com/razertory/MIT6.824/raw/master/src/raft/raft.go#L249) 方法会启动这个 Raft 节点，需要在方法的后实现 Raft 的入口和调度
 
-- [checkOneLeader()](https://github.com/razertory/MIT6.824/blob/master/src/raft/config.go#L298) 方法会检查是否有且只有一个 leader 节点
+- [checkOneLeader()](https://github.com/razertory/MIT6.824/raw/master/src/raft/config.go#L298) 方法会检查是否有且只有一个 leader 节点
 
-- [disconnect()](https://github.com/razertory/MIT6.824/blob/master/src/raft/config.go#L258) 方法会 disable 掉这个节点的 RPC 调用，也就是说让这个节点不可用
+- [disconnect()](https://github.com/razertory/MIT6.824/raw/master/src/raft/config.go#L258) 方法会 disable 掉这个节点的 RPC 调用，也就是说让这个节点不可用
 
 ### 2A leader 选举
 

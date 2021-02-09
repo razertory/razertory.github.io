@@ -5,7 +5,7 @@ tags: [操作系统]
 ---
 
 #### 概览
-进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct [task_struct](https://github.com/torvalds/linux/blob/master/include/linux/sched.h#L632)的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。
+进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct [task_struct](https://github.com/torvalds/linux/raw/master/include/linux/sched.h#L632)的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。
 
 #### 状态
 - TASK_RUNNING: 可执行的；等待执行的

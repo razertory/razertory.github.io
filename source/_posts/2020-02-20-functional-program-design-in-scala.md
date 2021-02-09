@@ -214,16 +214,16 @@ val n = sieve(from(2))(100) // 输出 547
 
 现在需要找到取得容量为 N 的水时，需要的操作。
 
-附：1. [Scala 完整代码](https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/WaterPouring.scala) 2. [python 解法](https://www.youtube.com/watch?v=q6M_pco_5Vo)
+附：1. [Scala 完整代码](https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/WaterPouring.scala) 2. [python 解法](https://www.youtube.com/watch?v=q6M_pco_5Vo)
 
 ## W3
 > 下面会用 Scala 进行加法器模拟。对于计算机中，两个数如何相加，可以提前阅读 [维基百科-加法器](https://zh.wikipedia.org/wiki/%E5%8A%A0%E6%B3%95%E5%99%A8)，最好能够做一下 [位运算实现加法](/2019/11/11/add-by-bit/)。
 
 通过以上内容，我们需要知道的最重要的点在于：两个一位二进制数相加，将会产生两个输出，其中一个是当前位相加的值 S，另一个是相加后的进位信息 C。其中 S 可以用*异或门*，进位可以用*与门*。两个半加器用*或*门组合为一个全加器。
 
-![异或的操作通过三种门的组合实现](http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg)
+![异或的操作通过三种门的组合实现](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-8.jpg)
 
-![两个用与门组合的半加器构成一个全加器](http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg)
+![两个用与门组合的半加器构成一个全加器](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-9.jpg)
 
 根据上图，我们至少需要实现的是
 
@@ -278,7 +278,7 @@ def fullAdder(a: Wire, b: Wire, cin: Wire, sum: Wire, cout: Wire): Unit = {
 }
 ```
 
-实现了全加器后。加入模拟信号的输入输出即可，完整代码 [模拟加法器](https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala)
+实现了全加器后。加入模拟信号的输入输出即可，完整代码 [模拟加法器](https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala)
 
 ## W4
 ### Functional Reactive Programming (FRP)
@@ -402,4 +402,4 @@ class StackableVariable[T](init: T) {
 }
 ```
 
-[完整代码](https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/SubPub.scala)
+[完整代码](https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/SubPub.scala)

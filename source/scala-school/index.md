@@ -3,7 +3,7 @@ title: Scala
 tags:
 ---
 
-![](http://ww1.sinaimg.cn/large/a67b702fgy1g9evzajfs5j20zk0k0juo.jpg)
+![](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-13.jpg)
 
 ## Scala 基础
 [Scala 总览](/2019/11/30/scala-overview/)
@@ -23,4 +23,4 @@ tags:
 **参考资料**
 * Scala School (https://twitter.github.io/scala_school/)
 * Scala 99 (https://github.com/shekhargulati/99-problems/tree/master/scala)
-* Databricks Scala 编程风格指南 (https://github.com/databricks/scala-style-guide/blob/master/README-ZH.md)
+* Databricks Scala 编程风格指南 (https://github.com/databricks/scala-style-guide/raw/master/README-ZH.md)

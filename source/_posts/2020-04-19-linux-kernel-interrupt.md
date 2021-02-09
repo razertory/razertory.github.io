@@ -10,16 +10,16 @@ tags: [操作系统]
 ### 中断处理
 操作系统处理中断的过程一般分成两个部分，命名为「上半部（top half）」和「下半部（bottom half）」。一般上半部(中断处理程序)有严格时限的操作，比方说快速应答。而有的可以延后执行的操作就交给了下半部。举个例子，操作系统处理网卡数据包的时候，会在上半部把网络数据拷贝到内存，下半部做数据处理的操作。
 
-![image.png](http://ww1.sinaimg.cn/large/a67b702fly1gdzeyef51dj217m0kmq9a.jpg)
+![image.png](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-11.jpg)
 
 ### 下半部
 **时间敏感**，**硬件相关**或者**保证不能中断**的任务，通常一定是在上半部，否则都在下半部。下半部的实现机制，在 linux 内核发展中经历了几个版本。
 
-![tasklet 基于软中断实现](http://ww1.sinaimg.cn/large/a67b702fly1gdzfdr63ytj212s0ak428.jpg)
+![tasklet 基于软中断实现](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-12.jpg)
 
-软中断是编译期间分配的，由 softirq_action 表示。定义在 [linux/interrupt.h](https://github.com/torvalds/linux/blob/master/include/linux/interrupt.h)。
+软中断是编译期间分配的，由 softirq_action 表示。定义在 [linux/interrupt.h](https://github.com/torvalds/linux/raw/master/include/linux/interrupt.h)。
 
-[kernel/softirq.c](https://github.com/torvalds/linux/blob/master/kernel/softirq.c) 里面定义了一个包含 32 个结构体的数组。每个结构体表示一个软中断，因此软中断最多有 32 个。不过目前这用到了 9 个。当软中断开始工作的时候，会执行一个名叫 `void softirq_handler(struct softirq_action *)` 的函数去标记注已经册的软中断。
+[kernel/softirq.c](https://github.com/torvalds/linux/raw/master/kernel/softirq.c) 里面定义了一个包含 32 个结构体的数组。每个结构体表示一个软中断，因此软中断最多有 32 个。不过目前这用到了 9 个。当软中断开始工作的时候，会执行一个名叫 `void softirq_handler(struct softirq_action *)` 的函数去标记注已经册的软中断。
 
 等到合适的时候，该软中断就会执行，比如
 

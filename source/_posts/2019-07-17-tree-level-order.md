@@ -6,7 +6,7 @@ tags:
 ## BFS 
 BFS 我觉得可以从两个方向理解。第一种，对某个树或者图的数据结构而言，就是某个节点相连接的节点都遍历，再不断对刚遍历的节点做同样的操作直到最后遍历完所有节点。第二种，当数据结构是树形的时候这个规律可以衍生为按照层来遍历。按照当前的理解，BFS 一般可以用一个队列来实现，这是因为按照 FIFO 的特性。对于节点相连接的节点都遍历的时候，遍历结束了之后需要从最第一个遍历的节点开始。
 
-![](http://ww1.sinaimg.cn/large/a67b702fly1g52r53xyfvj205v07fwei.jpg)
+![](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-2.jpg)
 输出：
 
 1, 2, 3, 4, 5, 6, 7, 8

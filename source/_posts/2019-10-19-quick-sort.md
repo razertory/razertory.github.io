@@ -53,5 +53,5 @@ int partition(int[] array, int low, int high) {
 ps: 
 - hoare 分组法会比 lomuto 分组法有平均少 3 倍的 swap 次数。[参考](https://ipfs-sec.stackexchange.cloudflare-ipfs.com/cs/A/question/11458.html)
 - hoare 和 lomuto 都是不稳定的，并且在元素全部有序的情况下复杂度都是 O(n^2)
-- [完整代码和测试用例](https://github.com/razertory/java-code-lab/blob/master/src/main/java/org/razertory/javacodelab/sort/QuickSort.java)
+- [完整代码和测试用例](https://github.com/razertory/java-code-lab/raw/master/src/main/java/org/razertory/javacodelab/sort/QuickSort.java)
 - 发明者 [Tony Hoare](https://zh.wikipedia.org/wiki/%E6%9D%B1%E5%B0%BC%C2%B7%E9%9C%8D%E7%88%BE)

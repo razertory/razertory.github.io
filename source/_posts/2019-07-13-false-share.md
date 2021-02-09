@@ -54,12 +54,12 @@ public class CPUCache1Test {
 上述的案例中，遍历数组计算机利用到了 CPU 缓存从而加快了速度。
 
 计算机系统中，CPU 缓存，内存，磁盘有着庞大的存取速度差异，所以往往会在这三者的协作之间通过设计缓存来达到更快的速度。
-![](http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg)
+![](https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-1.jpg)
 
 多核心 CPU 中的缓存是分层的，每个核心独有缓存模块，不过 L3 是多核心共享。当计算机收到找寻变量的指令的时候就会按照 L1，L2，L3 ，RAM 这样的顺序寻找。Java 语言中的数组其实就是在一定程度上部分存到了缓存当中。这里产生了一个叫做缓存行的东西，它是 CPU 缓存中的最小单元，占 64 字节（早期的 CPU 是 32 字节）。Java 中的一个 int 占 4 字节，意味着一个缓存行可以存下 16 个 int 类型的变量。在遍历的时候就能利用到从而加快速度。链表就没有这个福利了。
 
 ### 并发场景的 CPU 缓存
-那么在并发的场景中，又该如何利用 CPU 缓存呢？比如说这段代码 [false_sharing.c](https://github.com/razertory/c-code-lab/blob/master/multithread/false_sharing.c) 在我的 Mac 上打印出了
+那么在并发的场景中，又该如何利用 CPU 缓存呢？比如说这段代码 [false_sharing.c](https://github.com/razertory/c-code-lab/raw/master/multithread/false_sharing.c) 在我的 Mac 上打印出了
 ```shell
 1) 8.85049 4.8528e+08 ips
 2) 22.4329 3.82917e+08 ips

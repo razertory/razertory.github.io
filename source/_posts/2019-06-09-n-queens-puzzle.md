@@ -115,4 +115,4 @@ public class Solution {
     }
 }
 ```
-附: 完整的[代码&测试用例](https://github.com/razertory/java-code-lab/blob/master/src/main/java/org/razertory/javacodelab/backtrack/NQueen.java)
+附: 完整的[代码&测试用例](https://github.com/razertory/java-code-lab/raw/master/src/main/java/org/razertory/javacodelab/backtrack/NQueen.java)
