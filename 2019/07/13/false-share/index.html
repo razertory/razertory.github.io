@@ -43,12 +43,12 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Razertory 的技术博客">
 <meta property="og:description" content="数组和链表谁快？众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如 123456789101112public class CPUCache1 &amp;#123;    // 遍历数组    void traverseArray(int[] arr) &amp;#123;        for (int i : arr) &amp;#123">
 <meta property="og:locale" content="cn">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg">
-<meta property="og:updated_time" content="2020-03-28T13:02:10.006Z">
+<meta property="og:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-1.jpg">
+<meta property="og:updated_time" content="2021-02-09T10:51:33.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伪共享">
 <meta name="twitter:description" content="数组和链表谁快？众所周知数组和链表有个区别在于数组是一段连续的内存空间。那么如果说存放的值一样，长度一样的数组和链表都做简单的遍历谁会更快呢？比如 123456789101112public class CPUCache1 &amp;#123;    // 遍历数组    void traverseArray(int[] arr) &amp;#123;        for (int i : arr) &amp;#123">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg">
+<meta name="twitter:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-1.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
     
@@ -195,13 +195,13 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fly1g4ymsscbp6j207q0abjrq.jpg" alt title>
+                    <img src="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-1.jpg" alt title>
                 </div>
                 <div class="image-caption"></div>
             </figure>
 
 <p>多核心 CPU 中的缓存是分层的，每个核心独有缓存模块，不过 L3 是多核心共享。当计算机收到找寻变量的指令的时候就会按照 L1，L2，L3 ，RAM 这样的顺序寻找。Java 语言中的数组其实就是在一定程度上部分存到了缓存当中。这里产生了一个叫做缓存行的东西，它是 CPU 缓存中的最小单元，占 64 字节（早期的 CPU 是 32 字节）。Java 中的一个 int 占 4 字节，意味着一个缓存行可以存下 16 个 int 类型的变量。在遍历的时候就能利用到从而加快速度。链表就没有这个福利了。</p>
-<h3 id="并发场景的-CPU-缓存"><a href="#并发场景的-CPU-缓存" class="headerlink" title="并发场景的 CPU 缓存"></a>并发场景的 CPU 缓存</h3><p>那么在并发的场景中，又该如何利用 CPU 缓存呢？比如说这段代码 <a href="https://github.com/razertory/c-code-lab/blob/master/multithread/false_sharing.c" target="_blank" rel="noopener">false_sharing.c</a> 在我的 Mac 上打印出了</p>
+<h3 id="并发场景的-CPU-缓存"><a href="#并发场景的-CPU-缓存" class="headerlink" title="并发场景的 CPU 缓存"></a>并发场景的 CPU 缓存</h3><p>那么在并发的场景中，又该如何利用 CPU 缓存呢？比如说这段代码 <a href="https://github.com/razertory/c-code-lab/raw/master/multithread/false_sharing.c" target="_blank" rel="noopener">false_sharing.c</a> 在我的 Mac 上打印出了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1) 8.85049 4.8528e+08 ips</span><br><span class="line">2) 22.4329 3.82917e+08 ips</span><br><span class="line">3) 30.1988 4.26669e+08 ips</span><br><span class="line">4) 35.8548 4.79151e+08 ips</span><br></pre></td></tr></table></figure>
 
 <p>原本认为，在每次增加线程的时候新的线程有着独立的内存空间。这个不假，但是内存中的一些数据会存入 CPU 缓存当中。在多核 CPU 中，每个核都会有自身独立的缓存区。当只有其中一个核的内容发生先变更的时候，由于内核发现内存中的变量和另一个未发生变更的内容不一致，这个时候就会花一定的时间去同步另一个核的内容。这个现象就称为<strong>伪共享</strong>（false sharing）。维基百科中伪共享的定义有这么一段</p>
@@ -334,7 +334,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Razertory &copy; 2018 - 2020</span>
+        <p><span>Razertory &copy; 2018 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

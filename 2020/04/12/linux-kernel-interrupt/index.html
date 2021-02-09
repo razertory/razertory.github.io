@@ -43,13 +43,13 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Razertory 的技术博客">
 <meta property="og:description" content="中断信号中断机制，简单说就是键盘、鼠标、磁盘之类的硬件，在需要的时候向内核发信号的一种机制。比如我此刻正在用键盘打字，其实就是在发出电信号给一个名叫「中断控制器」的物理芯片中，再通过一个和处理器直连的管线给处理器。处理器接收到之后，监测到了是中断信号，就会中断当前的工作处理该信号进而告诉操作系统，让操作系统处理这个信号。不同的中断信号，有的着唯一的 IRQ 编号。比如时钟 IRQ 0，键盘 IRQ">
 <meta property="og:locale" content="cn">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fly1gdzeyef51dj217m0kmq9a.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fly1gdzfdr63ytj212s0ak428.jpg">
-<meta property="og:updated_time" content="2020-04-19T14:28:18.526Z">
+<meta property="og:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-11.jpg">
+<meta property="og:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-12.jpg">
+<meta property="og:updated_time" content="2021-02-09T10:52:10.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Linux 内核」中断">
 <meta name="twitter:description" content="中断信号中断机制，简单说就是键盘、鼠标、磁盘之类的硬件，在需要的时候向内核发信号的一种机制。比如我此刻正在用键盘打字，其实就是在发出电信号给一个名叫「中断控制器」的物理芯片中，再通过一个和处理器直连的管线给处理器。处理器接收到之后，监测到了是中断信号，就会中断当前的工作处理该信号进而告诉操作系统，让操作系统处理这个信号。不同的中断信号，有的着唯一的 IRQ 编号。比如时钟 IRQ 0，键盘 IRQ">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fly1gdzeyef51dj217m0kmq9a.jpg">
+<meta name="twitter:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-11.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
     
@@ -189,7 +189,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fly1gdzeyef51dj217m0kmq9a.jpg" alt="image.png" title>
+                    <img src="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-11.jpg" alt="image.png" title>
                 </div>
                 <div class="image-caption">image.png</div>
             </figure>
@@ -198,13 +198,13 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fly1gdzfdr63ytj212s0ak428.jpg" alt="tasklet 基于软中断实现" title>
+                    <img src="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-12.jpg" alt="tasklet 基于软中断实现" title>
                 </div>
                 <div class="image-caption">tasklet 基于软中断实现</div>
             </figure>
 
-<p>软中断是编译期间分配的，由 softirq_action 表示。定义在 <a href="https://github.com/torvalds/linux/blob/master/include/linux/interrupt.h" target="_blank" rel="noopener">linux/interrupt.h</a>。</p>
-<p><a href="https://github.com/torvalds/linux/blob/master/kernel/softirq.c" target="_blank" rel="noopener">kernel/softirq.c</a> 里面定义了一个包含 32 个结构体的数组。每个结构体表示一个软中断，因此软中断最多有 32 个。不过目前这用到了 9 个。当软中断开始工作的时候，会执行一个名叫 <code>void softirq_handler(struct softirq_action *)</code> 的函数去标记注已经册的软中断。</p>
+<p>软中断是编译期间分配的，由 softirq_action 表示。定义在 <a href="https://github.com/torvalds/linux/raw/master/include/linux/interrupt.h" target="_blank" rel="noopener">linux/interrupt.h</a>。</p>
+<p><a href="https://github.com/torvalds/linux/raw/master/kernel/softirq.c" target="_blank" rel="noopener">kernel/softirq.c</a> 里面定义了一个包含 32 个结构体的数组。每个结构体表示一个软中断，因此软中断最多有 32 个。不过目前这用到了 9 个。当软中断开始工作的时候，会执行一个名叫 <code>void softirq_handler(struct softirq_action *)</code> 的函数去标记注已经册的软中断。</p>
 <p>等到合适的时候，该软中断就会执行，比如</p>
 <ul>
 <li>从硬件中断代码返回的时候  </li>
@@ -334,7 +334,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Razertory &copy; 2018 - 2020</span>
+        <p><span>Razertory &copy; 2018 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

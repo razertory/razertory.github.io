@@ -44,7 +44,7 @@ ga('send', 'pageview');
 <meta property="og:description" content="概览进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct task_struct的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。 状态 TASK_RUNNING:">
 <meta property="og:locale" content="cn">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gdq0dnlo0cg20fw09b0sw.gif">
-<meta property="og:updated_time" content="2020-04-11T11:54:05.665Z">
+<meta property="og:updated_time" content="2021-02-09T10:47:32.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Linux 内核」进程管理">
 <meta name="twitter:description" content="概览进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct task_struct的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。 状态 TASK_RUNNING:">
@@ -183,7 +183,7 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p>进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct <a href="https://github.com/torvalds/linux/blob/master/include/linux/sched.h#L632" target="_blank" rel="noopener">task_struct</a>的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。</p>
+            <h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p>进程是处于执行期的程序以及相关资源的总称。比如打开的文件、挂起的信号、内核内部数据等等。在 linux 源码中，一个进程的相关信息维护在 task_struct <a href="https://github.com/torvalds/linux/raw/master/include/linux/sched.h#L632" target="_blank" rel="noopener">task_struct</a>的结构体中。这里面包含了进程的状态(pid，运行状态)、相关资源、以及相关进程（子进程、父进程）信息。内核会维护一个双向链表，每个链表的节点指向对应的 task_struct。</p>
 <h4 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h4><ul>
 <li>TASK_RUNNING: 可执行的；等待执行的</li>
 <li>TASK_INTERRUPTIBLE: 可中断的; 比如被阻塞、或者在 sleep</li>
@@ -327,7 +327,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Razertory &copy; 2018 - 2020</span>
+        <p><span>Razertory &copy; 2018 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>

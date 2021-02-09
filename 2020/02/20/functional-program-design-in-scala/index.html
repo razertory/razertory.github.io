@@ -43,13 +43,13 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Razertory 的技术博客">
 <meta property="og:description" content="在这个 2020 年初的特殊时期。 Scala 是一门现代化，多范式的 JVM 语言。 传送门（可能需要🚀)  Functional Program Design in Scala on Coursera 没什么用的 certificate   W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样 1234567abstract class JSONcase cla">
 <meta property="og:locale" content="cn">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg">
-<meta property="og:updated_time" content="2020-03-28T13:02:10.018Z">
+<meta property="og:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-8.jpg">
+<meta property="og:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-9.jpg">
+<meta property="og:updated_time" content="2021-02-09T10:50:23.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala 函数式编程设计">
 <meta name="twitter:description" content="在这个 2020 年初的特殊时期。 Scala 是一门现代化，多范式的 JVM 语言。 传送门（可能需要🚀)  Functional Program Design in Scala on Coursera 没什么用的 certificate   W1case class 和模式匹配用 Scala 来表示 JSON 对象可以这样 1234567abstract class JSONcase cla">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg">
+<meta name="twitter:image" content="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-8.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="Razertory 的技术博客" href="/atom.xml">
     
@@ -264,7 +264,7 @@ ga('send', 'pageview');
 <li>pour(a, b) 把 a 的水全部往 b 倒直至 b 杯满了或者 a 杯没水了</li>
 </ul>
 <p>现在需要找到取得容量为 N 的水时，需要的操作。</p>
-<p>附：1. <a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/WaterPouring.scala" target="_blank" rel="noopener">Scala 完整代码</a> 2. <a href="https://www.youtube.com/watch?v=q6M_pco_5Vo" target="_blank" rel="noopener">python 解法</a></p>
+<p>附：1. <a href="https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/WaterPouring.scala" target="_blank" rel="noopener">Scala 完整代码</a> 2. <a href="https://www.youtube.com/watch?v=q6M_pco_5Vo" target="_blank" rel="noopener">python 解法</a></p>
 <h2 id="W3"><a href="#W3" class="headerlink" title="W3"></a>W3</h2><blockquote>
 <p>下面会用 Scala 进行加法器模拟。对于计算机中，两个数如何相加，可以提前阅读 <a href="https://zh.wikipedia.org/wiki/%E5%8A%A0%E6%B3%95%E5%99%A8" target="_blank" rel="noopener">维基百科-加法器</a>，最好能够做一下 <a href="/2019/11/11/add-by-bit/">位运算实现加法</a>。</p>
 </blockquote>
@@ -272,7 +272,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mm6fcccj21fo0rgh3a.jpg" alt="异或的操作通过三种门的组合实现" title>
+                    <img src="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-8.jpg" alt="异或的操作通过三种门的组合实现" title>
                 </div>
                 <div class="image-caption">异或的操作通过三种门的组合实现</div>
             </figure>
@@ -280,7 +280,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ww1.sinaimg.cn/large/a67b702fgy1gc6mmvhps1j20tq0ja10b.jpg" alt="两个用与门组合的半加器构成一个全加器" title>
+                    <img src="https://gitee.com/razertory/razertory-statics/raw/master/razertory-me/photo-9.jpg" alt="两个用与门组合的半加器构成一个全加器" title>
                 </div>
                 <div class="image-caption">两个用与门组合的半加器构成一个全加器</div>
             </figure>
@@ -310,7 +310,7 @@ ga('send', 'pageview');
 
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fullAdder</span></span>(a: <span class="type">Wire</span>, b: <span class="type">Wire</span>, cin: <span class="type">Wire</span>, sum: <span class="type">Wire</span>, cout: <span class="type">Wire</span>): <span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> s = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  <span class="keyword">val</span> c1 = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  <span class="keyword">val</span> c2 = <span class="keyword">new</span> <span class="type">Wire</span></span><br><span class="line">  halfAdder(b, cin, s, c1)</span><br><span class="line">  halfAdder(a, s, sum, c2)</span><br><span class="line">  orGate(c1, c2, cout)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>实现了全加器后。加入模拟信号的输入输出即可，完整代码 <a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala" target="_blank" rel="noopener">模拟加法器</a></p>
+<p>实现了全加器后。加入模拟信号的输入输出即可，完整代码 <a href="https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/DigitalCircuitSimulator.scala" target="_blank" rel="noopener">模拟加法器</a></p>
 <h2 id="W4"><a href="#W4" class="headerlink" title="W4"></a>W4</h2><h3 id="Functional-Reactive-Programming-FRP"><a href="#Functional-Reactive-Programming-FRP" class="headerlink" title="Functional Reactive Programming (FRP)"></a>Functional Reactive Programming (FRP)</h3><p>在 MVC 模型中，FRP 可以让 model 在产生变化的同时 view 自动变化。这样的模型一般也就是 pub-sub 模型或者叫观察者模型 (observers)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Subscriber1   subscribe     ___________</span><br><span class="line">Subscriber2  ------------&gt; |          |</span><br><span class="line">Subscriber3                |Publisher |</span><br><span class="line">Subscriber4  &lt;------------ |          |</span><br><span class="line">Subscriber5    publish     |__________|</span><br></pre></td></tr></table></figure>
 
@@ -340,7 +340,7 @@ ga('send', 'pageview');
 <p>第三行开始，包含表达式的 Signal 进入调用栈，并不断被带入 subscriber 的集合。</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackableVariable</span>[<span class="type">T</span>](<span class="params">init: <span class="type">T</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> values: <span class="type">List</span>[<span class="type">T</span>] = <span class="type">List</span>(init)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">value</span></span>: <span class="type">T</span> = values.head</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">withValue</span></span>[<span class="type">R</span>](newValue: <span class="type">T</span>)(op: =&gt; <span class="type">R</span>): <span class="type">R</span> = &#123;</span><br><span class="line">    values = newValue :: values</span><br><span class="line">    <span class="keyword">try</span> op <span class="keyword">finally</span> values = values.tail</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://github.com/razertory/scala-code-lab/blob/master/src/main/scala/scalaschool/SubPub.scala" target="_blank" rel="noopener">完整代码</a></p>
+<p><a href="https://github.com/razertory/scala-code-lab/raw/master/src/main/scala/scalaschool/SubPub.scala" target="_blank" rel="noopener">完整代码</a></p>
 
         </div>
 
@@ -461,7 +461,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>Razertory &copy; 2018 - 2020</span>
+        <p><span>Razertory &copy; 2018 - 2021</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
